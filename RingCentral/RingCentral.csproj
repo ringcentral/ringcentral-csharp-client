@@ -94,6 +94,7 @@
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestClient.cs" />
+    <Compile Include="SubscriptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Flurl, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
