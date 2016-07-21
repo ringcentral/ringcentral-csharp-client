@@ -18,6 +18,12 @@ namespace RingCentral.Test
             const string phoneNumber = "+15889546648";
             var addressBook = rc.Restapi().Account().Extension().AddressBook();
 
+            var listt = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
+            foreach (var item in listt.records)
+            {
+                var temp = addressBook.Contact(item.id.ToString()).Delete().Result;
+            }
+
             // list
             var list = addressBook.Contact().List().Result;
             Assert.NotNull(list);

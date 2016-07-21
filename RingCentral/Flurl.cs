@@ -44,7 +44,12 @@ namespace RingCentral
         {
             get
             {
-                return string.Join("/", urls.Where(url => !string.IsNullOrWhiteSpace(url)).Select(url => url.Trim(new char[] { '/' })));
+                var result = string.Join("/", urls.Where(url => !string.IsNullOrWhiteSpace(url)).Select(url => url.Trim(new char[] { '/' })));
+                if (queryParams.Count > 0)
+                {
+                    result += "?" + string.Join("&", queryParams.Where(kv => !string.IsNullOrWhiteSpace(kv.Value)).Select(kv => $"{kv.Key}={System.Uri.EscapeDataString(kv.Value)}"));
+                }
+                return result;
             }
         }
 
@@ -79,14 +84,14 @@ namespace RingCentral
             return this;
         }
 
-        
+
 
         /// <summary>
-		/// Implicit conversion from Url to String.
-		/// </summary>
-		/// <param name="url">the Url object</param>
-		/// <returns>The string</returns>
-		public static implicit operator string(Url url)
+        /// Implicit conversion from Url to String.
+        /// </summary>
+        /// <param name="url">the Url object</param>
+        /// <returns>The string</returns>
+        public static implicit operator string(Url url)
         {
             return url.Uri;
         }
@@ -107,7 +112,7 @@ namespace RingCentral
         public async Task<T> PostUrlEncodedAsync<T>(object requestBody)
         {
             var client = GetClient();
-            
+
             var response = await client.PostAsync(Uri, new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(str);
@@ -145,16 +150,21 @@ namespace RingCentral
             return client.GetAsync(Uri);
         }
 
+        private string ToJson(object obj)
+        {
+            return JsonConvert.SerializeObject(obj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        }
+
         public Task<HttpResponseMessage> PostJsonAsync(object requestBody)
         {
             var client = GetClient();
-            return client.PostAsync(Uri, new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json"));
+            return client.PostAsync(Uri, new StringContent(ToJson(requestBody), Encoding.UTF8, "application/json"));
         }
 
         public Task<HttpResponseMessage> PutJsonAsync(object requestBody)
         {
             var client = GetClient();
-            return client.PutAsync(Uri, new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json"));
+            return client.PutAsync(Uri, new StringContent(ToJson(requestBody), Encoding.UTF8, "application/json"));
         }
     }
 }
