@@ -1,0 +1,9 @@
+{
+    "production": false,
+    "server": "apiServer",
+    "appKey": "myAppKey",
+    "appSecret": "myAppSecret",
+    "username": "myUsername",
+    "extension": "myExtension",
+    "password": "myPassword"
+}
