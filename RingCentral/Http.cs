@@ -1,30 +1,19 @@
-using Flurl;
-using Flurl.Http;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Flurl.Http.Configuration;
 
 namespace RingCentral
 {
     public partial class RestClient
     {
-        static RestClient()
-        {
-            var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-            var jsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings);
-            FlurlHttp.Configure(c => c.JsonSerializer = jsonSerializer);
-        }
-
-        private FlurlClient GetClient(string endpoint, object queryParams)
+        private Url GetClient(string endpoint, object queryParams)
         {
             var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams);
-            var client = new FlurlClient(url);
             if (token != null)
             {
-                client = client.WithOAuthBearerToken(token.access_token);
+                url = url.WithOAuthBearerToken(token.access_token);
             }
-            return client;
+            return url;
         }
 
         public Task<HttpResponseMessage> Get(string endpoint, object queryParams = null)

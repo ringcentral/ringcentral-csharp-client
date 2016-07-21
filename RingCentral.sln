@@ -5,12 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingCentral", "RingCentral\RingCentral.csproj", "{E55F50C2-42DF-496D-BB87-EB7A8D963A8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingCentral.Test", "RingCentral.Test\RingCentral.Test.csproj", "{4B8F243D-D979-4EEB-8B09-47B6834F880B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{13067057-FB70-49DB-AEE7-C05D844FE2AF}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingCentral.Test", "RingCentral.Test\RingCentral.Test.csproj", "{4B8F243D-D979-4EEB-8B09-47B6834F880B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

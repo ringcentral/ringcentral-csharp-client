@@ -1,5 +1,3 @@
-using Flurl;
-using Flurl.Http;
 using System.Threading.Tasks;
 
 namespace RingCentral
@@ -40,7 +38,7 @@ namespace RingCentral
                 {
                     if (!refreshScheduled)
                     { // don't do duplicate schedule
-                        Task.Delay((_token.expires_in.Value - 120) * 1000).ContinueWith((action) =>
+                        TaskEx.Delay((_token.expires_in.Value - 120) * 1000).ContinueWith((action) =>
                         { // 2 minutes before expiration
                             refreshScheduled = false;
                             Refresh();
@@ -68,7 +66,7 @@ namespace RingCentral
                 password = password,
                 grant_type = "password"
             };
-            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
         }
 
         /// <summary>
@@ -88,7 +86,7 @@ namespace RingCentral
                 refresh_token = token.refresh_token,
                 endpoint_id = token.endpoint_id
             };
-            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
         }
 
 
@@ -124,7 +122,7 @@ namespace RingCentral
                 redirect_uri = redirectUri,
                 code = authCode
             };
-            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
         }
 
         /// <summary>
