@@ -1,5 +1,5 @@
-using Xunit;
 using Newtonsoft.Json;
+using Xunit;
 
 namespace RingCentral.Test
 {
