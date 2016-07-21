@@ -13,7 +13,7 @@ namespace RingCentral
     {
         public static Url AppendPathSegment(this string url, string str)
         {
-            return new Url(str).AppendPathSegment(str);
+            return new Url(url).AppendPathSegment(str);
         }
     }
 
@@ -44,7 +44,7 @@ namespace RingCentral
         {
             get
             {
-                return string.Join("/", urls.Select(url => url.Trim(new char[] { '/' })));
+                return string.Join("/", urls.Where(url => !string.IsNullOrWhiteSpace(url)).Select(url => url.Trim(new char[] { '/' })));
             }
         }
 
@@ -69,9 +69,12 @@ namespace RingCentral
 
         public Url SetQueryParams(object obj)
         {
-            foreach (var kv in ObjectToKV(obj))
+            if (obj != null)
             {
-                SetQueryParam(kv.Key, kv.Value.ToString());
+                foreach (var kv in ObjectToKV(obj))
+                {
+                    SetQueryParam(kv.Key, kv.Value.ToString());
+                }
             }
             return this;
         }
@@ -85,7 +88,7 @@ namespace RingCentral
 		/// <returns>The string</returns>
 		public static implicit operator string(Url url)
         {
-            return string.Join("/", url.urls);
+            return url.Uri;
         }
 
         public Url WithBasicAuth(string key, string secret)
@@ -97,17 +100,14 @@ namespace RingCentral
 
         public async void PostUrlEncodedAsync(object requestBody)
         {
-            var client = new HttpClient();
-            await client.PostAsync(urls[0], new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
+            var client = GetClient();
+            await client.PostAsync(Uri, new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
         }
 
         public async Task<T> PostUrlEncodedAsync<T>(object requestBody)
         {
-            var client = new HttpClient();
-            if (key != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(key + ":" + secret)));
-            }
+            var client = GetClient();
+            
             var response = await client.PostAsync(Uri, new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(str);
@@ -119,27 +119,41 @@ namespace RingCentral
             return this;
         }
 
-        public Task<HttpResponseMessage> DeleteAsync()
+        private HttpClient GetClient()
         {
             var client = new HttpClient();
+            if (key != null)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(key + ":" + secret)));
+            }
+            if (accessToken != null)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            }
+            return client;
+        }
+
+        public Task<HttpResponseMessage> DeleteAsync()
+        {
+            var client = GetClient();
             return client.DeleteAsync(Uri);
         }
 
         public Task<HttpResponseMessage> GetAsync()
         {
-            var client = new HttpClient();
+            var client = GetClient();
             return client.GetAsync(Uri);
         }
 
         public Task<HttpResponseMessage> PostJsonAsync(object requestBody)
         {
-            var client = new HttpClient();
+            var client = GetClient();
             return client.PostAsync(Uri, new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json"));
         }
 
         public Task<HttpResponseMessage> PutJsonAsync(object requestBody)
         {
-            var client = new HttpClient();
+            var client = GetClient();
             return client.PutAsync(Uri, new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json"));
         }
     }
