@@ -101,7 +101,7 @@ var extension = rc.Restapi().Account().Extension("130829004");
 
 ### GET
 
-##### List all of the inbound call Logs:
+##### List all of the inbound call Logs
 
 ```cs
 var callLogs = await extension.CallLog().List(new { direction = "Inbound" });
@@ -122,7 +122,7 @@ var callLogs = extension.CallLog().List(new { direction = "Inbound" }).Result;
 ```
 
 
-##### Get a call log by ID:
+##### Get a call log by ID
 
 ```cs
 var callLog = await extension.CallLog("ASsQ3xLOZfrLBwM").Get();
