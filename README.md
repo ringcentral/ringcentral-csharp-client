@@ -95,7 +95,7 @@ var callLog = extension.CallLog("ASsQ3xLOZfrLBwM");
 ## Talk to API Server
 
 ```cs
-var extension = rc.Restapi().Account().Extension("130829004");
+var extension = rc.Restapi().Account().Extension();
 ```
 
 
@@ -202,6 +202,11 @@ subscription.Register();
 ```
 
 
+## Sample code
+
+The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets. Such as this [test class](https://github.com/tylerlong/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
+
+
 ## known issues
 
-- sending fax is not working yet.
+- sending fax doesn't work yet.
