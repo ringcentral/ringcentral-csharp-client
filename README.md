@@ -97,3 +97,8 @@ var timezone = rc.Get<Timezone.GetResponse>(endpoint).Result;
 ```cs
 var timezone = rc.Restapi().Dictionary().Timezone("6").Get().Result; // This is the shortest solution.
 ```
+
+
+## To be done
+
+- sending fax

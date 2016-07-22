@@ -10,6 +10,14 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
+    public partial class Subscription
+    {
+        public SubscriptionService New()
+        {
+            return new SubscriptionService(RC);
+        }
+    }
+
     public class SubscriptionEventArgs : EventArgs
     {
         public object Message { get; private set; }
@@ -84,8 +92,9 @@ namespace RingCentral
         private void Subscribe()
         {
             var temp = rc.Restapi().Subscription().Post(requestBody).Result;
-            pubnub = new Pubnub(null, temp.deliveryMode.subscriberKey);
-            pubnub.Subscribe<string>(temp.deliveryMode.address, OnSubscribe, OnConnect, OnError);
+            subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(temp));
+            pubnub = new Pubnub(null, subscriptionInfo.deliveryMode.subscriberKey);
+            pubnub.Subscribe<string>(subscriptionInfo.deliveryMode.address, OnSubscribe, OnConnect, OnError);
         }
 
         private void Renew()
