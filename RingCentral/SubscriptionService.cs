@@ -2,14 +2,13 @@
 using Org.BouncyCastle.Crypto.IO;
 using Org.BouncyCastle.Security;
 using PubNubMessaging.Core;
-using RingCentral.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RingCentral.Subscription
+namespace RingCentral
 {
     public class SubscriptionEventArgs : EventArgs
     {
@@ -26,23 +25,22 @@ namespace RingCentral.Subscription
         public event EventHandler<SubscriptionEventArgs> ConnectEvent;
         public event EventHandler<SubscriptionEventArgs> ErrorEvent;
         public List<string> EventFilters { get; set; } = new List<string>();
-        private string requestBody
+        private object requestBody
         {
             get
             {
-                return JsonConvert.SerializeObject(new
-                {
+                return new {
                     eventFilters = EventFilters,
                     deliveryMode = new { transportType = "PubNub", encryption = true }
-                });
+                };
             }
         }
 
-        private Platform platform;
+        private RestClient rc;
         private Pubnub pubnub;
-        private SubscriptionInfo _subscriptionInfo;
+        private Subscription.GetResponse _subscriptionInfo;
         private bool renewScheduled = false;
-        private SubscriptionInfo subscriptionInfo
+        private Subscription.GetResponse subscriptionInfo
         {
             get
             {
@@ -55,7 +53,7 @@ namespace RingCentral.Subscription
                 {
                     if (!renewScheduled)
                     { // don't do duplicate schedule
-                        TaskEx.Delay((_subscriptionInfo.ExpiresIn - 120) * 1000).ContinueWith((action) =>
+                        TaskEx.Delay((_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith((action) =>
                         { // 2 minutes before expiration
                             renewScheduled = false;
                             Renew();
@@ -66,9 +64,9 @@ namespace RingCentral.Subscription
             }
         }
 
-        internal SubscriptionService(Platform platform)
+        internal SubscriptionService(RestClient rc)
         {
-            this.platform = platform;
+            this.rc = rc;
         }
 
         public void Register()
@@ -85,11 +83,9 @@ namespace RingCentral.Subscription
 
         private void Subscribe()
         {
-            var request = new Request("/restapi/v1.0/subscription", requestBody);
-            var response = platform.Post(request);
-            subscriptionInfo = JsonConvert.DeserializeObject<SubscriptionInfo>(response.Body);
-            pubnub = new Pubnub(null, subscriptionInfo.DeliveryMode.SubscriberKey);
-            pubnub.Subscribe<string>(subscriptionInfo.DeliveryMode.Address, OnSubscribe, OnConnect, OnError);
+            var temp = rc.Restapi().Subscription().Post(requestBody).Result;
+            pubnub = new Pubnub(null, temp.deliveryMode.subscriberKey);
+            pubnub.Subscribe<string>(temp.deliveryMode.address, OnSubscribe, OnConnect, OnError);
         }
 
         private void Renew()
@@ -102,7 +98,7 @@ namespace RingCentral.Subscription
             ApiResponse response = null;
             try
             {
-                response = platform.Put(request);
+                response = rc.Put(request);
             }
             catch (ApiException ae)
             {
@@ -122,16 +118,15 @@ namespace RingCentral.Subscription
             { // has been removed
                 return;
             }
-            var request = new Request("/restapi/v1.0/subscription/" + subscriptionInfo.Id);
-            var response = platform.Delete(request);
+            var temp = rc.Restapi().Subscription(subscriptionInfo.id).Delete().Result;
             subscriptionInfo = null;
             pubnub = null;
         }
 
         public bool Alive()
         {
-            return pubnub != null && subscriptionInfo != null && subscriptionInfo.Id != null && subscriptionInfo.DeliveryMode != null
-                && subscriptionInfo.DeliveryMode.SubscriberKey != null && subscriptionInfo.DeliveryMode.Address != null;
+            return pubnub != null && subscriptionInfo != null && subscriptionInfo.id != null && subscriptionInfo.deliveryMode != null
+                && subscriptionInfo.deliveryMode.subscriberKey != null && subscriptionInfo.deliveryMode.address != null;
         }
 
         private void OnSubscribe(string result)
@@ -152,7 +147,7 @@ namespace RingCentral.Subscription
 
         private object Decrypt(string dataString)
         {
-            var key = Convert.FromBase64String(subscriptionInfo.DeliveryMode.EncryptionKey);
+            var key = Convert.FromBase64String(subscriptionInfo.deliveryMode.encryptionKey);
             var keyParameter = ParameterUtilities.CreateKeyParameter("AES", key);
             var cipher = CipherUtilities.GetCipher("AES/ECB/PKCS7Padding");
             cipher.Init(false, keyParameter);
