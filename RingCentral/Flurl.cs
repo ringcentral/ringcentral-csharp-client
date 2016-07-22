@@ -9,6 +9,15 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
+    public class ApiException : Exception
+    {
+        public HttpResponseMessage Response { get; private set; }
+        public ApiException(string message, HttpResponseMessage response) : base(message)
+        {
+            Response = response;
+        }
+    }
+
     public static class Flurl
     {
         public static Url AppendPathSegment(this string url, string str)
@@ -106,14 +115,15 @@ namespace RingCentral
         public async void PostUrlEncodedAsync(object requestBody)
         {
             var client = GetClient();
-            await client.PostAsync(Uri, new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
+            var result = await client.PostAsync(Uri, new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
+            CheckResult(result);
         }
 
         public async Task<T> PostUrlEncodedAsync<T>(object requestBody)
         {
             var client = GetClient();
-
             var response = await client.PostAsync(Uri, new FormUrlEncodedContent(ObjectToKV(requestBody).Select(kv => new KeyValuePair<string, string>(kv.Key, kv.Value.ToString()))));
+            CheckResult(response);
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(str);
         }
@@ -138,33 +148,50 @@ namespace RingCentral
             return client;
         }
 
-        public Task<HttpResponseMessage> DeleteAsync()
-        {
-            var client = GetClient();
-            return client.DeleteAsync(Uri);
-        }
-
-        public Task<HttpResponseMessage> GetAsync()
-        {
-            var client = GetClient();
-            return client.GetAsync(Uri);
-        }
-
         private string ToJson(object obj)
         {
             return JsonConvert.SerializeObject(obj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
 
-        public Task<HttpResponseMessage> PostJsonAsync(object requestBody)
+        private void CheckResult(HttpResponseMessage response)
         {
-            var client = GetClient();
-            return client.PostAsync(Uri, new StringContent(ToJson(requestBody), Encoding.UTF8, "application/json"));
+            var statusCode = Convert.ToInt32(response.StatusCode);
+            if (!(statusCode >= 200 && statusCode < 300))
+            {
+                throw new ApiException($"StatusCode: {statusCode}, Content: {response.Content.ReadAsStringAsync().Result}", response);
+            }
         }
 
-        public Task<HttpResponseMessage> PutJsonAsync(object requestBody)
+        public async Task<HttpResponseMessage> DeleteAsync()
         {
             var client = GetClient();
-            return client.PutAsync(Uri, new StringContent(ToJson(requestBody), Encoding.UTF8, "application/json"));
+            var result = await client.DeleteAsync(Uri);
+            CheckResult(result);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetAsync()
+        {
+            var client = GetClient();
+            var result = await client.GetAsync(Uri);
+            CheckResult(result);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PostJsonAsync(object requestBody)
+        {
+            var client = GetClient();
+            var result = await client.PostAsync(Uri, new StringContent(ToJson(requestBody), Encoding.UTF8, "application/json"));
+            CheckResult(result);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PutJsonAsync(object requestBody)
+        {
+            var client = GetClient();
+            var result = await client.PutAsync(Uri, new StringContent(ToJson(requestBody), Encoding.UTF8, "application/json"));
+            CheckResult(result);
+            return result;
         }
     }
 }
