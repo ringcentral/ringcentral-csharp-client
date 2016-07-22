@@ -1,104 +1,207 @@
-# ringcentral-cs-client
+# ringcentral-csharp-client
 
 RingCentral C# client.
 
-This is just a proof of concept release, please don't use it in production (yet)!
+**Notice:** This project is NOT yet ready for production!
 
 
-## Authorization management
+## Installation
 
-Token is refreshed automatically by background timer, the same as how we keep PubNub subscription alive.
+```powershell
+Install-Package RingCentral.Client -Pre
+```
 
-I made this change because I don't think we should refresh RingCentral token and PubNub subscription differently.
+
+## API Reference
+
+[RingCentral API Reference](https://developer.ringcentral.com/api-docs/latest/index.html#!#APIReference.html) is where you can find all the endpoints, requests, parameters and all kinds of necessary details.
 
 
-## URL Builder
+## Initialization
 
 ```cs
-var rc = new RestClient("appKey", "appSecret"); // you can use fake key and secret if you don't talk to api server.
+using RingCentral;
+
+rc = new RestClient("appKey", "appSecret");
+```
+
+By default the clients talk to sandbox server. If you want production server:
+
+```cs
+rc = new RestClient("appKey", "appSecret", true);
+```
+
+
+## Authorization
+
+```cs
+rc.Authorize("username", "extension", "password");
+```
+
+If you use direct number as username, leave extension empty.
+
+
+
+## Map URI to code
+
+This client library is built around URIs. 
+Please read this part carefully and make sure you get it before continuing.
+
+Let's go to the [RingCentral API Reference](https://developer.ringcentral.com/api-docs/latest/index.html#!#APIReference.html) to find 
+[an example](https://developer.ringcentral.com/api-docs/latest/index.html#!#RefExtensionCallLogRecord.html).
+
+We can see that the URI pattern is:
+
+```
+/restapi/v1.0/account/{accountId}/extension/{extensionId}/call-log/{callRecordId}
+```
+
+An real example of the URI could be:
+
+```none
+/restapi/v1.0/account/~/extension/130829004/call-log/ASsQ3xLOZfrLBwM
+```
+
+Let's map the URI above to code:
+
+```cs
+rc.Restapi("v1.0").Account("~").Extension("130829004").CallLog("ASsQ3xLOZfrLBwM");
+```
+
+It's just a one-to-one mapping:
+
+![mapping](~/Desktop/mapping.png)
+
+
+##### Default ID
+
+The default ID for `Restapi` is `v1.0`, the default ID for `Account` and `Extension` is `~`.
+
+We can omit arguments to use default value:
+
+```cs
+rc.Restapi().Account().Extension("130829004").CallLog("ASsQ3xLOZfrLBwM");
+```
+
+You can also break it into multiple lines if you don't like long-chained method calls:
+
+```cs
 var account = rc.Restapi().Account();
-var extension = account.Extension();
-account.CallLog().Endpoint(); // "/restapi/v1.0/account/~/call-log"
-extension.CallLog("123456").Endpoint(); // "/restapi/v1.0/account/~/extension/~/call-log/123456"
-extension.CallLog("123456").Url(); // "https://platform.devtest.ringcentral.com/restapi/v1.0/account/~/extension/~/call-log/123456"
-```
-
-Or you can specify all of the IDs explicitly:
-
-```cs
-rc.Restapi("v1.0").Account("~").Extension("12345678").CallLog("87654321").Endpoint(); // "/restapi/v1.0/account/~/extension/12345678/call-log/87654321"
-```
-
-Let's compare it with the traditional solution:
-
-```cs
-var apiVersion = "v1.0";
-var accountId = "~";
-var extensionId = "12345678";
-var callLogId = "87654321";
-var endpoint = "/restapi" + apiVersion + "/account" + accountId + "/extension" + extensionId + "/call-log" + callLogId;
-```
-
-Too many hard-coded strings, too much string concatenation. It is prone to make typos and hard to read/maintain.
-
-
-## Async by default
-
-Http requests are async by default:
-
-```cs
-var response = await rc.Get(endpoint);
-var country = await rc.Restapi().Dictionary().Country("46").Get();
-```
-
-And you can change them to sync easily:
-
-```cs
-var response = rc.Get(endpoint).Result;
-var country = rc.Restapi().Dictionary().Country("46").Get().Result;
+var extension = account.Extension("130829004");
+var callLog = extension.CallLog("ASsQ3xLOZfrLBwM");
 ```
 
 
-## Http Request sample
-
-Get extension list:
+## Talk to API Server
 
 ```cs
-var rc = new RestClient("appKey", "appSecret");
-var endpoint = rc.Restapi().Account().Extension().Endpoint(); // /restapi/v1.0/account/~/extension/~
-var response = rc.Get(endpoint).Result;
-var json = response.Content.ReadAsStringAsync().Result;
+var extension = rc.Restapi().Account().Extension("130829004");
 ```
 
-## Models
 
-This is **almost** ready. Some rare cases are not working yet.
+### GET
 
-Following code snippets are equivalent:
-
-##### Traditional solution:
+##### List all of the inbound call Logs:
 
 ```cs
-var endpoint = "/restapi/v1.0/dictionary/timezone/6"; // hard code string
+var callLogs = await extension.CallLog().List(new { direction = "Inbound" });
+```
+
+Or if you prefer the query parameters as a typed model:
+
+```cs
+var callLogs = await extension.CallLog().List(new CallLog.ListQueryParams { direction = "Inbound" });
+```
+
+All the HTTP calls are by default async, so you can use the `await` keyword of C#.
+
+Or you can append `.Result` to the end to turn it into sync:
+
+```
+var callLogs = extension.CallLog().List(new { direction = "Inbound" }).Result;
+```
+
+
+##### Get a call log by ID:
+
+```cs
+var callLog = await extension.CallLog("ASsQ3xLOZfrLBwM").Get();
+```
+
+You can inspect the attributes of the returned `callLog` object because it is a model instead of a string:
+
+```cs
+Console.WriteLine(callLog.id);
+Console.WriteLine(callLog.direction);
+Console.WriteLine(callLog.startTime);
+```
+
+
+### POST
+
+##### Send an SMS
+
+```cs
+var requestBody = new {
+    text = "hello world",
+    from = new { phoneNumber = phoneNumber },
+    to = new object[] { new { phoneNumber = phoneNumber } }
+};
+var response = await extension.Sms().Post(requestBody);
+```
+
+
+### PUT
+
+##### Update message status
+
+```cs
+var requestBody = new { readStatus = "Read" };
+var response = await extension.MessageStore(messageId).Put(requestBody);
+```
+
+
+### DELETE
+
+##### Delete message by ID
+
+```cs
+var response = await extension.MessageStore(messageId).Delete();
+```
+
+
+## What if I want plain HTTP without those fancy models?
+
+```cs
+var endpoint = rc.Restapi().Dictionary().Timezone("6").Endpoint(); // "/restapi/v1.0/dictionary/timezone/6"
 var response = rc.Get(endpoint).Result; // make http request
-var json = response.Content.ReadAsStringAsync().Result; // get response json
-var timezone = JsonConvert.DeserializeObject<Timezone.GetResponse>(json); // convert json to model
+var statusCode = response.StatusCode; // check status code
+var str = response.Content.ReadAsStringAsync().Result; // get response string
 ```
 
-##### URL Builder + generics programming:
+
+## Subscription
 
 ```cs
-var endpoint = rc.Restapi().Dictionary().Timezone("6").Endpoint();
-var timezone = rc.Get<Timezone.GetResponse>(endpoint).Result;
+var subscription = rc.Restapi().Subscription().New();
+subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
+subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence");
+subscription.ConnectEvent += (sender, args) => {
+    Console.WriteLine("Connected:");
+    Console.WriteLine(args.Message);
+};
+subscription.NotificationEvent += (sender, args) => {
+    Console.WriteLine("Notification:");
+    Console.WriteLine(args.Message);
+};
+subscription.ErrorEvent += (sender, args) => {
+    Console.WriteLine("Error:");
+    Console.WriteLine(args.Message);
+};
+subscription.Register();
 ```
 
-##### Most intuitive:
 
-```cs
-var timezone = rc.Restapi().Dictionary().Timezone("6").Get().Result; // This is the shortest solution.
-```
+## known issues
 
-
-## To be done
-
-- sending fax
+- sending fax is not working yet.
