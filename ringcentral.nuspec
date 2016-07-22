@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>RingCentral.Client</id>
+    <version>1.0.0-beta1</version>
+    <title>RingCentral Client</title>
+    <authors>Tyler Long</authors>
+    <owners>RingCentral</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/tylerlong/ringcentral-csharp-client</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>RingCentral C# Client</description>
+    <copyright>Copyright 2016</copyright>
+    <tags>RingCentral Ring Central C# Client</tags>
+    <dependencies>
+      <group>
+        <dependency id="Microsoft.Bcl" version="1.1.10" />
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.14" />
+        <dependency id="Microsoft.Net.Http" version="2.2.29" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="Portable.BouncyCastle-Signed" version="1.7.0.2" />
+        <dependency id="PubnubPCL" version="3.7.7.0" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/portable-net45+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/portable-net40" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net40" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net45" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/sl5" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/MonoTouch1" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/MonoAndroid1" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/MonoMac" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/Xamarin.Mac" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/Xamarin.iOS" />
+  </files>
+</package>
