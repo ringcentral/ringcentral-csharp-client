@@ -94,22 +94,20 @@ namespace RingCentral
             { // Remove() has been called
                 return;
             }
-            var request = new Request("/restapi/v1.0/subscription/" + subscriptionInfo.Id, requestBody);
-            ApiResponse response = null;
             try
             {
-                response = rc.Put(request);
+                var response = rc.Restapi().Subscription(subscriptionInfo.id).Put(requestBody).Result;
+                subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(response));
             }
             catch (ApiException ae)
             {
-                if (ae.Response.Status == 404)
+                if (ae.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 { // subscription not found on server side
                     Subscribe();
                     return;
                 }
                 throw ae;
             }
-            subscriptionInfo = JsonConvert.DeserializeObject<SubscriptionInfo>(response.Body);
         }
 
         public void Remove()
