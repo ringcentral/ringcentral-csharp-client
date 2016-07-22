@@ -31,5 +31,6 @@ namespace RingCentral.Test
         public string username { get; set; }
         public string extension { get; set; }
         public string password { get; set; }
+        public string receiver { get; set; }
     }
 }
