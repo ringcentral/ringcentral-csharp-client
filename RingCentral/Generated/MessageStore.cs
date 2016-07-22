@@ -27,7 +27,7 @@ namespace RingCentral
         public class ListQueryParams
         {
             public string availability { get; set; }
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             public string dateFrom { get; set; }
             public string dateTo { get; set; }
             public string direction { get; set; }
@@ -49,7 +49,7 @@ namespace RingCentral
                 public string uri { get; set; }
                 public Attachment[] attachments { get; set; }
                 public string availability { get; set; }
-                public int? conversationId { get; set; }
+                public long? conversationId { get; set; }
                 public string creationTime { get; set; }
                 public string deliveryErrorCode { get; set; }
                 public string direction { get; set; }
@@ -138,7 +138,7 @@ namespace RingCentral
         public class DeleteQueryParams
         {
             public bool? purge { get; set; }
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
         }
         public Task<GetResponse> Get()
         {
@@ -150,7 +150,7 @@ namespace RingCentral
             public string uri { get; set; }
             public Attachment[] attachments { get; set; }
             public string availability { get; set; }
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             public string creationTime { get; set; }
             public string deliveryErrorCode { get; set; }
             public string direction { get; set; }
@@ -213,7 +213,7 @@ namespace RingCentral
             public string uri { get; set; }
             public Attachment[] attachments { get; set; }
             public string availability { get; set; }
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             public string creationTime { get; set; }
             public string deliveryErrorCode { get; set; }
             public string direction { get; set; }

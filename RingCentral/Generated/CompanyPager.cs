@@ -47,7 +47,7 @@ namespace RingCentral
             public string uri { get; set; }
             public Attachment[] attachments { get; set; }
             public string availability { get; set; }
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             public string creationTime { get; set; }
             public string deliveryErrorCode { get; set; }
             public string direction { get; set; }
