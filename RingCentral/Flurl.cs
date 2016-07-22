@@ -87,7 +87,10 @@ namespace RingCentral
             {
                 foreach (var kv in ObjectToKV(obj))
                 {
-                    SetQueryParam(kv.Key, kv.Value.ToString());
+                    if (kv.Value != null)
+                    {
+                        SetQueryParam(kv.Key, kv.Value.ToString());
+                    }
                 }
             }
             return this;

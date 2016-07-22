@@ -48,11 +48,9 @@ namespace RingCentral.Test
             subscription.Register();
             SendSMS();
             Thread.Sleep(15000);
-            SendSMS();
-            Thread.Sleep(15000);
             subscription.Remove();
             Assert.Equal(1, connectCount);
-            Assert.True(messageCount >= 2);
+            Assert.True(messageCount >= 1);
             Assert.Equal(0, errorCount);
         }
     }
