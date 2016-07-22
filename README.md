@@ -70,7 +70,7 @@ rc.Restapi("v1.0").Account("~").Extension("130829004").CallLog("ASsQ3xLOZfrLBwM"
 
 It's just a one-to-one mapping:
 
-![mapping](~/Desktop/mapping.png)
+![mapping](mapping.png)
 
 
 ##### Default ID
