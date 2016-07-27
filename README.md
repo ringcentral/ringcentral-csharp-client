@@ -41,7 +41,6 @@ rc.Authorize("username", "extension", "password");
 If you use direct number as username, leave extension empty.
 
 
-
 ## Map URI to code
 
 This client library is built around URIs. 

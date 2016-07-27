@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>RingCentral.Client</id>
-    <version>1.0.0-beta2</version>
+    <version>1.0.0-beta3</version>
     <title>RingCentral Client</title>
     <authors>Tyler Long</authors>
     <owners>RingCentral</owners>
@@ -24,16 +24,12 @@
       </group>
     </dependencies>
   </metadata>
-  <files>
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/portable-net45+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/portable-net40" />
+  <files>  
     <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net40" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net45" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/sl5" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/MonoTouch1" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/MonoAndroid1" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/MonoMac" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/Xamarin.Mac" />
-    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/Xamarin.iOS" />
+    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/monoandroid" />
+    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/monotouch" />
+    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/monomac" />
+    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/xamarinios" />
+    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/xamarinmac" />
   </files>
 </package>
