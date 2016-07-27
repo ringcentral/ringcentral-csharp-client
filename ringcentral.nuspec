@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>RingCentral.Client</id>
-    <version>1.0.0-beta3</version>
+    <version>1.0.0-beta5</version>
     <title>RingCentral Client</title>
     <authors>Tyler Long</authors>
     <owners>RingCentral</owners>
@@ -26,10 +26,10 @@
   </metadata>
   <files>  
     <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net40" />
-    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/monoandroid" />
-    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/monotouch" />
-    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/monomac" />
-    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/xamarinios" />
-    <file src="RingCentral/bin/Mac/RingCentral.dll" target="lib/xamarinmac" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monoandroid" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monotouch" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monomac" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/xamarinios" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/xamarinmac" />
   </files>
 </package>

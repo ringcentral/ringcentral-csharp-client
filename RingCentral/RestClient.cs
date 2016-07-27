@@ -59,7 +59,7 @@ namespace RingCentral
         {
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new
+            var requestBody = new Token.PostRequest
             {
                 username = username,
                 extension = extension,
@@ -69,6 +69,12 @@ namespace RingCentral
             token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
         }
 
+        public class RefreshRequest
+        {
+            public string grant_type { get; set; }
+            public string refresh_token { get; set; }
+            public string endpoint_id { get; set; }
+        }
         /// <summary>
         /// Refresh the token
         /// </summary>
@@ -80,7 +86,7 @@ namespace RingCentral
             }
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new
+            var requestBody = new RefreshRequest
             {
                 grant_type = "refresh_token",
                 refresh_token = token.refresh_token,
@@ -107,6 +113,13 @@ namespace RingCentral
             return baseUrl.ToString();
         }
 
+
+        public class AuthCodeRequest
+        {
+            public string grant_type { get; set; }
+            public string redirect_uri { get; set; }
+            public string code { get; set; }
+        }
         /// <summary>
         /// Do authorization with the authorization code returned from server
         /// </summary>
@@ -116,7 +129,7 @@ namespace RingCentral
         {
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new
+            var requestBody = new AuthCodeRequest
             {
                 grant_type = "authorization_code",
                 redirect_uri = redirectUri,
