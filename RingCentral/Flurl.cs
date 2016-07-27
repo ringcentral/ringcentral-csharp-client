@@ -76,9 +76,9 @@ namespace RingCentral
 
         private static IEnumerable<KeyValuePair<string, object>> ObjectToKV(object obj)
         {
-            return from prop in obj.GetType().GetProperties()
-                   let val = prop.GetValue(obj, null)
-                   select new KeyValuePair<string, object>(prop.Name, val);
+            return (from prop in obj.GetType().GetProperties()
+                    let val = prop.GetValue(obj, null)
+                    select new KeyValuePair<string, object>(prop.Name, val)).Where(kv => kv.Value != null);
         }
 
         public Url SetQueryParams(object obj)
@@ -87,10 +87,7 @@ namespace RingCentral
             {
                 foreach (var kv in ObjectToKV(obj))
                 {
-                    if (kv.Value != null)
-                    {
-                        SetQueryParam(kv.Key, kv.Value.ToString());
-                    }
+                    SetQueryParam(kv.Key, kv.Value.ToString());
                 }
             }
             return this;
