@@ -23,7 +23,7 @@ namespace RingCentral
         public class PostRequest
         {
             public To[] to { get; set; }
-            public string resolution { get; set; }
+            public string faxResolution { get; set; }
             public string sendTime { get; set; }
             public int? coverIndex { get; set; }
             public string coverPageText { get; set; }
