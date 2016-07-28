@@ -20,7 +20,7 @@ namespace RingCentral.Test
             {
                 faxResolution = "High",
                 to = new Fax.PostRequest.To[] { new Fax.PostRequest.To { phoneNumber = Config.Instance.receiver } }
-            }).Result;
+            }, null).Result;
             Assert.NotNull(response);
         }
     }

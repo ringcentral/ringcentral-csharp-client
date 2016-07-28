@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Fax.cs" />
     <Compile Include="Flurl.cs" />
     <Compile Include="Generated\Account.cs" />
     <Compile Include="Generated\ActiveCalls.cs" />
