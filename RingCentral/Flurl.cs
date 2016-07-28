@@ -150,7 +150,8 @@ namespace RingCentral
 
         private string ToJson(object obj)
         {
-            return JsonConvert.SerializeObject(obj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var result = JsonConvert.SerializeObject(obj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            return result;
         }
 
         private void CheckResult(HttpResponseMessage response)
