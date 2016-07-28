@@ -12,14 +12,6 @@ namespace RingCentral
                 return "fax";
             }
         }
-        public Task<PostResponse> Post(object requestBody)
-        {
-            return RC.Post<PostResponse>(Endpoint(false), requestBody, null);
-        }
-        public Task<PostResponse> Post(PostRequest requestBody)
-        {
-            return Post(requestBody as object);
-        }
         public class PostRequest
         {
             public To[] to { get; set; }
