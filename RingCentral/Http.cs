@@ -1,3 +1,5 @@
+using Flurl;
+using Flurl.Http;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -6,14 +8,15 @@ namespace RingCentral
 {
     public partial class RestClient
     {
-        private Url GetClient(string endpoint, object queryParams)
+        private FlurlClient GetClient(string endpoint, object queryParams)
         {
             var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams);
+            var client = new FlurlClient(url);
             if (token != null)
             {
-                url = url.WithOAuthBearerToken(token.access_token);
+                client = client.WithOAuthBearerToken(token.access_token);
             }
-            return url;
+            return client;
         }
 
         public Task<HttpResponseMessage> Get(string endpoint, object queryParams = null)

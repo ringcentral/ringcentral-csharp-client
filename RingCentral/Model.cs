@@ -1,3 +1,5 @@
+using Flurl;
+
 namespace RingCentral
 {
     public abstract partial class Model

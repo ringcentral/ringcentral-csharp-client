@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Flurl.Http;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.IO;
 using Org.BouncyCastle.Security;
 using PubNubMessaging.Core;
@@ -61,7 +62,7 @@ namespace RingCentral
                 {
                     if (!renewScheduled)
                     { // don't do duplicate schedule
-                        TaskEx.Delay((_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith((action) =>
+                        Task.Delay((_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith((action) =>
                         { // 2 minutes before expiration
                             renewScheduled = false;
                             Renew();
@@ -108,14 +109,14 @@ namespace RingCentral
                 var response = rc.Restapi().Subscription(subscriptionInfo.id).Put(requestBody).Result;
                 subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(response));
             }
-            catch (ApiException ae)
+            catch (FlurlHttpException fhe)
             {
-                if (ae.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 { // subscription not found on server side
                     Subscribe();
                     return;
                 }
-                throw ae;
+                throw fhe;
             }
         }
 

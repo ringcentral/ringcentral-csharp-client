@@ -1,3 +1,7 @@
+using Flurl;
+using Flurl.Http;
+using Flurl.Http.Configuration;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace RingCentral
@@ -10,6 +14,13 @@ namespace RingCentral
         public string appKey;
         public string appSecret;
         public string server;
+
+        static RestClient()
+        {
+            var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+            var jsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings);
+            FlurlHttp.Configure(c => c.JsonSerializer = jsonSerializer);
+        }
 
         public RestClient(string appKey, string appSecret, string server)
         {
@@ -38,7 +49,7 @@ namespace RingCentral
                 {
                     if (!refreshScheduled)
                     { // don't do duplicate schedule
-                        TaskEx.Delay((_token.expires_in.Value - 120) * 1000).ContinueWith((action) =>
+                        Task.Delay((_token.expires_in.Value - 120) * 1000).ContinueWith((action) =>
                         { // 2 minutes before expiration
                             refreshScheduled = false;
                             Refresh();
@@ -57,7 +68,7 @@ namespace RingCentral
         /// <param name="password">Password</param>
         public void Authorize(string username, string extension, string password)
         {
-            var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
+            var url = server.AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new Token.PostRequest
             {
@@ -66,7 +77,7 @@ namespace RingCentral
                 password = password,
                 grant_type = "password"
             };
-            token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
+            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
         }
 
         public class RefreshRequest
@@ -92,7 +103,7 @@ namespace RingCentral
                 refresh_token = token.refresh_token,
                 endpoint_id = token.endpoint_id
             };
-            token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
+            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
         }
 
 
@@ -135,7 +146,7 @@ namespace RingCentral
                 redirect_uri = redirectUri,
                 code = authCode
             };
-            token = client.PostUrlEncodedAsync<Token.PostResponse>(requestBody).Result;
+            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
         }
 
         /// <summary>
