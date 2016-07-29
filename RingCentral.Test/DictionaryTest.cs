@@ -44,10 +44,6 @@ namespace RingCentral.Test
             var methodInfo = rc.Restapi().GetType().GetMethod("Dictionary");
             var parameters = methodInfo.GetParameters();
             Assert.Equal(0, parameters.Length);
-
-            methodInfo = rc.Restapi().Dictionary().GetType().GetMethod("Timezone");
-            parameters = methodInfo.GetParameters();
-            Assert.Equal(1, parameters.Length);
         }
     }
 }

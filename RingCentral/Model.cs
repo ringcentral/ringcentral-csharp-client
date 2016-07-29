@@ -37,4 +37,40 @@ namespace RingCentral
             }
         }
     }
+
+    public class ID
+    {
+        private int? i = null;
+        private string s = null;
+
+        public ID(int i)
+        {
+            this.i = i;
+        }
+
+        public ID(string s)
+        {
+            this.s = s;
+        }
+
+        public static implicit operator ID(int i)
+        {
+            return new ID(i);
+        }
+
+        public static implicit operator ID(string s)
+        {
+            return new ID(s);
+        }
+
+        public static implicit operator string(ID id)
+        {
+            return id.ToString();
+        }
+
+        public override string ToString()
+        {
+            return i.HasValue ? i.ToString() : s;
+        }
+    }
 }
