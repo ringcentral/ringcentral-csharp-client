@@ -12,9 +12,13 @@ namespace RingCentral
                 return "recording";
             }
         }
-        public Content Content(string _id = null)
+        public Content Content(ID _id)
         {
             return new Content(this, _id);
+        }
+        public Content Content()
+        {
+            return new Content(this, null);
         }
         public Task<GetResponse> Get()
         {

@@ -24,21 +24,33 @@ namespace RingCentral
         {
             return new AddressBook(this);
         }
-        public AnsweringRule AnsweringRule(string _id = null)
+        public AnsweringRule AnsweringRule(ID _id)
         {
             return new AnsweringRule(this, _id);
         }
-        public BlockedNumber BlockedNumber(string _id = null)
+        public AnsweringRule AnsweringRule()
+        {
+            return new AnsweringRule(this, null);
+        }
+        public BlockedNumber BlockedNumber(ID _id)
         {
             return new BlockedNumber(this, _id);
+        }
+        public BlockedNumber BlockedNumber()
+        {
+            return new BlockedNumber(this, null);
         }
         public BusinessHours BusinessHours()
         {
             return new BusinessHours(this);
         }
-        public CallLog CallLog(string _id = null)
+        public CallLog CallLog(ID _id)
         {
             return new CallLog(this, _id);
+        }
+        public CallLog CallLog()
+        {
+            return new CallLog(this, null);
         }
         public CallLogSync CallLogSync()
         {
@@ -52,9 +64,13 @@ namespace RingCentral
         {
             return new Conferencing(this);
         }
-        public Device Device(string _id = null)
+        public Device Device(ID _id)
         {
             return new Device(this, _id);
+        }
+        public Device Device()
+        {
+            return new Device(this, null);
         }
         public Fax Fax()
         {
@@ -68,33 +84,53 @@ namespace RingCentral
         {
             return new Grant(this);
         }
-        public Meeting Meeting(string _id = null)
+        public Meeting Meeting(ID _id)
         {
             return new Meeting(this, _id);
         }
-        public MessageStore MessageStore(string _id = null)
+        public Meeting Meeting()
+        {
+            return new Meeting(this, null);
+        }
+        public MessageStore MessageStore(ID _id)
         {
             return new MessageStore(this, _id);
+        }
+        public MessageStore MessageStore()
+        {
+            return new MessageStore(this, null);
         }
         public MessageSync MessageSync()
         {
             return new MessageSync(this);
         }
-        public PhoneNumber PhoneNumber(string _id = null)
+        public PhoneNumber PhoneNumber(ID _id)
         {
             return new PhoneNumber(this, _id);
+        }
+        public PhoneNumber PhoneNumber()
+        {
+            return new PhoneNumber(this, null);
         }
         public Presence Presence()
         {
             return new Presence(this);
         }
-        public ProfileImage ProfileImage(string _id = null)
+        public ProfileImage ProfileImage(ID _id)
         {
             return new ProfileImage(this, _id);
         }
-        public Ringout Ringout(string _id = null)
+        public ProfileImage ProfileImage()
+        {
+            return new ProfileImage(this, null);
+        }
+        public Ringout Ringout(ID _id)
         {
             return new Ringout(this, _id);
+        }
+        public Ringout Ringout()
+        {
+            return new Ringout(this, null);
         }
         public Sms Sms()
         {

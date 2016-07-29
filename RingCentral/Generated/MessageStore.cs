@@ -12,9 +12,13 @@ namespace RingCentral
                 return "message-store";
             }
         }
-        public Content Content(string _id = null)
+        public Content Content(ID _id)
         {
             return new Content(this, _id);
+        }
+        public Content Content()
+        {
+            return new Content(this, null);
         }
         public Task<ListResponse> List(object queryParams)
         {

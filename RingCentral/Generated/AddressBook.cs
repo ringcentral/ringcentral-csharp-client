@@ -11,13 +11,21 @@ namespace RingCentral
                 return "address-book";
             }
         }
-        public Contact Contact(string _id = null)
+        public Contact Contact(ID _id)
         {
             return new Contact(this, _id);
         }
-        public Group Group(string _id = null)
+        public Contact Contact()
+        {
+            return new Contact(this, null);
+        }
+        public Group Group(ID _id)
         {
             return new Group(this, _id);
+        }
+        public Group Group()
+        {
+            return new Group(this, null);
         }
     }
 }

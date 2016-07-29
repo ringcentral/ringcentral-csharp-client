@@ -11,9 +11,13 @@ namespace RingCentral
                 return "client-info";
             }
         }
-        public CustomData CustomData(string _id = null)
+        public CustomData CustomData(ID _id)
         {
             return new CustomData(this, _id);
+        }
+        public CustomData CustomData()
+        {
+            return new CustomData(this, null);
         }
     }
 }

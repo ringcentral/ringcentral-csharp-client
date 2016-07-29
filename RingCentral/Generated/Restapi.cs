@@ -16,9 +16,13 @@ namespace RingCentral
         {
             return new Oauth(this);
         }
-        public Account Account(string _id = "~")
+        public Account Account(ID _id)
         {
             return new Account(this, _id);
+        }
+        public Account Account()
+        {
+            return new Account(this, "~");
         }
         public ClientInfo ClientInfo()
         {
@@ -36,9 +40,13 @@ namespace RingCentral
         {
             return new NumberPool(this);
         }
-        public Subscription Subscription(string _id = null)
+        public Subscription Subscription(ID _id)
         {
             return new Subscription(this, _id);
+        }
+        public Subscription Subscription()
+        {
+            return new Subscription(this, null);
         }
         public Task<ListResponse> List()
         {

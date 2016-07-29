@@ -20,33 +20,61 @@ namespace RingCentral
         {
             return new BusinessAddress(this);
         }
-        public CallLog CallLog(string _id = null)
+        public CallLog CallLog(ID _id)
         {
             return new CallLog(this, _id);
         }
-        public Department Department(string _id = null)
+        public CallLog CallLog()
+        {
+            return new CallLog(this, null);
+        }
+        public Department Department(ID _id)
         {
             return new Department(this, _id);
         }
-        public Device Device(string _id = null)
+        public Department Department()
+        {
+            return new Department(this, null);
+        }
+        public Device Device(ID _id)
         {
             return new Device(this, _id);
         }
-        public Extension Extension(string _id = "~")
+        public Device Device()
+        {
+            return new Device(this, null);
+        }
+        public Extension Extension(ID _id)
         {
             return new Extension(this, _id);
         }
-        public Order Order(string _id = null)
+        public Extension Extension()
+        {
+            return new Extension(this, "~");
+        }
+        public Order Order(ID _id)
         {
             return new Order(this, _id);
         }
-        public PhoneNumber PhoneNumber(string _id = null)
+        public Order Order()
+        {
+            return new Order(this, null);
+        }
+        public PhoneNumber PhoneNumber(ID _id)
         {
             return new PhoneNumber(this, _id);
         }
-        public Recording Recording(string _id = null)
+        public PhoneNumber PhoneNumber()
+        {
+            return new PhoneNumber(this, null);
+        }
+        public Recording Recording(ID _id)
         {
             return new Recording(this, _id);
+        }
+        public Recording Recording()
+        {
+            return new Recording(this, null);
         }
         public ServiceInfo ServiceInfo()
         {
