@@ -122,7 +122,7 @@ namespace RingCentral
             baseUrl.SetQueryParam("state", state);
             baseUrl.SetQueryParam("redirect_uri", redirectUri);
             baseUrl.SetQueryParam("client_id", appKey);
-            return baseUrl.ToString();
+            return baseUrl;
         }
 
 
