@@ -15,9 +15,10 @@ namespace RingCentral
         public string appSecret;
         public string server;
 
+        public static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+
         static RestClient()
         {
-            var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
             var jsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings);
             FlurlHttp.Configure(c => c.JsonSerializer = jsonSerializer);
         }

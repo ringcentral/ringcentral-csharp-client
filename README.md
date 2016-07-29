@@ -91,6 +91,36 @@ var callLog = extension.CallLog("ASsQ3xLOZfrLBwM");
 ```
 
 
+## Anonymous types vs Pre-defined types
+
+For example, the following line is for sending fax:
+
+```cs
+var response = extension.Fax().Post(requestBody, attachments).Result;
+```
+
+To create the `requestBody` object, you can define it as following:
+
+```cs
+var requestBody = new Fax.PostRequest
+{
+    to = new Fax.PostRequest.To[] { new Fax.PostRequest.To { phoneNumber = "123456789" } }
+}
+```
+
+Or, you can define it using anonymous types:
+
+```cs
+var requestBody = new
+{
+    to = new object[] { new { phoneNumber = "123456789" } }
+}
+```
+
+Both are OK. The anonymous types approach is shorter while you can take advantages of IDE intellisense with pre-defined types approach.
+You can choose based on your preferences.
+
+
 ## Talk to API Server
 
 ```cs
@@ -201,11 +231,19 @@ subscription.Register();
 ```
 
 
+## Send Fax
+
+```cs
+var attachment1 = new Attachment { fileName = "test.txt", contentType = "text/plain", bytes = Encoding.UTF8.GetBytes("hello world") };
+var attachment2 = new Attachment { fileName = "test.pdf", contentType = "application/pdf", bytes = File.ReadAllBytes("test.pdf") };
+var attachments = new Attachment[] { attachment1, attachment2 };
+var response = extension.Fax().Post(new Fax.PostRequest
+{
+    to = new Fax.PostRequest.To[] { new Fax.PostRequest.To { phoneNumber = Config.Instance.receiver } }
+}, attachments).Result;
+```
+
+
 ## Sample code
 
 The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets. Such as this [test class](https://github.com/tylerlong/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
-
-
-## known issues
-
-- sending fax doesn't work yet.
