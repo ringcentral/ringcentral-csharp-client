@@ -244,6 +244,24 @@ var response = extension.Fax().Post(new Fax.PostRequest
 ```
 
 
+## Binary data
+
+#### Create profile image
+
+```cs
+var bytes = File.ReadAllBytes("test.png");
+var response = extension.ProfileImage().Post(bytes, "test.png").Result;
+```
+
+#### Update profile image
+
+```cs
+var bytes = File.ReadAllBytes("test.png");
+var response = extension.ProfileImage().Put(bytes, "test.png").Result;
+```
+
+
 ## Sample code
 
-The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets. Such as this [test class](https://github.com/tylerlong/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
+The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
+Such as this [test class](https://github.com/tylerlong/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
