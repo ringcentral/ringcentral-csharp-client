@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Xunit;
 
@@ -42,7 +43,7 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void Content()
+        public void MessageContent()
         {
             var extension = rc.Restapi().Account().Extension();
 
@@ -61,6 +62,31 @@ namespace RingCentral.Test
             Assert.NotNull(bytes);
             Assert.True(bytes.Length > 0);
             File.WriteAllBytes("test.pdf", bytes);
+        }
+
+        [Fact]
+        public void RecordingContent()
+        {
+            var account = rc.Restapi().Account();
+
+            // List call Logs
+            var queryParams = new CallLog.ListQueryParams
+            {
+                type = "Voice",
+                view = "Detailed",
+                dateFrom = DateTime.UtcNow.AddDays(-100).ToString("o"),
+                withRecording = true,
+                perPage = 10,
+            };
+            var callLogs = account.CallLog().List(queryParams).Result;
+            Assert.Equal(10, callLogs.records.Length);
+
+            // download a call recording
+            var callLog = callLogs.records[0];
+            var bytes = account.Recording(callLog.recording.id).Content().Get().Result;
+            Assert.NotNull(bytes);
+            Assert.True(bytes.Length > 0);
+            File.WriteAllBytes("test.wav", bytes);
         }
     }
 }
