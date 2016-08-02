@@ -146,7 +146,7 @@ All the HTTP calls are by default async, so you can use the `await` keyword of C
 
 Or you can append `.Result` to the end to turn it into sync:
 
-```
+```cs
 var callLogs = extension.CallLog().List(new { direction = "Inbound" }).Result;
 ```
 

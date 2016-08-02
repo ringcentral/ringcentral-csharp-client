@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>RingCentral.Client</id>
-    <version>1.0.0-beta4</version>
+    <version>1.0.0-beta5</version>
     <title>RingCentral Client</title>
     <authors>Tyler Long</authors>
     <owners>RingCentral</owners>
@@ -14,16 +14,26 @@
     <tags>RingCentral Ring Central C# Client</tags>
     <dependencies>
       <group>
+        <dependency id="Flurl" version="2.1.0" />
+        <dependency id="Flurl.Http" version="1.0.0" />
+        <dependency id="Microsoft.Bcl" version="1.1.10" />
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+        <dependency id="Microsoft.Net.Http" version="2.2.29" />
         <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="PCLStorage" version="1.0.2" />
+        <dependency id="Portable.BouncyCastle-Signed" version="1.7.0.2" />
+        <dependency id="PubnubPCL" version="3.7.7.0" />
       </group>
     </dependencies>
   </metadata>
   <files>  
-    <file src="RingCentral/bin/Release/**.dll" target="lib/net40" exclude="**/System.IO.dll;**/System.Runtime.dll;**/System.Threading.Tasks.dll;**/Newtonsoft.Json.dll" />
-    <file src="RingCentral/bin/Release/**.dll" target="lib/monoandroid" exclude="**/System.IO.dll;**/System.Runtime.dll;**/System.Threading.Tasks.dll;**/Newtonsoft.Json.dll" />
-    <file src="RingCentral/bin/Release/**.dll" target="lib/monotouch" exclude="**/System.IO.dll;**/System.Runtime.dll;**/System.Threading.Tasks.dll;**/Newtonsoft.Json.dll" />
-    <file src="RingCentral/bin/Release/**.dll" target="lib/monomac" exclude="**/System.IO.dll;**/System.Runtime.dll;**/System.Threading.Tasks.dll;**/Newtonsoft.Json.dll" />
-    <file src="RingCentral/bin/Release/**.dll" target="lib/xamarinios" exclude="**/System.IO.dll;**/System.Runtime.dll;**/System.Threading.Tasks.dll;**/Newtonsoft.Json.dll" />
-    <file src="RingCentral/bin/Release/**.dll" target="lib/xamarinmac" exclude="**/System.IO.dll;**/System.Runtime.dll;**/System.Threading.Tasks.dll;**/Newtonsoft.Json.dll" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net45" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/netcore45" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monoandroid" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monotouch" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monomac" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/xamarinios" />
+    <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/xamarinmac" />
   </files>
 </package>
