@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace RingCentral
 {
@@ -9,14 +12,33 @@ namespace RingCentral
             return RC.GetBinary(Endpoint(true), null);
         }
 
-        public Task<byte[]> Post(byte[] requestBody)
+        private MultipartFormDataContent GetContent(byte[] bytes, string imageFileName)
         {
-            return RC.PostBinary(Endpoint(false), requestBody, null);
+            var multipartFormDataContent = new MultipartFormDataContent();
+            multipartFormDataContent.Headers.ContentType.MediaType = "multipart/form-data";
+            var byteArrayContent = new ByteArrayContent(bytes);
+            byteArrayContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "image",
+                FileName = imageFileName,
+            };
+            byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue("image/" + Path.GetExtension(imageFileName).Substring(1));
+            multipartFormDataContent.Add(byteArrayContent);
+            return multipartFormDataContent;
         }
 
-        public Task<byte[]> Put(byte[] requestBody)
+        public async Task<byte[]> Post(byte[] requestBody, string imageFileName)
         {
-            return RC.PutBinary(Endpoint(false), requestBody, null);
+            var content = GetContent(requestBody, imageFileName);
+            var response = await RC.PostContent(Endpoint(false), content);
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
+        public async Task<byte[]> Put(byte[] requestBody, string imageFileName)
+        {
+            var content = GetContent(requestBody, imageFileName);
+            var response = await RC.PutContent(Endpoint(false), content);
+            return await response.Content.ReadAsByteArrayAsync();
         }
     }
 }

@@ -2,7 +2,6 @@ using Flurl;
 using Flurl.Http;
 using Newtonsoft.Json;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace RingCentral
@@ -59,31 +58,6 @@ namespace RingCentral
             return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
         }
 
-        public async Task<byte[]> PostBinary(string endpoint, byte[] requestBody, object queryParams = null)
-        {
-            var multipartFormDataContent = new MultipartFormDataContent();
-            multipartFormDataContent.Headers.ContentType.MediaType = "multipart/form-data";
-            //multipartFormDataContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-            //{
-            //    Name = "image",
-            //    FileName = "test.png",
-            //};
-            //multipartFormDataContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
-
-            var content = new ByteArrayContent(requestBody);
-            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-            {
-                 Name="image",
-                 FileName = "test.png",
-            };
-            content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
-            multipartFormDataContent.Add(content);
-            var response = await PostContent(endpoint, multipartFormDataContent, queryParams);
-            //var response = await PostContent(endpoint, content, queryParams);
-            var bytes = await response.Content.ReadAsByteArrayAsync();
-            return bytes;
-        }
-
         public Task<HttpResponseMessage> PostContent(string endpoint, HttpContent content, object queryParams = null)
         {
             return GetClient(endpoint, queryParams).PostAsync(content);
@@ -93,15 +67,6 @@ namespace RingCentral
         {
             var response = await Put(endpoint, requestBody, queryParams);
             return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
-        }
-
-        public async Task<byte[]> PutBinary(string endpoint, byte[] requestBody, object queryParams = null)
-        {
-            var multipartFormDataContent = new MultipartFormDataContent();
-            multipartFormDataContent.Add(new ByteArrayContent(requestBody));
-            var response = await PutContent(endpoint, multipartFormDataContent, queryParams);
-            var bytes = await response.Content.ReadAsByteArrayAsync();
-            return bytes;
         }
 
         public Task<HttpResponseMessage> PutContent(string endpoint, HttpContent content, object queryParams = null)

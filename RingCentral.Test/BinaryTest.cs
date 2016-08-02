@@ -19,9 +19,8 @@ namespace RingCentral.Test
         {
             var extension = rc.Restapi().Account().Extension();
 
-            //var bytes2 = extension.ProfileImage().Post(bytes).Result;
-            //Assert.NotNull(bytes2);
-            //Assert.Equal(bytes, bytes2);
+            var temp = extension.ProfileImage().Post(bytes, "test.png").Result;
+            Assert.NotNull(temp);
 
             var bytes3 = extension.ProfileImage().Get().Result;
             Assert.NotNull(bytes3);
@@ -29,6 +28,16 @@ namespace RingCentral.Test
 
             var bytes4 = extension.ProfileImage("90x90").Get().Result;
             Assert.NotNull(bytes4);
+
+            temp = extension.ProfileImage().Put(bytes, "test.png").Result;
+            Assert.NotNull(temp);
+
+            var bytes5 = extension.ProfileImage().Get().Result;
+            Assert.NotNull(bytes5);
+            Assert.Equal(bytes, bytes5);
+
+            var bytes6 = extension.ProfileImage("90x90").Get().Result;
+            Assert.NotNull(bytes6);
         }
     }
 }
