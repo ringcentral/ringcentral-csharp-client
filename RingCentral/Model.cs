@@ -21,7 +21,7 @@ namespace RingCentral
             {
                 url = url.AppendPathSegment(_id);
             }
-            return url.Path;
+            return (url.Path.StartsWith("/") ? "" : "/") + url.Path;
         }
 
         public string Url(bool withId = true)
