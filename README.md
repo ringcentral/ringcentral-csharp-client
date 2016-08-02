@@ -246,18 +246,32 @@ var response = extension.Fax().Post(new Fax.PostRequest
 
 ## Binary data
 
-#### Create profile image
+#### Create/Update profile image
 
 ```cs
+// create
 var bytes = File.ReadAllBytes("test.png");
 var response = extension.ProfileImage().Post(bytes, "test.png").Result;
-```
 
-#### Update profile image
-
-```cs
+// update
 var bytes = File.ReadAllBytes("test.png");
 var response = extension.ProfileImage().Put(bytes, "test.png").Result;
+```
+
+#### Get message content
+
+```cs
+var messages = extension.MessageStore().List().Result.records;
+
+// sms
+var message = messages.Where(m => m.type == "SMS" && m.attachments != null && m.attachments.Length > 0).First();
+var bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+var content = System.Text.Encoding.UTF8.GetString(bytes);
+
+// fax
+message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
+bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+File.WriteAllBytes("test.pdf", bytes);
 ```
 
 

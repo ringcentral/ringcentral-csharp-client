@@ -1,5 +1,6 @@
-﻿using Xunit;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
+using Xunit;
 
 namespace RingCentral.Test
 {
@@ -38,6 +39,28 @@ namespace RingCentral.Test
 
             var bytes6 = extension.ProfileImage("90x90").Get().Result;
             Assert.NotNull(bytes6);
+        }
+
+        [Fact]
+        public void Content()
+        {
+            var extension = rc.Restapi().Account().Extension();
+
+            var messages = extension.MessageStore().List().Result.records;
+
+            // sms
+            var message = messages.Where(m => m.type == "SMS" && m.attachments != null && m.attachments.Length > 0).First();
+            var bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+            var content = System.Text.Encoding.UTF8.GetString(bytes);
+            Assert.NotNull(content);
+            Assert.True(content.Length > 0);
+
+            // fax
+            message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
+            bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+            Assert.NotNull(bytes);
+            Assert.True(bytes.Length > 0);
+            File.WriteAllBytes("test.pdf", bytes);
         }
     }
 }
