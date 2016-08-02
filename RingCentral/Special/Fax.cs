@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Flurl.Http;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -26,7 +27,7 @@ namespace RingCentral
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue(attachment.contentType);
                 multipartFormDataContent.Add(fileContent);
             }
-            return RC.PostContent<PostResponse>(Endpoint(false), multipartFormDataContent);
+            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<PostResponse>();
         }
         public Task<PostResponse> Post(PostRequest requestBody, IEnumerable<Attachment> attachments)
         {

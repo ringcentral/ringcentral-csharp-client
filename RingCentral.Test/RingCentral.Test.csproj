@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryTest.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ContactTest.cs" />
     <Compile Include="DictionaryTest.cs" />
