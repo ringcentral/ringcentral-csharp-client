@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Fax.cs" />
+    <Compile Include="Special\Fax.cs" />
     <Compile Include="Generated\Account.cs" />
     <Compile Include="Generated\ActiveCalls.cs" />
     <Compile Include="Generated\AddressBook.cs" />
@@ -91,7 +91,6 @@
     <Compile Include="Generated\Timezone.cs" />
     <Compile Include="Generated\Token.cs" />
     <Compile Include="Http.cs" />
-    <Compile Include="MockModel.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestClient.cs" />
