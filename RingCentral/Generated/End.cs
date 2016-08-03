@@ -12,5 +12,10 @@ namespace RingCentral
                 return "end";
             }
         }
+        public Task<PostResponse> Post()
+        {
+            return RC.Post<PostResponse>(Endpoint(false), null, null);
+        }
+        public class PostResponse { }
     }
 }
