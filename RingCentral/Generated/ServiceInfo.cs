@@ -47,13 +47,13 @@ namespace RingCentral
             public string uri { get; set; }
             public string servicePlanName { get; set; }
             public ServiceFeature[] serviceFeatures { get; set; }
-            public Limit[] limits { get; set; }
+            public Limits limits { get; set; }
             public class ServiceFeature
             {
                 public string featureName { get; set; }
                 public bool? enabled { get; set; }
             }
-            public class Limit
+            public class Limits
             {
                 public int? freeSoftPhoneLinesPerExtension { get; set; }
                 public int? meetingSize { get; set; }
