@@ -2,7 +2,9 @@
 
 RingCentral C# client.
 
-**Notice:** This project is NOT yet ready for production!
+**Notice:** any issues or questions, please do let me know by [creating an issue](https://github.com/tylerlong/ringcentral-csharp-client/issues/new).
+
+Feel free to :star: and :fork_and_knife: this repository.
 
 
 ## Installation
@@ -321,3 +323,8 @@ catch (FlurlHttpException fhe)
 
 The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
 Such as this [test class](https://github.com/tylerlong/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
+
+
+## Lisence
+
+MIT
