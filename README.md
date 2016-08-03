@@ -300,6 +300,23 @@ File.WriteAllBytes("test.wav", bytes);
 ```
 
 
+## Exception handling
+
+```cs
+try
+{
+    ...
+}
+catch (FlurlHttpException fhe)
+{
+    if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
+    { 
+		Console.WriteLine("The resource doesn't exist");
+    }
+}
+```
+
+
 ## Sample code
 
 The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
