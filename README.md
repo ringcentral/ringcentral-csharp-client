@@ -16,6 +16,8 @@ Install-Package RingCentral.Client -Pre
 
 [RingCentral API Reference](https://developer.ringcentral.com/api-docs/latest/index.html#!#APIReference.html) is where you can find all the endpoints, requests, parameters and all kinds of necessary details.
 
+Please note: as a guest reader, you can only read the basic version of API Reference. Please do login if you want to get information about Advanced API endpoints.
+
 
 ## Initialization
 
