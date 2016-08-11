@@ -23,7 +23,7 @@ namespace RingCentral
         public partial class GetQueryParams
         {
             // Conversation identifier for the resulting messages. Meaningful for SMS and Pager messages only.
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             // The start datetime for resulting messages in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is dateTo minus 24 hours
             public string dateFrom { get; set; }
             // The end datetime for resulting messages in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is current time

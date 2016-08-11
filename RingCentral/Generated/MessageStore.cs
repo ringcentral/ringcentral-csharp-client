@@ -33,7 +33,7 @@ namespace RingCentral
             // Specifies the availability status for the resulting messages. Default value is 'Alive'. Multiple values are accepted
             public string availability { get; set; }
             // Specifies the conversation identifier for the resulting messages
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             // The start datetime for resulting messages in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is dateTo minus 24 hours
             public string dateFrom { get; set; }
             // The end datetime for resulting messages in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is current time
@@ -75,7 +75,7 @@ namespace RingCentral
             // If the value is 'True', then the message is purged immediately with all the attachments. The default value is 'False'
             public bool? purge { get; set; }
             // Internal identifier of a message thread
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
         }
         public Task<GetResponse> Get()
         {
@@ -92,7 +92,7 @@ namespace RingCentral
             // Message availability status. Message in 'Deleted' state is still preserved with all its attachments and can be restored. 'Purged' means that all attachments are already deleted and the message itself is about to be physically deleted shortly
             public string availability { get; set; }
             // SMS and Pager only. Identifier of the conversation the message belongs to
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             // Message creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string creationTime { get; set; }
             // SMS only. Delivery error code returned by gateway
@@ -152,7 +152,7 @@ namespace RingCentral
             // Message availability status. Message in 'Deleted' state is still preserved with all its attachments and can be restored. 'Purged' means that all attachments are already deleted and the message itself is about to be physically deleted shortly
             public string availability { get; set; }
             // SMS and Pager only. Identifier of the conversation the message belongs to
-            public int? conversationId { get; set; }
+            public long? conversationId { get; set; }
             // Message creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string creationTime { get; set; }
             // SMS only. Delivery error code returned by gateway
