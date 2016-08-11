@@ -108,7 +108,7 @@ To create the `requestBody` object, you can define it as following:
 ```cs
 var requestBody = new Fax.PostRequest
 {
-    to = new Fax.PostRequest.To[] { new Fax.PostRequest.To { phoneNumber = "123456789" } }
+    to = new CallerInfo[] { new CallerInfo { phoneNumber = "123456789" } }
 }
 ```
 
@@ -243,7 +243,7 @@ var attachment2 = new Attachment { fileName = "test.pdf", contentType = "applica
 var attachments = new Attachment[] { attachment1, attachment2 };
 var response = extension.Fax().Post(new Fax.PostRequest
 {
-    to = new Fax.PostRequest.To[] { new Fax.PostRequest.To { phoneNumber = Config.Instance.receiver } }
+    to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } }
 }, attachments).Result;
 ```
 
@@ -313,7 +313,7 @@ catch (FlurlHttpException fhe)
 {
     if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
     { 
-		Console.WriteLine("The resource doesn't exist");
+        Console.WriteLine("The resource doesn't exist");
     }
 }
 ```
