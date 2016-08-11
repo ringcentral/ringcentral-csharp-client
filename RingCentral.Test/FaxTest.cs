@@ -22,7 +22,7 @@ namespace RingCentral.Test
             var attachments = new Attachment[] { attachment1, attachment2 };
             var response = extension.Fax().Post(new Fax.PostRequest
             {
-                to = new Fax.PostRequest.To[] { new Fax.PostRequest.To { phoneNumber = Config.Instance.receiver } }
+                to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } }
             }, attachments).Result;
             Assert.NotNull(response);
             Assert.Equal("High", response.faxResolution);
