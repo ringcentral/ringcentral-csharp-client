@@ -16,20 +16,16 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(false), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Canonical URI of the business address resource
             public string uri { get; set; }
+            // Company business name
             public string company { get; set; }
+            // Company business email address
             public string email { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
+            // Company business address
+            public BusinessAddressInfo businessAddress { get; set; }
         }
         public Task<PutResponse> Put(object requestBody)
         {
@@ -39,34 +35,25 @@ namespace RingCentral
         {
             return Put(requestBody as object);
         }
-        public class PutRequest
+        public partial class PutRequest
         {
+            // Company business name
             public string company { get; set; }
+            // Company business email address
             public string email { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
+            // Company business address
+            public BusinessAddressInfo businessAddress { get; set; }
         }
-        public class PutResponse
+        public partial class PutResponse
         {
+            // Canonical URI of the business address resource
             public string uri { get; set; }
+            // Company business name
             public string company { get; set; }
+            // Company business email address
             public string email { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
+            // Company business address
+            public BusinessAddressInfo businessAddress { get; set; }
         }
     }
 }

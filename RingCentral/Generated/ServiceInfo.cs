@@ -12,53 +12,18 @@ namespace RingCentral
                 return "service-info";
             }
         }
-        public class MeetingServiceInfo
+        public partial class MeetingServiceInfo
         {
+            // Canonical URI of a meeting service info resource
             public string uri { get; set; }
+            // URI to retrieve support information for meetings functionality
             public string supportUri { get; set; }
+            // URI to retrieve international dial in numbers
             public string intlDialInNumbersUri { get; set; }
+            // External user data
             public ExternalUserInfo externalUserInfo { get; set; }
+            // Dial-in numbers data
             public DialInNumbers dialInNumbers { get; set; }
-            public class ExternalUserInfo
-            {
-                public string accountId { get; set; }
-                public string userId { get; set; }
-                public string userToken { get; set; }
-                public int? userType { get; set; }
-            }
-            public class DialInNumbers
-            {
-                public string phoneNumber { get; set; }
-                public string formattedNumber { get; set; }
-                public string location { get; set; }
-                public Country country { get; set; }
-                public class Country
-                {
-                    public string id { get; set; }
-                    public string uri { get; set; }
-                    public string callingCode { get; set; }
-                    public string isoCode { get; set; }
-                    public string name { get; set; }
-                }
-            }
-        }
-        public class AccountServiceInfo
-        {
-            public string uri { get; set; }
-            public string servicePlanName { get; set; }
-            public ServiceFeature[] serviceFeatures { get; set; }
-            public Limits limits { get; set; }
-            public class ServiceFeature
-            {
-                public string featureName { get; set; }
-                public bool? enabled { get; set; }
-            }
-            public class Limits
-            {
-                public int? freeSoftPhoneLinesPerExtension { get; set; }
-                public int? meetingSize { get; set; }
-                public int? maxMonitoredExtensionsPerUser { get; set; }
-            }
         }
     }
 }

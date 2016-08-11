@@ -20,68 +20,40 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Standard resource properties ID and canonical URI, see the section called “Resource Identification Properties”
             public string id { get; set; }
+            // Canonical URI of a blocked number resource
             public string uri { get; set; }
+            // Name assigned by a user to a blocked phone number
             public string name { get; set; }
+            // Phone number to be blocked
             public string phoneNumber { get; set; }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Standard resource properties ID and canonical URI, see the section called “Resource Identification Properties”
             public string id { get; set; }
+            // Canonical URI of a blocked number resource
             public string uri { get; set; }
+            // Name assigned by a user to a blocked phone number
             public string name { get; set; }
+            // Phone number to be blocked
             public string phoneNumber { get; set; }
         }
         public Task<ListResponse> List()
         {
             return RC.Get<ListResponse>(Endpoint(false), null);
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string name { get; set; }
-                public string phoneNumber { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of blocked phone numbers
+            public BlockedNumberInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<System.Net.Http.HttpResponseMessage> Delete()
         {
@@ -91,11 +63,15 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Standard resource properties ID and canonical URI, see the section called “Resource Identification Properties”
             public string id { get; set; }
+            // Canonical URI of a blocked number resource
             public string uri { get; set; }
+            // Name assigned by a user to a blocked phone number
             public string name { get; set; }
+            // Phone number to be blocked
             public string phoneNumber { get; set; }
         }
         public Task<PutResponse> Put(object requestBody)
@@ -106,18 +82,26 @@ namespace RingCentral
         {
             return Put(requestBody as object);
         }
-        public class PutRequest
+        public partial class PutRequest
         {
+            // Standard resource properties ID and canonical URI, see the section called “Resource Identification Properties”
             public string id { get; set; }
+            // Canonical URI of a blocked number resource
             public string uri { get; set; }
+            // Name assigned by a user to a blocked phone number
             public string name { get; set; }
+            // Phone number to be blocked
             public string phoneNumber { get; set; }
         }
-        public class PutResponse
+        public partial class PutResponse
         {
+            // Standard resource properties ID and canonical URI, see the section called “Resource Identification Properties”
             public string id { get; set; }
+            // Canonical URI of a blocked number resource
             public string uri { get; set; }
+            // Name assigned by a user to a blocked phone number
             public string name { get; set; }
+            // Phone number to be blocked
             public string phoneNumber { get; set; }
         }
     }

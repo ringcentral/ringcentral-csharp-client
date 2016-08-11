@@ -20,8 +20,9 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Active access or refresh token to be revoked
             public string token { get; set; }
         }
         public class PostResponse { }

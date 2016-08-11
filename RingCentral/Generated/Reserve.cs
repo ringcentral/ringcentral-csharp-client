@@ -20,27 +20,15 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
-            public Record[] records { get; set; }
-            public class Record
-            {
-                public string phoneNumber { get; set; }
-                public string reservedTill { get; set; }
-            }
+            // Phone numbers to be reserved/un-reserved
+            public ReservePhoneNumber_Request_ReserveRecord[] records { get; set; }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
-            public Record[] records { get; set; }
-            public class Record
-            {
-                public string phoneNumber { get; set; }
-                public string formattedNumber { get; set; }
-                public string reservedTill { get; set; }
-                public string reservationId { get; set; }
-                public string status { get; set; }
-                public string error { get; set; }
-            }
+            // Phone numbers to be reserved/un-reserved
+            public ReservePhoneNumber_Response_ReserveRecord[] records { get; set; }
         }
     }
 }

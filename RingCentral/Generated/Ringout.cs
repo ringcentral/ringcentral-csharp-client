@@ -20,41 +20,25 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
-            public From from { get; set; }
-            public To to { get; set; }
-            public CallerId callerId { get; set; }
+            // Phone number of the caller. This number corresponds to the 1st leg of the RingOut call. This number can be one of user's configured forwarding numbers or arbitrary number
+            public RingOut_Request_From from { get; set; }
+            // Phone number of the called party. This number corresponds to the 2nd leg of the RingOut call
+            public RingOut_Request_To to { get; set; }
+            // The number which will be displayed to the called party
+            public RingOut_Request_To callerId { get; set; }
+            // The audio prompt that the calling party hears when the call is connected
             public bool? playPrompt { get; set; }
-            public Country country { get; set; }
-            public class From
-            {
-                public string phoneNumber { get; set; }
-                public string forwardingNumberId { get; set; }
-            }
-            public class To
-            {
-                public string phoneNumber { get; set; }
-            }
-            public class CallerId
-            {
-                public string phoneNumber { get; set; }
-            }
-            public class Country
-            {
-                public string id { get; set; }
-            }
+            // Optional. Dialing plan country data. If not specified, then extension home country is applied by default
+            public RingOut_Request_CountryInfo country { get; set; }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Internal identifier of a RingOut call
             public string id { get; set; }
-            public Status status { get; set; }
-            public class Status
-            {
-                public string callStatus { get; set; }
-                public string callerStatus { get; set; }
-                public string calleeStatus { get; set; }
-            }
+            // RingOut status information
+            public RingOutStatusInfo status { get; set; }
         }
         public Task<System.Net.Http.HttpResponseMessage> Delete()
         {
@@ -64,16 +48,12 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a RingOut call
             public string id { get; set; }
-            public Status status { get; set; }
-            public class Status
-            {
-                public string callStatus { get; set; }
-                public string callerStatus { get; set; }
-                public string calleeStatus { get; set; }
-            }
+            // RingOut status information
+            public RingOutStatusInfo status { get; set; }
         }
     }
 }

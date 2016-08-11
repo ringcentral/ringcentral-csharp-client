@@ -52,29 +52,30 @@ namespace RingCentral
         {
             return RC.Get<ListResponse>(Endpoint(false), null);
         }
-        public class ListResponse
+        public partial class ListResponse
         {
+            // Canonical URI of the API version
             public string uri { get; set; }
-            public ApiVersion[] apiVersions { get; set; }
+            // Full API version information: uri, number, release date
+            public VersionInfo[] apiVersions { get; set; }
+            // Server version
             public string serverVersion { get; set; }
+            // Server revision
             public string serverRevision { get; set; }
-            public class ApiVersion
-            {
-                public string uri { get; set; }
-                public string versionString { get; set; }
-                public string releaseDate { get; set; }
-                public string uriString { get; set; }
-            }
         }
         public Task<GetResponse> Get()
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Canonical URI of API versions
             public string uri { get; set; }
+            // Version of the RingCentral REST API
             public string versionString { get; set; }
+            // Release date of this version
             public string releaseDate { get; set; }
+            // URI part determining the current version
             public string uriString { get; set; }
         }
     }

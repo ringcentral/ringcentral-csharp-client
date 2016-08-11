@@ -24,11 +24,15 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of the call recording
             public int? id { get; set; }
+            // Link to the call recording binary content
             public string contentUri { get; set; }
+            // Call recording file format. Supported format is audio/x-wav
             public string contentType { get; set; }
+            // Recorded call duration
             public int? duration { get; set; }
         }
     }

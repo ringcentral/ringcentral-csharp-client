@@ -20,79 +20,33 @@ namespace RingCentral
         {
             return Get(queryParams as object);
         }
-        public class GetQueryParams
+        public partial class GetQueryParams
         {
-            public long? conversationId { get; set; }
+            // Conversation identifier for the resulting messages. Meaningful for SMS and Pager messages only.
+            public int? conversationId { get; set; }
+            // The start datetime for resulting messages in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is dateTo minus 24 hours
             public string dateFrom { get; set; }
+            // The end datetime for resulting messages in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is current time
             public string dateTo { get; set; }
+            // Direction for the resulting messages. If not specified, both inbound and outbound messages are returned. Multiple values are accepted
             public string direction { get; set; }
+            // If 'True', then the latest messages per every conversation ID are returned
             public bool? distinctConversations { get; set; }
+            // Type for the resulting messages. If not specified, all types of messages are returned. Multiple values are accepted
             public string messageType { get; set; }
+            // Limits the number of records to be returned (works in combination with dateFrom and dateTo if specified)
             public int? recordCount { get; set; }
+            // Value of syncToken property of last sync request response
             public string syncToken { get; set; }
+            // Type of message synchronization
             public string syncType { get; set; }
         }
-        public class GetResponse
+        public partial class GetResponse
         {
-            public Record[] records { get; set; }
+            // List of message records with synchronization information
+            public MessageInfo[] records { get; set; }
+            // Sync type, token and time
             public SyncInfo syncInfo { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public Attachment[] attachments { get; set; }
-                public string availability { get; set; }
-                public long? conversationId { get; set; }
-                public string creationTime { get; set; }
-                public string deliveryErrorCode { get; set; }
-                public string direction { get; set; }
-                public int? faxPageCount { get; set; }
-                public string faxResolution { get; set; }
-                public From from { get; set; }
-                public string lastModifiedTime { get; set; }
-                public string messageStatus { get; set; }
-                public bool? pgToDepartment { get; set; }
-                public string priority { get; set; }
-                public string readStatus { get; set; }
-                public string smsDeliveryTime { get; set; }
-                public int? smsSendingAttemptsCount { get; set; }
-                public string subject { get; set; }
-                public To[] to { get; set; }
-                public string type { get; set; }
-                public string vmTranscriptionStatus { get; set; }
-                public class Attachment
-                {
-                    public string id { get; set; }
-                    public string uri { get; set; }
-                    public string type { get; set; }
-                    public string contentType { get; set; }
-                    public int? vmDuration { get; set; }
-                }
-                public class From
-                {
-                    public string extensionNumber { get; set; }
-                    public string location { get; set; }
-                    public string messageStatus { get; set; }
-                    public string faxErrorCode { get; set; }
-                    public string name { get; set; }
-                    public string phoneNumber { get; set; }
-                }
-                public class To
-                {
-                    public string extensionNumber { get; set; }
-                    public string location { get; set; }
-                    public string messageStatus { get; set; }
-                    public string faxErrorCode { get; set; }
-                    public string name { get; set; }
-                    public string phoneNumber { get; set; }
-                }
-            }
-            public class SyncInfo
-            {
-                public string syncType { get; set; }
-                public string syncToken { get; set; }
-                public string syncTime { get; set; }
-            }
         }
     }
 }

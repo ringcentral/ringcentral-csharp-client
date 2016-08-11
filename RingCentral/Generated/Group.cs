@@ -16,62 +16,30 @@ namespace RingCentral
         {
             return RC.Get<ListResponse>(Endpoint(false), null);
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public int? contactsCount { get; set; }
-                public string groupName { get; set; }
-                public string notes { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of groups
+            public GroupInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<GetResponse> Get()
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a group
             public string id { get; set; }
+            // Canonical URI of a group
             public string uri { get; set; }
+            // Amount of contacts in a group
             public int? contactsCount { get; set; }
+            // Name of a group
             public string groupName { get; set; }
+            // Notes for a group
             public string notes { get; set; }
         }
     }

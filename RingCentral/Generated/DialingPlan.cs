@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class Members : Model
+    public partial class DialingPlan : Model
     {
-        internal Members(Model parent) : base(parent, null) { }
+        internal DialingPlan(Model parent) : base(parent, null) { }
         protected override string PathSegment
         {
             get
             {
-                return "members";
+                return "dialing-plan";
             }
         }
         public Task<ListResponse> List(object queryParams)
@@ -29,12 +29,12 @@ namespace RingCentral
         }
         public partial class ListResponse
         {
-            // List of extensions belonging to a given department
-            public Department_Response_ExtensionInfo[] records { get; set; }
-            // Information on navigation
-            public NavigationInfo navigation { get; set; }
+            // List of countries which can be selected for a dialing plan
+            public DialingPlanCountryInfo[] records { get; set; }
             // Information on paging
             public PagingInfo paging { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
         }
     }
 }

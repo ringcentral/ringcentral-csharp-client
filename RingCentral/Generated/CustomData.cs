@@ -20,23 +20,25 @@ namespace RingCentral
         {
             return Put(requestBody as object);
         }
-        public class PutRequest
+        public partial class PutRequest
         {
+            // Custom data access key. Optional. If specified, must match the custom key in the URL
             public string id { get; set; }
+            // Description of custom data. Mandatory for create, if there is no attachment specified. Maximum length is limited to 256 symbols
             public string value { get; set; }
         }
-        public class PutResponse
+        public partial class PutResponse
         {
+            // Custom data access key
             public string id { get; set; }
+            // Link to the custom data
             public string uri { get; set; }
+            // Description of custom data
             public string value { get; set; }
+            // Time of the last change in custom data
             public string lastModifiedTime { get; set; }
-            public Attachment attachment { get; set; }
-            public class Attachment
-            {
-                public string uri { get; set; }
-                public string contentType { get; set; }
-            }
+            // Attachment data: link and type
+            public AttachmentInfo attachment { get; set; }
         }
     }
 }

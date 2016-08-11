@@ -20,75 +20,47 @@ namespace RingCentral
         {
             return List(queryParams as object);
         }
-        public class ListQueryParams
+        public partial class ListQueryParams
         {
+            // Specifies whether login with the phone numbers of this country is enabled or not
             public bool? loginAllowed { get; set; }
+            // Specifies if RingCentral sells phone numbers of this country
             public bool? numberSelling { get; set; }
+            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
             public int? page { get; set; }
+            // Indicates the page size (number of items). If not specified, the value is '100' by default
             public int? perPage { get; set; }
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string callingCode { get; set; }
-                public bool? emergencyCalling { get; set; }
-                public string isoCode { get; set; }
-                public string name { get; set; }
-                public bool? numberSelling { get; set; }
-                public bool? loginAllowed { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of countries with the country data
+            public FullCountryInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<GetResponse> Get()
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a country
             public string id { get; set; }
+            // Canonical URI of a country
             public string uri { get; set; }
+            // Country calling code defined by ITU-T recommendations E.123 and E.164, see Calling Codes
             public string callingCode { get; set; }
+            // Emergency calling feature availability/emergency address requirement indicator
             public bool? emergencyCalling { get; set; }
+            // Country code according to the ISO standard, see ISO 3166
             public string isoCode { get; set; }
+            // Official name of a country
             public string name { get; set; }
+            // Determines whether phone numbers are available for a country
             public bool? numberSelling { get; set; }
+            // Specifies whether login with the phone numbers of this country is enabled or not
             public bool? loginAllowed { get; set; }
         }
     }

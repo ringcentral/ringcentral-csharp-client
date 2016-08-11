@@ -16,225 +16,47 @@ namespace RingCentral
         {
             return RC.Get<ListResponse>(Endpoint(false), null);
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string sku { get; set; }
-                public string type { get; set; }
-                public string name { get; set; }
-                public string serial { get; set; }
-                public string computerName { get; set; }
-                public Model model { get; set; }
-                public Extension extension { get; set; }
-                public EmergencyServiceAddress emergencyServiceAddress { get; set; }
-                public PhoneLines phoneLines { get; set; }
-                public Shipping shipping { get; set; }
-                public int? boxBillingId { get; set; }
-                public class Model
-                {
-                    public string id { get; set; }
-                    public string name { get; set; }
-                    public Addon[] addons { get; set; }
-                    public class Addon
-                    {
-                        public string id { get; set; }
-                        public int? count { get; set; }
-                    }
-                }
-                public class Extension
-                {
-                    public string id { get; set; }
-                    public string uri { get; set; }
-                    public string extensionNumber { get; set; }
-                    public string partnerId { get; set; }
-                }
-                public class EmergencyServiceAddress
-                {
-                    public string customerName { get; set; }
-                    public string street { get; set; }
-                    public string street2 { get; set; }
-                    public string city { get; set; }
-                    public string state { get; set; }
-                    public string zip { get; set; }
-                    public string country { get; set; }
-                }
-                public class PhoneLines
-                {
-                    public string lineType { get; set; }
-                    public PhoneInfo phoneInfo { get; set; }
-                    public class PhoneInfo
-                    {
-                        public int? id { get; set; }
-                        public Country country { get; set; }
-                        public string location { get; set; }
-                        public string paymentType { get; set; }
-                        public string phoneNumber { get; set; }
-                        public string status { get; set; }
-                        public string type { get; set; }
-                        public string usageType { get; set; }
-                        public class Country
-                        {
-                            public string id { get; set; }
-                            public string uri { get; set; }
-                            public string name { get; set; }
-                        }
-                    }
-                }
-                public class Shipping
-                {
-                    public string status { get; set; }
-                    public string carrier { get; set; }
-                    public string trackingNumber { get; set; }
-                    public Method[] method { get; set; }
-                    public Address[] address { get; set; }
-                    public class Method
-                    {
-                        public string id { get; set; }
-                        public string name { get; set; }
-                    }
-                    public class Address
-                    {
-                        public string customerName { get; set; }
-                        public string street { get; set; }
-                        public string street2 { get; set; }
-                        public string city { get; set; }
-                        public string state { get; set; }
-                        public string zip { get; set; }
-                        public string country { get; set; }
-                    }
-                }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of extension records
+            public DeviceInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<GetResponse> Get()
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a device
             public string id { get; set; }
+            // Canonical URI of a device
             public string uri { get; set; }
+            // Device identification number (stock keeping unit) in the format TP-ID [-AT-AC], where TP is device type (HP for RC HardPhone, DV for all other devices including softphone); ID - device model ID; AT -addon type ID; AC - addon count (if any). For example 'HP-56-2-2'
             public string sku { get; set; }
+            // Device type. The default value is 'HardPhone'
             public string type { get; set; }
+            // Device name. Mandatory if ordering "SoftPhone" or "OtherPhone". Optional for "HardPhone". If not specified for HardPhone, then device "model" name is used as device "name"
             public string name { get; set; }
+            // Serial number for HardPhone (is returned only when the phone is shipped and provisioned); endpoint_id for softphone and mobile applications
             public string serial { get; set; }
+            // PC name for softphone
             public string computerName { get; set; }
-            public Model model { get; set; }
-            public Extension extension { get; set; }
-            public EmergencyServiceAddress emergencyServiceAddress { get; set; }
-            public PhoneLines phoneLines { get; set; }
-            public Shipping shipping { get; set; }
+            // HardPhone model information
+            public ModelInfo model { get; set; }
+            // This attribute can be omitted for unassigned devices
+            public DeviceInfo_ExtensionInfo extension { get; set; }
+            // Address for emergency cases. The same emergency address is assigned to all the numbers of one device
+            public EmergencyAddressInfo emergencyServiceAddress { get; set; }
+            // Phone lines information
+            public PhoneLinesInfo phoneLines { get; set; }
+            // Shipping information, according to which devices (in case of "HardPhone") or e911 stickers (in case of "SoftPhone" and "OtherPhone") will be delivered to the customer
+            public ShippingInfo shipping { get; set; }
+            // Box billing identifier of a device. Applicable only for HardPhones. It is an alternative way to identify the device to be ordered. Either "model" structure, or "boxBillingId" must be specified for HardPhone
             public int? boxBillingId { get; set; }
-            public class Model
-            {
-                public string id { get; set; }
-                public string name { get; set; }
-                public Addon[] addons { get; set; }
-                public class Addon
-                {
-                    public string id { get; set; }
-                    public int? count { get; set; }
-                }
-            }
-            public class Extension
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string extensionNumber { get; set; }
-                public string partnerId { get; set; }
-            }
-            public class EmergencyServiceAddress
-            {
-                public string customerName { get; set; }
-                public string street { get; set; }
-                public string street2 { get; set; }
-                public string city { get; set; }
-                public string state { get; set; }
-                public string zip { get; set; }
-                public string country { get; set; }
-            }
-            public class PhoneLines
-            {
-                public string lineType { get; set; }
-                public PhoneInfo phoneInfo { get; set; }
-                public class PhoneInfo
-                {
-                    public int? id { get; set; }
-                    public Country country { get; set; }
-                    public string location { get; set; }
-                    public string paymentType { get; set; }
-                    public string phoneNumber { get; set; }
-                    public string status { get; set; }
-                    public string type { get; set; }
-                    public string usageType { get; set; }
-                    public class Country
-                    {
-                        public string id { get; set; }
-                        public string uri { get; set; }
-                        public string name { get; set; }
-                    }
-                }
-            }
-            public class Shipping
-            {
-                public string status { get; set; }
-                public string carrier { get; set; }
-                public string trackingNumber { get; set; }
-                public Method[] method { get; set; }
-                public Address[] address { get; set; }
-                public class Method
-                {
-                    public string id { get; set; }
-                    public string name { get; set; }
-                }
-                public class Address
-                {
-                    public string customerName { get; set; }
-                    public string street { get; set; }
-                    public string street2 { get; set; }
-                    public string city { get; set; }
-                    public string state { get; set; }
-                    public string zip { get; set; }
-                    public string country { get; set; }
-                }
-            }
         }
     }
 }

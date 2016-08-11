@@ -20,65 +20,35 @@ namespace RingCentral
         {
             return List(queryParams as object);
         }
-        public class ListQueryParams
+        public partial class ListQueryParams
         {
+            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
             public string page { get; set; }
+            // Indicates the page size (number of items). If not specified, the value is '100' by default
             public string perPage { get; set; }
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string name { get; set; }
-                public string description { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of timezones
+            public TimezoneInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<GetResponse> Get()
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a timezone
             public string id { get; set; }
+            // Canonical URI of a timezone
             public string uri { get; set; }
+            // Short name of a timezone
             public string name { get; set; }
+            // Meaningful description of the timezone
             public string description { get; set; }
         }
     }

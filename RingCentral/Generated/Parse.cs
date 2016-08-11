@@ -28,68 +28,44 @@ namespace RingCentral
         {
             return Post(requestBody as object, queryParams as object);
         }
-        public class PostQueryParams
+        public partial class PostQueryParams
         {
+            // Internal identifier of a home country. The default value is ISO code (ISO 3166) of the user's home country or brand country, if the user is undefined
             public string homeCountry { get; set; }
+            // The default value is "False". If "True", the numbers that are closer to the home country are given higher priority
             public bool? nationalAsPriority { get; set; }
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Phone numbers passed in a string. The maximum value of phone numbers is limited to 64. The maximum number of symbols in each phone number in a string is 64
             public string[] originalStrings { get; set; }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Canonical URI of a resource
             public string uri { get; set; }
-            public HomeCountry[] homeCountry { get; set; }
-            public PhoneNumber[] phoneNumbers { get; set; }
+            // Information on a user home country
+            public ParsePhoneNumber_CountryInfo[] homeCountry { get; set; }
+            // Parsed phone numbers data
+            public ParsePhoneNumber_PhoneNumberInfo[] phoneNumbers { get; set; }
+            // One of the numbers to be parsed, passed as a string in response
             public string originalString { get; set; }
+            // Area code of the location (3-digit usually), according to the NANP number format, that can be summarized as NPA-NXX-xxxx and covers Canada, the United States, parts of the Caribbean Sea, and some Atlantic and Pacific islands. See North American Numbering Plan for details
             public string areaCode { get; set; }
+            // Domestic format of a phone number
             public string formattedNational { get; set; }
+            // International format of a phone number
             public string formattedInternational { get; set; }
+            // Dialing format of a phone number
             public string dialable { get; set; }
+            // E.164 (11-digits) format of a phone number
             public string e164 { get; set; }
+            // "True" if the number is in a special format (for example N11 code)
             public bool? special { get; set; }
+            // E.164 (11-digits) format of a phone number without the plus sign ('+')
             public string normalized { get; set; }
-            public Country[] country { get; set; }
-            public class HomeCountry
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string callingCode { get; set; }
-                public bool? emergencyCalling { get; set; }
-                public string isoCode { get; set; }
-                public string name { get; set; }
-            }
-            public class PhoneNumber
-            {
-                public string areaCode { get; set; }
-                public Country[] country { get; set; }
-                public string dialable { get; set; }
-                public string e164 { get; set; }
-                public string formattedInternational { get; set; }
-                public string formattedNational { get; set; }
-                public string originalString { get; set; }
-                public bool? special { get; set; }
-                public string normalized { get; set; }
-                public class Country
-                {
-                    public string id { get; set; }
-                    public string uri { get; set; }
-                    public string callingCode { get; set; }
-                    public bool? emergencyCalling { get; set; }
-                    public string isoCode { get; set; }
-                    public string name { get; set; }
-                }
-            }
-            public class Country
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string callingCode { get; set; }
-                public bool? emergencyCalling { get; set; }
-                public string isoCode { get; set; }
-                public string name { get; set; }
-            }
+            // Information on a country the phone number belongs to
+            public ParsePhoneNumber_CountryInfo[] country { get; set; }
         }
     }
 }

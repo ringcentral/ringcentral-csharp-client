@@ -20,119 +20,131 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Standard resource properties ID
             public int? id { get; set; }
+            // Canonical URI
             public string url { get; set; }
+            // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
             public string availability { get; set; }
+            // First name of a personal contact
             public string firstName { get; set; }
+            // Last name of a personal contact
             public string lastName { get; set; }
+            // Middle name of a personal contact
             public string middleName { get; set; }
+            // Nick name of a personal contact
             public string nickName { get; set; }
+            // Company name of a personal contact
             public string company { get; set; }
+            // Job title of a personal contact
             public string jobTitle { get; set; }
+            // Home phone of a personal contact
             public string homePhone { get; set; }
+            // The 2-d home phone of a personal contact
             public string homePhone2 { get; set; }
+            // Business phone of a personal contact
             public string businessPhone { get; set; }
+            // The 2-d business phone of a personal contact
             public string businessPhone2 { get; set; }
+            // Mobile phone of a personal contact
             public string mobilePhone { get; set; }
+            // Business fax of a personal contact
             public string businessFax { get; set; }
+            // Company phone of a personal contact
             public string companyPhone { get; set; }
+            // Assistant phone of a personal contact
             public string assistantPhone { get; set; }
+            // Car phone of a personal contact
             public string carPhone { get; set; }
+            // Other phone of a personal contact
             public string otherPhone { get; set; }
+            // Other fax of a personal contact
             public string otherFax { get; set; }
+            // Callback phone of a personal contact
             public string callbackPhone { get; set; }
+            // Email of a personal contact
             public string email { get; set; }
+            // The 2-d email of a personal contact
             public string email2 { get; set; }
+            // The 3-d email of a personal contact
             public string email3 { get; set; }
-            public HomeAddress homeAddress { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public OtherAddress otherAddress { get; set; }
+            // Home address of a personal contact
+            public ContactAddressInfo homeAddress { get; set; }
+            // Business address of a personal contact
+            public ContactAddressInfo businessAddress { get; set; }
+            // Other address of a personal contact
+            public ContactAddressInfo otherAddress { get; set; }
+            // Date of birth of a personal contact in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string birthday { get; set; }
+            // Web page of a personal contact
             public string webPage { get; set; }
+            // Notes of a personal contact
             public string notes { get; set; }
-            public class HomeAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class OtherAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Standard resource properties ID
             public int? id { get; set; }
+            // Canonical URI
             public string url { get; set; }
+            // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
             public string availability { get; set; }
+            // First name of a personal contact
             public string firstName { get; set; }
+            // Last name of a personal contact
             public string lastName { get; set; }
+            // Middle name of a personal contact
             public string middleName { get; set; }
+            // Nick name of a personal contact
             public string nickName { get; set; }
+            // Company name of a personal contact
             public string company { get; set; }
+            // Job title of a personal contact
             public string jobTitle { get; set; }
+            // Home phone of a personal contact
             public string homePhone { get; set; }
+            // The 2-d home phone of a personal contact
             public string homePhone2 { get; set; }
+            // Business phone of a personal contact
             public string businessPhone { get; set; }
+            // The 2-d business phone of a personal contact
             public string businessPhone2 { get; set; }
+            // Mobile phone of a personal contact
             public string mobilePhone { get; set; }
+            // Business fax of a personal contact
             public string businessFax { get; set; }
+            // Company phone of a personal contact
             public string companyPhone { get; set; }
+            // Assistant phone of a personal contact
             public string assistantPhone { get; set; }
+            // Car phone of a personal contact
             public string carPhone { get; set; }
+            // Other phone of a personal contact
             public string otherPhone { get; set; }
+            // Other fax of a personal contact
             public string otherFax { get; set; }
+            // Callback phone of a personal contact
             public string callbackPhone { get; set; }
+            // Email of a personal contact
             public string email { get; set; }
+            // The 2-d email of a personal contact
             public string email2 { get; set; }
+            // The 3-d email of a personal contact
             public string email3 { get; set; }
-            public HomeAddress homeAddress { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public OtherAddress otherAddress { get; set; }
+            // Home address of a personal contact
+            public ContactAddressInfo homeAddress { get; set; }
+            // Business address of a personal contact
+            public ContactAddressInfo businessAddress { get; set; }
+            // Other address of a personal contact
+            public ContactAddressInfo otherAddress { get; set; }
+            // Date of birth of a personal contact in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string birthday { get; set; }
+            // Web page of a personal contact
             public string webPage { get; set; }
+            // Notes of a personal contact
             public string notes { get; set; }
-            public class HomeAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class OtherAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
         }
         public Task<ListResponse> List(object queryParams)
         {
@@ -142,108 +154,27 @@ namespace RingCentral
         {
             return List(queryParams as object);
         }
-        public class ListQueryParams
+        public partial class ListQueryParams
         {
+            // Phone number in E.164 (11-digits) format with or without plus '+'. Multiple values are supported
             public string phoneNumber { get; set; }
+            // If specified, only contacts whose First name or Last name start with the mentioned substring are returned. Case-insensitive
             public string startsWith { get; set; }
+            // Sorts results by the specified property. The default is 'First Name'
             public string sortBy { get; set; }
+            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
             public int? page { get; set; }
+            // Indicates the page size (number of items). If not specified, the value is '100' by default
             public int? perPage { get; set; }
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public int? id { get; set; }
-                public string url { get; set; }
-                public string availability { get; set; }
-                public string firstName { get; set; }
-                public string lastName { get; set; }
-                public string middleName { get; set; }
-                public string nickName { get; set; }
-                public string company { get; set; }
-                public string jobTitle { get; set; }
-                public string homePhone { get; set; }
-                public string homePhone2 { get; set; }
-                public string businessPhone { get; set; }
-                public string businessPhone2 { get; set; }
-                public string mobilePhone { get; set; }
-                public string businessFax { get; set; }
-                public string companyPhone { get; set; }
-                public string assistantPhone { get; set; }
-                public string carPhone { get; set; }
-                public string otherPhone { get; set; }
-                public string otherFax { get; set; }
-                public string callbackPhone { get; set; }
-                public string email { get; set; }
-                public string email2 { get; set; }
-                public string email3 { get; set; }
-                public HomeAddress homeAddress { get; set; }
-                public BusinessAddress businessAddress { get; set; }
-                public OtherAddress otherAddress { get; set; }
-                public string birthday { get; set; }
-                public string webPage { get; set; }
-                public string notes { get; set; }
-                public class HomeAddress
-                {
-                    public string country { get; set; }
-                    public string state { get; set; }
-                    public string city { get; set; }
-                    public string street { get; set; }
-                    public string zip { get; set; }
-                }
-                public class BusinessAddress
-                {
-                    public string country { get; set; }
-                    public string state { get; set; }
-                    public string city { get; set; }
-                    public string street { get; set; }
-                    public string zip { get; set; }
-                }
-                public class OtherAddress
-                {
-                    public string country { get; set; }
-                    public string state { get; set; }
-                    public string city { get; set; }
-                    public string street { get; set; }
-                    public string zip { get; set; }
-                }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of personal contacts from the extension address book
+            public PersonalContactInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<System.Net.Http.HttpResponseMessage> Delete()
         {
@@ -253,62 +184,68 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Standard resource properties ID
             public int? id { get; set; }
+            // Canonical URI
             public string url { get; set; }
+            // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
             public string availability { get; set; }
+            // First name of a personal contact
             public string firstName { get; set; }
+            // Last name of a personal contact
             public string lastName { get; set; }
+            // Middle name of a personal contact
             public string middleName { get; set; }
+            // Nick name of a personal contact
             public string nickName { get; set; }
+            // Company name of a personal contact
             public string company { get; set; }
+            // Job title of a personal contact
             public string jobTitle { get; set; }
+            // Home phone of a personal contact
             public string homePhone { get; set; }
+            // The 2-d home phone of a personal contact
             public string homePhone2 { get; set; }
+            // Business phone of a personal contact
             public string businessPhone { get; set; }
+            // The 2-d business phone of a personal contact
             public string businessPhone2 { get; set; }
+            // Mobile phone of a personal contact
             public string mobilePhone { get; set; }
+            // Business fax of a personal contact
             public string businessFax { get; set; }
+            // Company phone of a personal contact
             public string companyPhone { get; set; }
+            // Assistant phone of a personal contact
             public string assistantPhone { get; set; }
+            // Car phone of a personal contact
             public string carPhone { get; set; }
+            // Other phone of a personal contact
             public string otherPhone { get; set; }
+            // Other fax of a personal contact
             public string otherFax { get; set; }
+            // Callback phone of a personal contact
             public string callbackPhone { get; set; }
+            // Email of a personal contact
             public string email { get; set; }
+            // The 2-d email of a personal contact
             public string email2 { get; set; }
+            // The 3-d email of a personal contact
             public string email3 { get; set; }
-            public HomeAddress homeAddress { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public OtherAddress otherAddress { get; set; }
+            // Home address of a personal contact
+            public ContactAddressInfo homeAddress { get; set; }
+            // Business address of a personal contact
+            public ContactAddressInfo businessAddress { get; set; }
+            // Other address of a personal contact
+            public ContactAddressInfo otherAddress { get; set; }
+            // Date of birth of a personal contact in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string birthday { get; set; }
+            // Web page of a personal contact
             public string webPage { get; set; }
+            // Notes of a personal contact
             public string notes { get; set; }
-            public class HomeAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class OtherAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
         }
         public Task<PutResponse> Put(object requestBody)
         {
@@ -318,119 +255,131 @@ namespace RingCentral
         {
             return Put(requestBody as object);
         }
-        public class PutRequest
+        public partial class PutRequest
         {
+            // Standard resource properties ID
             public int? id { get; set; }
+            // Canonical URI
             public string url { get; set; }
+            // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
             public string availability { get; set; }
+            // First name of a personal contact
             public string firstName { get; set; }
+            // Last name of a personal contact
             public string lastName { get; set; }
+            // Middle name of a personal contact
             public string middleName { get; set; }
+            // Nick name of a personal contact
             public string nickName { get; set; }
+            // Company name of a personal contact
             public string company { get; set; }
+            // Job title of a personal contact
             public string jobTitle { get; set; }
+            // Home phone of a personal contact
             public string homePhone { get; set; }
+            // The 2-d home phone of a personal contact
             public string homePhone2 { get; set; }
+            // Business phone of a personal contact
             public string businessPhone { get; set; }
+            // The 2-d business phone of a personal contact
             public string businessPhone2 { get; set; }
+            // Mobile phone of a personal contact
             public string mobilePhone { get; set; }
+            // Business fax of a personal contact
             public string businessFax { get; set; }
+            // Company phone of a personal contact
             public string companyPhone { get; set; }
+            // Assistant phone of a personal contact
             public string assistantPhone { get; set; }
+            // Car phone of a personal contact
             public string carPhone { get; set; }
+            // Other phone of a personal contact
             public string otherPhone { get; set; }
+            // Other fax of a personal contact
             public string otherFax { get; set; }
+            // Callback phone of a personal contact
             public string callbackPhone { get; set; }
+            // Email of a personal contact
             public string email { get; set; }
+            // The 2-d email of a personal contact
             public string email2 { get; set; }
+            // The 3-d email of a personal contact
             public string email3 { get; set; }
-            public HomeAddress homeAddress { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public OtherAddress otherAddress { get; set; }
+            // Home address of a personal contact
+            public ContactAddressInfo homeAddress { get; set; }
+            // Business address of a personal contact
+            public ContactAddressInfo businessAddress { get; set; }
+            // Other address of a personal contact
+            public ContactAddressInfo otherAddress { get; set; }
+            // Date of birth of a personal contact in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string birthday { get; set; }
+            // Web page of a personal contact
             public string webPage { get; set; }
+            // Notes of a personal contact
             public string notes { get; set; }
-            public class HomeAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class OtherAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
         }
-        public class PutResponse
+        public partial class PutResponse
         {
+            // Standard resource properties ID
             public int? id { get; set; }
+            // Canonical URI
             public string url { get; set; }
+            // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
             public string availability { get; set; }
+            // First name of a personal contact
             public string firstName { get; set; }
+            // Last name of a personal contact
             public string lastName { get; set; }
+            // Middle name of a personal contact
             public string middleName { get; set; }
+            // Nick name of a personal contact
             public string nickName { get; set; }
+            // Company name of a personal contact
             public string company { get; set; }
+            // Job title of a personal contact
             public string jobTitle { get; set; }
+            // Home phone of a personal contact
             public string homePhone { get; set; }
+            // The 2-d home phone of a personal contact
             public string homePhone2 { get; set; }
+            // Business phone of a personal contact
             public string businessPhone { get; set; }
+            // The 2-d business phone of a personal contact
             public string businessPhone2 { get; set; }
+            // Mobile phone of a personal contact
             public string mobilePhone { get; set; }
+            // Business fax of a personal contact
             public string businessFax { get; set; }
+            // Company phone of a personal contact
             public string companyPhone { get; set; }
+            // Assistant phone of a personal contact
             public string assistantPhone { get; set; }
+            // Car phone of a personal contact
             public string carPhone { get; set; }
+            // Other phone of a personal contact
             public string otherPhone { get; set; }
+            // Other fax of a personal contact
             public string otherFax { get; set; }
+            // Callback phone of a personal contact
             public string callbackPhone { get; set; }
+            // Email of a personal contact
             public string email { get; set; }
+            // The 2-d email of a personal contact
             public string email2 { get; set; }
+            // The 3-d email of a personal contact
             public string email3 { get; set; }
-            public HomeAddress homeAddress { get; set; }
-            public BusinessAddress businessAddress { get; set; }
-            public OtherAddress otherAddress { get; set; }
+            // Home address of a personal contact
+            public ContactAddressInfo homeAddress { get; set; }
+            // Business address of a personal contact
+            public ContactAddressInfo businessAddress { get; set; }
+            // Other address of a personal contact
+            public ContactAddressInfo otherAddress { get; set; }
+            // Date of birth of a personal contact in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string birthday { get; set; }
+            // Web page of a personal contact
             public string webPage { get; set; }
+            // Notes of a personal contact
             public string notes { get; set; }
-            public class HomeAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class BusinessAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
-            public class OtherAddress
-            {
-                public string country { get; set; }
-                public string state { get; set; }
-                public string city { get; set; }
-                public string street { get; set; }
-                public string zip { get; set; }
-            }
         }
     }
 }

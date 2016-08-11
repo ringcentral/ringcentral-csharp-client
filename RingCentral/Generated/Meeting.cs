@@ -28,129 +28,66 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Topic of a meeting
             public string topic { get; set; }
+            // Type of a meeting. 'Instant' - meeting that is instantly started as soon as the host creates it; 'Scheduled' - common scheduled meeting; 'Recurring' - a recurring meeting. If the specified meeting type is 'Scheduled' then schedule property is mandatory for request
             public string meetingType { get; set; }
+            // Password required to join a meeting. Max number of characters is 10
             public string password { get; set; }
-            public Schedule schedule { get; set; }
+            // Schedule of a meeting
+            public MeetingScheduleInfo schedule { get; set; }
+            // If 'True' then the meeting can be joined and started by any participant (not host only). Supported for the meetings of 'Scheduled' and 'Recurring' type.
             public bool? allowJoinBeforeHost { get; set; }
+            // Enables starting video when host joins the meeting
             public bool? startHostVideo { get; set; }
+            // Enables starting video when participants join the meeting
             public bool? startParticipantsVideo { get; set; }
+            // Meeting audio options. Possible values are 'Phone', 'ComputerAudio'
             public string[] audioOptions { get; set; }
-            public class Schedule
-            {
-                public string startTime { get; set; }
-                public int? durationInMinutes { get; set; }
-                public TimeZone timeZone { get; set; }
-                public class TimeZone
-                {
-                    public string id { get; set; }
-                }
-            }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Canonical URI of a meeting resource
             public string uri { get; set; }
+            // Internal identifier of a meeting as retrieved from Zoom
             public string id { get; set; }
+            // Topic of a meeting
             public string topic { get; set; }
+            // Type of a meeting
             public string meetingType { get; set; }
+            // Password required to join a meeting
             public string password { get; set; }
+            // Current status of a meeting
             public string status { get; set; }
-            public Links links { get; set; }
-            public Schedule schedule { get; set; }
+            // Links to start/join the meeting
+            public LinksInfo links { get; set; }
+            // Schedule of a meeting
+            public MeetingScheduleInfo schedule { get; set; }
+            // If 'True' then the meeting can be joined and started by any participant (not host only). Supported for the meetings of 'Scheduled' and 'Recurring' type.
             public bool? allowJoinBeforeHost { get; set; }
+            // Enables starting video when host joins the meeting
             public bool? startHostVideo { get; set; }
+            // Enables starting video when participants join the meeting
             public bool? startParticipantsVideo { get; set; }
+            // Meeting audio options. Possible values are 'Phone', 'ComputerAudio'
             public string[] audioOptions { get; set; }
-            public class Links
-            {
-                public string startUri { get; set; }
-                public string joinUri { get; set; }
-            }
-            public class Schedule
-            {
-                public string startTime { get; set; }
-                public int? durationInMinutes { get; set; }
-                public TimeZone timeZone { get; set; }
-                public class TimeZone
-                {
-                    public string id { get; set; }
-                }
-            }
         }
         public Task<ListResponse> List()
         {
             return RC.Get<ListResponse>(Endpoint(false), null);
         }
-        public class ListResponse
+        public partial class ListResponse
         {
+            // Canonical URI of meetings resource
             public string uri { get; set; }
-            public Record[] records { get; set; }
-            public Paging paging { get; set; }
-            public Navigation navigation { get; set; }
-            public class Record
-            {
-                public string uri { get; set; }
-                public string id { get; set; }
-                public string topic { get; set; }
-                public string meetingType { get; set; }
-                public string password { get; set; }
-                public string status { get; set; }
-                public Links links { get; set; }
-                public Schedule schedule { get; set; }
-                public bool? allowJoinBeforeHost { get; set; }
-                public bool? startHostVideo { get; set; }
-                public bool? startParticipantsVideo { get; set; }
-                public string[] audioOptions { get; set; }
-                public class Links
-                {
-                    public string startUri { get; set; }
-                    public string joinUri { get; set; }
-                }
-                public class Schedule
-                {
-                    public string startTime { get; set; }
-                    public int? durationInMinutes { get; set; }
-                    public TimeZone timeZone { get; set; }
-                    public class TimeZone
-                    {
-                        public string id { get; set; }
-                    }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
+            // List of extension meetings
+            public MeetingInfo[] records { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
         }
         public Task<System.Net.Http.HttpResponseMessage> Delete()
         {
@@ -160,35 +97,32 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Canonical URI of a meeting resource
             public string uri { get; set; }
+            // Internal identifier of a meeting as retrieved from Zoom
             public string id { get; set; }
+            // Topic of a meeting
             public string topic { get; set; }
+            // Type of a meeting
             public string meetingType { get; set; }
+            // Password required to join a meeting
             public string password { get; set; }
+            // Current status of a meeting
             public string status { get; set; }
-            public Links links { get; set; }
-            public Schedule schedule { get; set; }
+            // Links to start/join the meeting
+            public LinksInfo links { get; set; }
+            // Schedule of a meeting
+            public MeetingScheduleInfo schedule { get; set; }
+            // If 'True' then the meeting can be joined and started by any participant (not host only). Supported for the meetings of 'Scheduled' and 'Recurring' type.
             public bool? allowJoinBeforeHost { get; set; }
+            // Enables starting video when host joins the meeting
             public bool? startHostVideo { get; set; }
+            // Enables starting video when participants join the meeting
             public bool? startParticipantsVideo { get; set; }
+            // Meeting audio options. Possible values are 'Phone', 'ComputerAudio'
             public string[] audioOptions { get; set; }
-            public class Links
-            {
-                public string startUri { get; set; }
-                public string joinUri { get; set; }
-            }
-            public class Schedule
-            {
-                public string startTime { get; set; }
-                public int? durationInMinutes { get; set; }
-                public TimeZone timeZone { get; set; }
-                public class TimeZone
-                {
-                    public string id { get; set; }
-                }
-            }
         }
         public Task<PutResponse> Put(object requestBody)
         {
@@ -198,56 +132,51 @@ namespace RingCentral
         {
             return Put(requestBody as object);
         }
-        public class PutRequest
+        public partial class PutRequest
         {
+            // Topic of a meeting
             public string topic { get; set; }
+            // Type of a meeting. 'Instant' - meeting that is instantly started as soon as the host creates it; 'Scheduled' - common scheduled meeting; 'Recurring' - a recurring meeting. If the specified meeting type is 'Scheduled' then schedule property is mandatory for request
             public string meetingType { get; set; }
+            // Password required to join a meeting. Max number of characters is 10
             public string password { get; set; }
-            public Schedule schedule { get; set; }
+            // Schedule of a meeting
+            public MeetingScheduleInfo schedule { get; set; }
+            // If 'True' then the meeting can be joined and started by any participant (not host only). Supported for the meetings of 'Scheduled' and 'Recurring' type.
             public bool? allowJoinBeforeHost { get; set; }
+            // Enables starting video when host joins the meeting
             public bool? startHostVideo { get; set; }
+            // Enables starting video when participants join the meeting
             public bool? startParticipantsVideo { get; set; }
+            // Meeting audio options. Possible values are 'Phone', 'ComputerAudio'
             public string[] audioOptions { get; set; }
-            public class Schedule
-            {
-                public string startTime { get; set; }
-                public int? durationInMinutes { get; set; }
-                public TimeZone timeZone { get; set; }
-                public class TimeZone
-                {
-                    public string id { get; set; }
-                }
-            }
         }
-        public class PutResponse
+        public partial class PutResponse
         {
+            // Canonical URI of a meeting resource
             public string uri { get; set; }
+            // Internal identifier of a meeting as retrieved from Zoom
             public string id { get; set; }
+            // Topic of a meeting
             public string topic { get; set; }
+            // Type of a meeting
             public string meetingType { get; set; }
+            // Password required to join a meeting
             public string password { get; set; }
+            // Current status of a meeting
             public string status { get; set; }
-            public Links links { get; set; }
-            public Schedule schedule { get; set; }
+            // Links to start/join the meeting
+            public LinksInfo links { get; set; }
+            // Schedule of a meeting
+            public MeetingScheduleInfo schedule { get; set; }
+            // If 'True' then the meeting can be joined and started by any participant (not host only). Supported for the meetings of 'Scheduled' and 'Recurring' type.
             public bool? allowJoinBeforeHost { get; set; }
+            // Enables starting video when host joins the meeting
             public bool? startHostVideo { get; set; }
+            // Enables starting video when participants join the meeting
             public bool? startParticipantsVideo { get; set; }
+            // Meeting audio options. Possible values are 'Phone', 'ComputerAudio'
             public string[] audioOptions { get; set; }
-            public class Links
-            {
-                public string startUri { get; set; }
-                public string joinUri { get; set; }
-            }
-            public class Schedule
-            {
-                public string startTime { get; set; }
-                public int? durationInMinutes { get; set; }
-                public TimeZone timeZone { get; set; }
-                public class TimeZone
-                {
-                    public string id { get; set; }
-                }
-            }
         }
     }
 }

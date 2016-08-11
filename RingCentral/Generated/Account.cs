@@ -44,6 +44,10 @@ namespace RingCentral
         {
             return new Device(this, null);
         }
+        public DialingPlan DialingPlan()
+        {
+            return new DialingPlan(this);
+        }
         public Extension Extension(ID _id)
         {
             return new Extension(this, _id);
@@ -84,183 +88,26 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of an account
             public string id { get; set; }
+            // Canonical URI of an account
             public string uri { get; set; }
+            // Main phone number of the current account
             public string mainNumber { get; set; }
-            public Operator @operator { get; set; }
+            // Operator's extension information. This extension will receive all calls and messages intended for the operator
+            public ExtensionInfo @operator { get; set; }
+            // Additional account identifier, developed and applied by the client
             public string partnerId { get; set; }
+            // Account service information, including brand, service plan and billing plan
             public ServiceInfo serviceInfo { get; set; }
+            // Specifies account configuration wizard state (web service setup). The default value is 'NotStarted'
             public string setupWizardState { get; set; }
+            // Status of the current account
             public string status { get; set; }
+            // Status information (reason, comment, lifetime). Returned for 'Disabled' status only
             public StatusInfo statusInfo { get; set; }
-            public class Operator
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public Contact contact { get; set; }
-                public Departments departments { get; set; }
-                public string extensionNumber { get; set; }
-                public string name { get; set; }
-                public string partnerId { get; set; }
-                public Permissions permissions { get; set; }
-                public ProfileImage profileImage { get; set; }
-                public Reference[] references { get; set; }
-                public RegionalSettings regionalSettings { get; set; }
-                public ServiceFeature[] serviceFeatures { get; set; }
-                public string setupWizardState { get; set; }
-                public string status { get; set; }
-                public StatusInfo statusInfo { get; set; }
-                public string type { get; set; }
-                public class Contact
-                {
-                    public string firstName { get; set; }
-                    public string lastName { get; set; }
-                    public string company { get; set; }
-                    public string email { get; set; }
-                    public string businessPhone { get; set; }
-                    public BusinessAddress businessAddress { get; set; }
-                    public class BusinessAddress
-                    {
-                        public string country { get; set; }
-                        public string state { get; set; }
-                        public string city { get; set; }
-                        public string street { get; set; }
-                        public string zip { get; set; }
-                    }
-                }
-                public class Departments
-                {
-                    public string id { get; set; }
-                    public string uri { get; set; }
-                    public string extensionNumber { get; set; }
-                }
-                public class Permissions
-                {
-                    public Admin admin { get; set; }
-                    public InternationalCalling internationalCalling { get; set; }
-                    public class Admin
-                    {
-                        public bool? enabled { get; set; }
-                    }
-                    public class InternationalCalling
-                    {
-                        public bool? enabled { get; set; }
-                    }
-                }
-                public class ProfileImage
-                {
-                    public string uri { get; set; }
-                    public string etag { get; set; }
-                    public string lastModified { get; set; }
-                    public string contentType { get; set; }
-                    public string[] scales { get; set; }
-                }
-                public class Reference
-                {
-                    public string @ref { get; set; }
-                    public string type { get; set; }
-                }
-                public class RegionalSettings
-                {
-                    public HomeCountry homeCountry { get; set; }
-                    public Timezone timezone { get; set; }
-                    public Language language { get; set; }
-                    public GreetingLanguage greetingLanguage { get; set; }
-                    public FormattingLocale formattingLocale { get; set; }
-                    public class HomeCountry
-                    {
-                        public string id { get; set; }
-                        public string uri { get; set; }
-                        public string name { get; set; }
-                    }
-                    public class Timezone
-                    {
-                        public string id { get; set; }
-                        public string uri { get; set; }
-                        public string name { get; set; }
-                        public string description { get; set; }
-                    }
-                    public class Language
-                    {
-                        public string id { get; set; }
-                        public string uri { get; set; }
-                        public bool? greeting { get; set; }
-                        public bool? formattingLocale { get; set; }
-                        public string localeCode { get; set; }
-                        public string name { get; set; }
-                        public bool? ui { get; set; }
-                    }
-                    public class GreetingLanguage
-                    {
-                        public string id { get; set; }
-                        public string localeCode { get; set; }
-                        public string name { get; set; }
-                    }
-                    public class FormattingLocale
-                    {
-                        public string id { get; set; }
-                        public string localeCode { get; set; }
-                        public string name { get; set; }
-                    }
-                }
-                public class ServiceFeature
-                {
-                    public bool? enabled { get; set; }
-                    public string featureName { get; set; }
-                    public string reason { get; set; }
-                }
-                public class StatusInfo
-                {
-                    public string comment { get; set; }
-                    public string reason { get; set; }
-                }
-            }
-            public class ServiceInfo
-            {
-                public string uri { get; set; }
-                public BillingPlan billingPlan { get; set; }
-                public Brand brand { get; set; }
-                public ServicePlan servicePlan { get; set; }
-                public TargetServicePlan targetServicePlan { get; set; }
-                public class BillingPlan
-                {
-                    public string id { get; set; }
-                    public string name { get; set; }
-                    public string durationUnit { get; set; }
-                    public string duration { get; set; }
-                    public string type { get; set; }
-                }
-                public class Brand
-                {
-                    public string id { get; set; }
-                    public string name { get; set; }
-                    public HomeCountry homeCountry { get; set; }
-                    public class HomeCountry
-                    {
-                        public string id { get; set; }
-                        public string uri { get; set; }
-                        public string name { get; set; }
-                    }
-                }
-                public class ServicePlan
-                {
-                    public string id { get; set; }
-                    public string name { get; set; }
-                    public string edition { get; set; }
-                }
-                public class TargetServicePlan
-                {
-                    public string id { get; set; }
-                    public string name { get; set; }
-                }
-            }
-            public class StatusInfo
-            {
-                public string comment { get; set; }
-                public string reason { get; set; }
-            }
         }
     }
 }

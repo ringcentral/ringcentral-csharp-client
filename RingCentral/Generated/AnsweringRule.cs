@@ -16,120 +16,32 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Canonical URI to the answering rule resource
             public string uri { get; set; }
+            // Internal identifier of an asnwering rule
             public string id { get; set; }
+            // Type of an answering rule
             public string type { get; set; }
+            // Name of an answering rule specified by user
             public string name { get; set; }
+            // Specifies if an answering rule is active or inactive
             public bool? enabled { get; set; }
-            public Schedule schedule { get; set; }
-            public CalledNumber[] calledNumbers { get; set; }
-            public Caller[] callers { get; set; }
+            // Schedule when an answering rule should be applied
+            public ScheduleInfo schedule { get; set; }
+            // Answering rules are applied when calling to selected number(s)
+            public AnsweringRuleInfo_CalleeInfo[] calledNumbers { get; set; }
+            // Answering rules are applied when calls are received from specified caller(s)
+            public AnsweringRuleInfo_CallerInfo[] callers { get; set; }
+            // Specifies how incoming calls are forwarded
             public string callHandlingAction { get; set; }
-            public Forwarding forwarding { get; set; }
-            public UnconditionalForwarding unconditionalForwarding { get; set; }
-            public Voicemail voicemail { get; set; }
-            public class Schedule
-            {
-                public WeeklyRanges weeklyRanges { get; set; }
-                public Ranges ranges { get; set; }
-                public string @ref { get; set; }
-                public class WeeklyRanges
-                {
-                    public Monday[] monday { get; set; }
-                    public Tuesday[] tuesday { get; set; }
-                    public Wednesday[] wednesday { get; set; }
-                    public Thursday[] thursday { get; set; }
-                    public Friday[] friday { get; set; }
-                    public Saturday[] saturday { get; set; }
-                    public Sunday[] sunday { get; set; }
-                    public class Monday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                    public class Tuesday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                    public class Wednesday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                    public class Thursday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                    public class Friday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                    public class Saturday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                    public class Sunday
-                    {
-                        public string from { get; set; }
-                        public string to { get; set; }
-                    }
-                }
-                public class Ranges
-                {
-                    public string from { get; set; }
-                    public string to { get; set; }
-                }
-            }
-            public class CalledNumber
-            {
-                public string phoneNumber { get; set; }
-            }
-            public class Caller
-            {
-                public string callerId { get; set; }
-                public string name { get; set; }
-            }
-            public class Forwarding
-            {
-                public bool? notifyMySoftPhones { get; set; }
-                public bool? notifyAdminSoftPhones { get; set; }
-                public int? softPhonesRingCount { get; set; }
-                public string ringingMode { get; set; }
-                public Rule[] rules { get; set; }
-                public class Rule
-                {
-                    public int? index { get; set; }
-                    public int? ringCount { get; set; }
-                    public ForwardingNumber[] forwardingNumbers { get; set; }
-                    public class ForwardingNumber
-                    {
-                        public string uri { get; set; }
-                        public string id { get; set; }
-                        public string phoneNumber { get; set; }
-                        public string label { get; set; }
-                    }
-                }
-            }
-            public class UnconditionalForwarding
-            {
-                public string phoneNumber { get; set; }
-            }
-            public class Voicemail
-            {
-                public bool? enabled { get; set; }
-                public Recipient recipient { get; set; }
-                public class Recipient
-                {
-                    public string uri { get; set; }
-                    public string id { get; set; }
-                }
-            }
+            // Forwarding parameters. Returned if 'ForwardCalls' is specified in 'callHandlingAction'. These settings determine the forwarding numbers to which the call will be forwarded
+            public ForwardingInfo forwarding { get; set; }
+            // Unconditional forwarding parameters. Returned if 'UnconditionalForwarding' is specified in 'callHandlingAction'
+            public UnconditionalForwardingInfo unconditionalForwarding { get; set; }
+            // Specifies whether to take a voicemail and who should do it
+            public VoicemailInfo voicemail { get; set; }
         }
     }
 }

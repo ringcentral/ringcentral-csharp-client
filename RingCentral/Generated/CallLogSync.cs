@@ -20,104 +20,25 @@ namespace RingCentral
         {
             return Get(queryParams as object);
         }
-        public class GetQueryParams
+        public partial class GetQueryParams
         {
+            // Type of synchronization. 'FSync' is a default value
             public string syncType { get; set; }
+            // Value of syncToken property of last sync request response
             public string syncToken { get; set; }
+            // The start datetime for resulting records in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is the current moment
             public string dateFrom { get; set; }
+            // For FSync the parameter is mandatory, it limits the number of records to be returned in response. For ISync it specifies with how many records to extend sync Frame to the past, the maximum number of records is 250
             public int? recordCount { get; set; }
+            // Type of calls to be returned. The default value is 'All'
             public string statusGroup { get; set; }
         }
-        public class GetResponse
+        public partial class GetResponse
         {
-            public Record[] records { get; set; }
+            // List of call log records with synchronization information. For ISync the total number of returned records is limited to 250; this includes both new records and the old ones, specified by the recordCount parameter
+            public CallLogRecord[] records { get; set; }
+            // Sync type, token and time
             public SyncInfo syncInfo { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string sessionId { get; set; }
-                public From from { get; set; }
-                public To to { get; set; }
-                public string type { get; set; }
-                public string direction { get; set; }
-                public string action { get; set; }
-                public string result { get; set; }
-                public string startTime { get; set; }
-                public int? duration { get; set; }
-                public Recording recording { get; set; }
-                public string lastModifiedTime { get; set; }
-                public string transport { get; set; }
-                public Leg[] legs { get; set; }
-                public class From
-                {
-                    public string phoneNumber { get; set; }
-                    public string extensionNumber { get; set; }
-                    public string location { get; set; }
-                    public string name { get; set; }
-                }
-                public class To
-                {
-                    public string phoneNumber { get; set; }
-                    public string extensionNumber { get; set; }
-                    public string location { get; set; }
-                    public string name { get; set; }
-                }
-                public class Recording
-                {
-                    public int? id { get; set; }
-                    public string uri { get; set; }
-                    public string type { get; set; }
-                    public string contentUri { get; set; }
-                }
-                public class Leg
-                {
-                    public string action { get; set; }
-                    public string direction { get; set; }
-                    public int? duration { get; set; }
-                    public Extension extension { get; set; }
-                    public string legType { get; set; }
-                    public string startTime { get; set; }
-                    public string type { get; set; }
-                    public string result { get; set; }
-                    public From from { get; set; }
-                    public To to { get; set; }
-                    public string transport { get; set; }
-                    public Recording recording { get; set; }
-                    public class Extension
-                    {
-                        public int? id { get; set; }
-                        public string uri { get; set; }
-                    }
-                    public class From
-                    {
-                        public string phoneNumber { get; set; }
-                        public string extensionNumber { get; set; }
-                        public string location { get; set; }
-                        public string name { get; set; }
-                    }
-                    public class To
-                    {
-                        public string phoneNumber { get; set; }
-                        public string extensionNumber { get; set; }
-                        public string location { get; set; }
-                        public string name { get; set; }
-                    }
-                    public class Recording
-                    {
-                        public int? id { get; set; }
-                        public string uri { get; set; }
-                        public string type { get; set; }
-                        public string contentUri { get; set; }
-                    }
-                }
-            }
-            public class SyncInfo
-            {
-                public string syncType { get; set; }
-                public string syncToken { get; set; }
-                public string syncTime { get; set; }
-            }
         }
     }
 }

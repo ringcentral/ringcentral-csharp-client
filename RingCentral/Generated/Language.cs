@@ -16,66 +16,34 @@ namespace RingCentral
         {
             return RC.Get<ListResponse>(Endpoint(false), null);
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public bool? greeting { get; set; }
-                public bool? formattingLocale { get; set; }
-                public string localeCode { get; set; }
-                public string name { get; set; }
-                public bool? ui { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // Language data
+            public LanguageInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
         public Task<GetResponse> Get()
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a language
             public string id { get; set; }
+            // Canonical URI of a language
             public string uri { get; set; }
+            // Indicates whether a language is available as greeting language
             public bool? greeting { get; set; }
+            // Indicates whether a language is available as formatting locale
             public bool? formattingLocale { get; set; }
+            // Localization code of a language
             public string localeCode { get; set; }
+            // Official name of a language
             public string name { get; set; }
+            // Indicates whether a language is available as UI language
             public bool? ui { get; set; }
         }
     }

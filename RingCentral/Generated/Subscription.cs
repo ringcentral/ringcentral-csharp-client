@@ -28,40 +28,36 @@ namespace RingCentral
         {
             return Post(requestBody as object, queryParams as object);
         }
-        public class PostQueryParams
+        public partial class PostQueryParams
         {
+            // If 'True' then aggregated presence status is returned in a notification payload in the 'presenceStatus' field
             public bool? aggregated { get; set; }
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Mandatory. Collection of URIs to API resources (see Event Types for details). For APNS transport type only message event filter is available
             public string[] eventFilters { get; set; }
-            public DeliveryMode deliveryMode { get; set; }
-            public class DeliveryMode
-            {
-                public string transportType { get; set; }
-                public bool? encryption { get; set; }
-            }
+            // Notification delivery settings
+            public Subscription_Request_DeliveryMode deliveryMode { get; set; }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Internal identifier of a subscription
             public string id { get; set; }
+            // Canonical URI of a subscription
             public string uri { get; set; }
+            // Collection of URIs to API resources (message-store/presence/detailed presence)
             public string[] eventFilters { get; set; }
+            // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string expirationTime { get; set; }
+            // Subscription lifetime in seconds. The default value is 900
             public int? expiresIn { get; set; }
+            // Subscription status
             public string status { get; set; }
+            // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string creationTime { get; set; }
+            // Delivery mode data
             public DeliveryMode deliveryMode { get; set; }
-            public class DeliveryMode
-            {
-                public string transportType { get; set; }
-                public bool? encryption { get; set; }
-                public string address { get; set; }
-                public string subscriberKey { get; set; }
-                public string secretKey { get; set; }
-                public string encryptionAlgorithm { get; set; }
-                public string encryptionKey { get; set; }
-            }
         }
         public Task<System.Net.Http.HttpResponseMessage> Delete()
         {
@@ -71,26 +67,24 @@ namespace RingCentral
         {
             return RC.Get<GetResponse>(Endpoint(true), null);
         }
-        public class GetResponse
+        public partial class GetResponse
         {
+            // Internal identifier of a subscription
             public string id { get; set; }
+            // Canonical URI of a subscription
             public string uri { get; set; }
+            // Collection of URIs to API resources (message-store/presence/detailed presence)
             public string[] eventFilters { get; set; }
+            // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string expirationTime { get; set; }
+            // Subscription lifetime in seconds. The default value is 900
             public int? expiresIn { get; set; }
+            // Subscription status
             public string status { get; set; }
+            // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string creationTime { get; set; }
+            // Delivery mode data
             public DeliveryMode deliveryMode { get; set; }
-            public class DeliveryMode
-            {
-                public string transportType { get; set; }
-                public bool? encryption { get; set; }
-                public string address { get; set; }
-                public string subscriberKey { get; set; }
-                public string secretKey { get; set; }
-                public string encryptionAlgorithm { get; set; }
-                public string encryptionKey { get; set; }
-            }
         }
         public Task<PutResponse> Put(object requestBody, object queryParams)
         {
@@ -108,34 +102,34 @@ namespace RingCentral
         {
             return Put(requestBody as object, queryParams as object);
         }
-        public class PutQueryParams
+        public partial class PutQueryParams
         {
+            // If 'True' then aggregated presence status is returned in a notification payload
             public bool? aggregated { get; set; }
         }
-        public class PutRequest
+        public partial class PutRequest
         {
+            // Collection of URIs to API resources (see Event Types). Mandatory field
             public string[] eventFilters { get; set; }
         }
-        public class PutResponse
+        public partial class PutResponse
         {
+            // Internal identifier of a subscription
             public string id { get; set; }
+            // Canonical URI of a subscription
             public string uri { get; set; }
+            // Collection of URIs to API resources (message-store/presence/detailed presence)
             public string[] eventFilters { get; set; }
+            // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string expirationTime { get; set; }
+            // Subscription lifetime in seconds. The default value is 900
             public int? expiresIn { get; set; }
+            // Subscription status
             public string status { get; set; }
+            // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string creationTime { get; set; }
+            // Delivery mode data
             public DeliveryMode deliveryMode { get; set; }
-            public class DeliveryMode
-            {
-                public string transportType { get; set; }
-                public bool? encryption { get; set; }
-                public string address { get; set; }
-                public string subscriberKey { get; set; }
-                public string secretKey { get; set; }
-                public string encryptionAlgorithm { get; set; }
-                public string encryptionKey { get; set; }
-            }
         }
     }
 }

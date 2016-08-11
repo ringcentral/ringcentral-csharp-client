@@ -20,18 +20,26 @@ namespace RingCentral
         {
             return Post(requestBody as object);
         }
-        public class PostRequest
+        public partial class PostRequest
         {
+            // Forwarding/Call flip phone number
             public string phoneNumber { get; set; }
+            // Forwarding/Call flip number title
             public string label { get; set; }
         }
-        public class PostResponse
+        public partial class PostResponse
         {
+            // Internal identifier of a forwarding/call flip phone number
             public string id { get; set; }
+            // Canonical URI of a forwarding/call flip phone number
             public string uri { get; set; }
+            // Forwarding/Call flip phone number
             public string phoneNumber { get; set; }
+            // Forwarding/Call flip number title
             public string label { get; set; }
+            // Type of option this phone number is used for. Multiple values are accepted
             public string features { get; set; }
+            // Number assigned to the call flip phone number, corresponds to the shortcut dial number
             public int? flipNumber { get; set; }
         }
         public Task<ListResponse> List(object queryParams)
@@ -42,57 +50,21 @@ namespace RingCentral
         {
             return List(queryParams as object);
         }
-        public class ListQueryParams
+        public partial class ListQueryParams
         {
+            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
             public int? page { get; set; }
+            // Indicates the page size (number of items). If not specified, the value is '100' by default
             public int? perPage { get; set; }
         }
-        public class ListResponse
+        public partial class ListResponse
         {
-            public Record[] records { get; set; }
-            public Navigation navigation { get; set; }
-            public Paging paging { get; set; }
-            public class Record
-            {
-                public string id { get; set; }
-                public string uri { get; set; }
-                public string phoneNumber { get; set; }
-                public string label { get; set; }
-                public string features { get; set; }
-                public int? flipNumber { get; set; }
-            }
-            public class Navigation
-            {
-                public FirstPage firstPage { get; set; }
-                public NextPage nextPage { get; set; }
-                public PreviousPage previousPage { get; set; }
-                public LastPage lastPage { get; set; }
-                public class FirstPage
-                {
-                    public string uri { get; set; }
-                }
-                public class NextPage
-                {
-                    public string uri { get; set; }
-                }
-                public class PreviousPage
-                {
-                    public string uri { get; set; }
-                }
-                public class LastPage
-                {
-                    public string uri { get; set; }
-                }
-            }
-            public class Paging
-            {
-                public int? page { get; set; }
-                public int? perPage { get; set; }
-                public int? pageStart { get; set; }
-                public int? pageEnd { get; set; }
-                public int? totalPages { get; set; }
-                public int? totalElements { get; set; }
-            }
+            // List of forwarding phone numbers
+            public ForwardingNumberInfo[] records { get; set; }
+            // Information on navigation
+            public NavigationInfo navigation { get; set; }
+            // Information on paging
+            public PagingInfo paging { get; set; }
         }
     }
 }
