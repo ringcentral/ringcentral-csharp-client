@@ -23,7 +23,7 @@ namespace RingCentral
         public partial class PostQueryParams
         {
             // Area code of the location
-            public int? areaCode { get; set; }
+            public long? areaCode { get; set; }
             // Two-letter country code, complying with the ISO standard
             public string countryCode { get; set; }
             // Internal identifier of a country; '1'- the US; '39' - Canada; '224' - the UK. The default value is '1'
@@ -43,7 +43,7 @@ namespace RingCentral
             // Payment type. Default is 'Local' (it should correlate with the npa provided)
             public string paymentType { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '10' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
             // Specifies if SMS activation is available for the number. If specified, it is taken into account in all returned phone numbers both in the phone numbers satisfying to parameters of lookup and in alternative phone numbers (in case when extendedSearch is specified). If not specified, the value is null.
             public bool? smsEnabled { get; set; }
         }

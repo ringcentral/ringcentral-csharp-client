@@ -24,11 +24,11 @@ public partial class AccountInfo
 public partial class AccountLimits
 {
     // The maximum number of free softphone digital lines per user extension
-    public int? freeSoftPhoneLinesPerExtension { get; set; }
+    public long? freeSoftPhoneLinesPerExtension { get; set; }
     // The maximum number of participants in RingCentral Meeting hosted by this account's user
-    public int? meetingSize { get; set; }
+    public long? meetingSize { get; set; }
     // The maximum number of extensions which can be included in the list of users monitored for Presence
-    public int? maxMonitoredExtensionsPerUser { get; set; }
+    public long? maxMonitoredExtensionsPerUser { get; set; }
 }
 
 
@@ -37,7 +37,7 @@ public partial class AddonInfo
     // Addon identifier. For HardPhones of certain types, which are compatible with this addon identifier
     public string id { get; set; }
     // Number of addons. For HardPhones of certain types, which are compatible with such addon identifier
-    public int? count { get; set; }
+    public long? count { get; set; }
 }
 
 
@@ -179,7 +179,7 @@ public partial class CallLogInfo
     // The call start datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
     public string startTime { get; set; }
     // Call duration in seconds
-    public int? duration { get; set; }
+    public long? duration { get; set; }
     // Call recording data. Returned if the call is recorded
     public RecordingInfo recording { get; set; }
 }
@@ -208,7 +208,7 @@ public partial class CallLogRecord
     // The call start datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
     public string startTime { get; set; }
     // Call duration in seconds
-    public int? duration { get; set; }
+    public long? duration { get; set; }
     // Call recording data. Returned if the call is recorded, the withRecording parameter is set to 'True' in this case
     public RecordingInfo recording { get; set; }
     // For 'Detailed' view only. The datetime when the call log record was modified in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
@@ -408,7 +408,7 @@ public partial class DeviceInfo
     // Shipping information, according to which devices (in case of "HardPhone") or e911 stickers (in case of "SoftPhone" and "OtherPhone") will be delivered to the customer
     public ShippingInfo shipping { get; set; }
     // Box billing identifier of a device. Applicable only for HardPhones. It is an alternative way to identify the device to be ordered. Either "model" structure, or "boxBillingId" must be specified for HardPhone
-    public int? boxBillingId { get; set; }
+    public long? boxBillingId { get; set; }
 }
 
 
@@ -652,7 +652,7 @@ public partial class ExternalUserInfo
     // Meeting account user token
     public string userToken { get; set; }
     // Meeting account user type
-    public int? userType { get; set; }
+    public long? userType { get; set; }
 }
 
 
@@ -674,7 +674,7 @@ public partial class ForwardingInfo
     // Specifies if the administrator's softphone is notified before forwarding the incoming call to desk phones and forwarding numbers. The default value is 'False'
     public bool? notifyAdminSoftPhones { get; set; }
     // Number of rings before forwarding starts
-    public int? softPhonesRingCount { get; set; }
+    public long? softPhonesRingCount { get; set; }
     // Specifies the order in which forwarding numbers ring. 'Sequentially' means that forwarding numbers are ringing one at a time, in order of priority. 'Simultaneously' means that forwarding numbers are ring all at the same time
     public string ringingMode { get; set; }
     // Information on a call forwarding rule
@@ -695,7 +695,7 @@ public partial class ForwardingNumberInfo
     // Type of option this phone number is used for. Multiple values are accepted
     public string features { get; set; }
     // Number assigned to the call flip phone number, corresponds to the shortcut dial number
-    public int? flipNumber { get; set; }
+    public long? flipNumber { get; set; }
 }
 
 
@@ -764,7 +764,7 @@ public partial class GroupInfo
     // Canonical URI of a group
     public string uri { get; set; }
     // Amount of contacts in a group
-    public int? contactsCount { get; set; }
+    public long? contactsCount { get; set; }
     // Name of a group
     public string groupName { get; set; }
     // Notes for a group
@@ -798,7 +798,7 @@ public partial class LegInfo
     // Call direction
     public string direction { get; set; }
     // Call duration in seconds
-    public int? duration { get; set; }
+    public long? duration { get; set; }
     // Information on extension
     public LegInfo_ExtensionInfo extension { get; set; }
     // Leg type
@@ -823,7 +823,7 @@ public partial class LegInfo
 public partial class LegInfo_ExtensionInfo
 {
     // Internal identifier of an extension
-    public int? id { get; set; }
+    public long? id { get; set; }
     // Canonical URI of an extension
     public string uri { get; set; }
 }
@@ -864,7 +864,7 @@ public partial class LookUpPhoneNumber_PhoneNumberInfo
     // Vanity pattern for this number. Returned only when vanity search option is requested. Vanity pattern corresponds to request parameters nxx plus line or numberPattern
     public string vanityPattern { get; set; }
     // The value is returned if the extendedSearch parameter is true. '10' is the closest match
-    public int? rank { get; set; }
+    public long? rank { get; set; }
 }
 
 
@@ -902,7 +902,7 @@ public partial class MeetingScheduleInfo
     // Start time of a meeting in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
     public string startTime { get; set; }
     // Duration of a meeting in minutes
-    public int? durationInMinutes { get; set; }
+    public long? durationInMinutes { get; set; }
     // Timezone of a meeting
     public MeetingScheduleInfo_TimezoneInfo timeZone { get; set; }
 }
@@ -926,7 +926,7 @@ public partial class MessageAttachmentInfo
     // MIME type for a given attachment, for instance 'audio/wav'
     public string contentType { get; set; }
     // Voicemail only Duration of the voicemail in seconds
-    public int? vmDuration { get; set; }
+    public long? vmDuration { get; set; }
 }
 
 
@@ -949,7 +949,7 @@ public partial class MessageInfo
     // Message direction. Note that for some message types not all directions are allowed. For example voicemail messages can be only inbound
     public string direction { get; set; }
     // Fax only. Page count in fax message
-    public int? faxPageCount { get; set; }
+    public long? faxPageCount { get; set; }
     // Fax only. Resolution of fax message. ('High' for black and white image scanned at 200 dpi, 'Low' for black and white image scanned at 100 dpi)
     public string faxResolution { get; set; }
     // Sender information
@@ -967,7 +967,7 @@ public partial class MessageInfo
     // SMS only. The datetime when outbound SMS was delivered to recipient's handset in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. It is filled only if the carrier sends a delivery receipt to RingCentral
     public string smsDeliveryTime { get; set; }
     // SMS only. Number of attempts made to send an outbound SMS to the gateway (if gateway is temporary unavailable)
-    public int? smsSendingAttemptsCount { get; set; }
+    public long? smsSendingAttemptsCount { get; set; }
     // Message subject. For SMS and Pager messages it replicates message text which is also returned as an attachment
     public string subject { get; set; }
     // Recipient information
@@ -1030,17 +1030,17 @@ public partial class Page
 public partial class PagingInfo
 {
     // The current page number. 1-indexed, so the first page is 1 by default. May be omitted if result is empty (because non-existent page was specified or perPage=0 was requested)
-    public int? page { get; set; }
+    public long? page { get; set; }
     // Current page size, describes how many items are in each page. Default value is 100. Maximum value is 1000. If perPage value in the request is greater than 1000, the maximum value (1000) is applied
-    public int? perPage { get; set; }
+    public long? perPage { get; set; }
     // The zero-based number of the first element on the current page. Omitted if the page is omitted or result is empty
-    public int? pageStart { get; set; }
+    public long? pageStart { get; set; }
     // The zero-based index of the last element on the current page. Omitted if the page is omitted or result is empty
-    public int? pageEnd { get; set; }
+    public long? pageEnd { get; set; }
     // The total number of pages in a dataset. May be omitted for some resources due to performance reasons
-    public int? totalPages { get; set; }
+    public long? totalPages { get; set; }
     // The total number of elements in a dataset. May be omitted for some resource due to performance reasons
-    public int? totalElements { get; set; }
+    public long? totalElements { get; set; }
 }
 
 
@@ -1094,7 +1094,7 @@ public partial class PermissionInfo
 public partial class PersonalContactInfo
 {
     // Standard resource properties ID
-    public int? id { get; set; }
+    public long? id { get; set; }
     // Canonical URI
     public string url { get; set; }
     // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
@@ -1168,7 +1168,7 @@ public partial class PhoneLinesInfo
 public partial class PhoneLinesInfo_PhoneNumberInfo
 {
     // Internal identifier of a phone number
-    public int? id { get; set; }
+    public long? id { get; set; }
     // Brief information on a phone number country
     public CountryInfo country { get; set; }
     // Location (City, State). Filled for local US numbers
@@ -1189,7 +1189,7 @@ public partial class PhoneLinesInfo_PhoneNumberInfo
 public partial class PhoneNumberInfo
 {
     // Internal identifier of a phone number
-    public int? id { get; set; }
+    public long? id { get; set; }
     // Brief information on a phone number country
     public CountryInfo country { get; set; }
     // Information on the extension, to which the phone number is assigned. Returned only for the request of Account phone number list
@@ -1296,7 +1296,7 @@ public partial class RecipientInfo
 public partial class RecordingInfo
 {
     // Internal identifier of the call recording
-    public int? id { get; set; }
+    public long? id { get; set; }
     // Link to the call recording metadata resource
     public string uri { get; set; }
     // Indicates recording mode used
@@ -1402,9 +1402,9 @@ public partial class RingOutStatusInfo
 public partial class RuleInfo
 {
     // Forwarding number (or group) ordinal
-    public int? index { get; set; }
+    public long? index { get; set; }
     // Number of rings for a forwarding number (or group)
-    public int? ringCount { get; set; }
+    public long? ringCount { get; set; }
     // Forwarding number (or group) data
     public RuleInfo_ForwardingNumberInfo[] forwardingNumbers { get; set; }
 }
@@ -1578,7 +1578,7 @@ public partial class SubscriptionInfo
     // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
     public string expirationTime { get; set; }
     // Subscription lifetime in seconds. The default value is 900
-    public int? expiresIn { get; set; }
+    public long? expiresIn { get; set; }
     // Subscription status
     public string status { get; set; }
     // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z

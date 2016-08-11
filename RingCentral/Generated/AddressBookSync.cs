@@ -27,9 +27,9 @@ namespace RingCentral
             // Value of syncToken property of the last sync request response
             public string syncToken { get; set; }
             // Number of records per page to be returned. The max number of records is 250, which is also the default. For FSync — if the number of records exceeds the parameter value (either specified or default), all of the pages can be retrieved in several requests. For ISync — if the number of records exceeds the page size, the number of incoming changes to this number is limited
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
             // Internal identifier of a page. It can be obtained from the 'nextPageId' parameter passed in response body
-            public int? pageId { get; set; }
+            public long? pageId { get; set; }
         }
         public partial class GetResponse
         {
@@ -38,7 +38,7 @@ namespace RingCentral
             // Sync type, token and time
             public SyncInfo syncInfo { get; set; }
             // Internal identifier of the next page, if any
-            public int? nextPageId { get; set; }
+            public long? nextPageId { get; set; }
             // URL of the next page, if any
             public string nextPageUri { get; set; }
         }

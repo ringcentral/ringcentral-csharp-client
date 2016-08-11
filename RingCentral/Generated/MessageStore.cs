@@ -47,9 +47,9 @@ namespace RingCentral
             // The read status for the resulting messages. Multiple values are accepted
             public string readStatus { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
             // The phone number. If specified, messages are returned for this particular phone number only
             public string phoneNumber { get; set; }
         }
@@ -100,7 +100,7 @@ namespace RingCentral
             // Message direction. Note that for some message types not all directions are allowed. For example voicemail messages can be only inbound
             public string direction { get; set; }
             // Fax only. Page count in fax message
-            public int? faxPageCount { get; set; }
+            public long? faxPageCount { get; set; }
             // Fax only. Resolution of fax message. ('High' for black and white image scanned at 200 dpi, 'Low' for black and white image scanned at 100 dpi)
             public string faxResolution { get; set; }
             // Sender information
@@ -118,7 +118,7 @@ namespace RingCentral
             // SMS only. The datetime when outbound SMS was delivered to recipient's handset in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. It is filled only if the carrier sends a delivery receipt to RingCentral
             public string smsDeliveryTime { get; set; }
             // SMS only. Number of attempts made to send an outbound SMS to the gateway (if gateway is temporary unavailable)
-            public int? smsSendingAttemptsCount { get; set; }
+            public long? smsSendingAttemptsCount { get; set; }
             // Message subject. For SMS and Pager messages it replicates message text which is also returned as an attachment
             public string subject { get; set; }
             // Recipient information
@@ -160,7 +160,7 @@ namespace RingCentral
             // Message direction. Note that for some message types not all directions are allowed. For example voicemail messages can be only inbound
             public string direction { get; set; }
             // Fax only. Page count in fax message
-            public int? faxPageCount { get; set; }
+            public long? faxPageCount { get; set; }
             // Fax only. Resolution of fax message. ('High' for black and white image scanned at 200 dpi, 'Low' for black and white image scanned at 100 dpi)
             public string faxResolution { get; set; }
             // Sender information
@@ -178,7 +178,7 @@ namespace RingCentral
             // SMS only. The datetime when outbound SMS was delivered to recipient's handset in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. It is filled only if the carrier sends a delivery receipt to RingCentral
             public string smsDeliveryTime { get; set; }
             // SMS only. Number of attempts made to send an outbound SMS to the gateway (if gateway is temporary unavailable)
-            public int? smsSendingAttemptsCount { get; set; }
+            public long? smsSendingAttemptsCount { get; set; }
             // Message subject. For SMS and Pager messages it replicates message text which is also returned as an attachment
             public string subject { get; set; }
             // Recipient information

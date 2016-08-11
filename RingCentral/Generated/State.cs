@@ -23,11 +23,11 @@ namespace RingCentral
         public partial class ListQueryParams
         {
             // Internal identifier of a country
-            public int? countryId { get; set; }
+            public long? countryId { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
             // If 'True', the list of states with phone numbers available for buying is returned. The default value is 'False'
             public bool? withPhoneNumbers { get; set; }
         }

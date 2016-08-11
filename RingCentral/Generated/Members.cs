@@ -23,9 +23,9 @@ namespace RingCentral
         public partial class ListQueryParams
         {
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
         }
         public partial class ListResponse
         {

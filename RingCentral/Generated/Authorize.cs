@@ -36,7 +36,7 @@ namespace RingCentral
             // The authorization code returned for your application
             public string code { get; set; }
             // The remaining lifetime of the authorization code
-            public int? expires_in { get; set; }
+            public long? expires_in { get; set; }
             // This parameter will be included in response if it was specified in the client authorization request. The value will be copied from the one received from the client
             public string state { get; set; }
         }

@@ -39,9 +39,9 @@ namespace RingCentral
             // The end datetime for resulting records in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is current time
             public string dateTo { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed. The default value is '1'
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default.
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
         }
         public partial class ListResponse
         {
@@ -79,7 +79,7 @@ namespace RingCentral
             // The call start datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string startTime { get; set; }
             // Call duration in seconds
-            public int? duration { get; set; }
+            public long? duration { get; set; }
             // Call recording data. Returned if the call is recorded
             public RecordingInfo recording { get; set; }
         }

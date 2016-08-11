@@ -25,9 +25,9 @@ namespace RingCentral
             // Usage type of the phone number
             public string usageType { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
         }
         public partial class ListResponse
         {
@@ -45,7 +45,7 @@ namespace RingCentral
         public partial class GetResponse
         {
             // Internal identifier of a phone number
-            public int? id { get; set; }
+            public long? id { get; set; }
             // Brief information on a phone number country
             public CountryInfo country { get; set; }
             // Information on the extension, to which the phone number is assigned. Returned only for the request of Account phone number list

@@ -23,7 +23,7 @@ namespace RingCentral
         public partial class PostRequest
         {
             // Standard resource properties ID
-            public int? id { get; set; }
+            public long? id { get; set; }
             // Canonical URI
             public string url { get; set; }
             // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
@@ -86,7 +86,7 @@ namespace RingCentral
         public partial class PostResponse
         {
             // Standard resource properties ID
-            public int? id { get; set; }
+            public long? id { get; set; }
             // Canonical URI
             public string url { get; set; }
             // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
@@ -163,9 +163,9 @@ namespace RingCentral
             // Sorts results by the specified property. The default is 'First Name'
             public string sortBy { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
         }
         public partial class ListResponse
         {
@@ -187,7 +187,7 @@ namespace RingCentral
         public partial class GetResponse
         {
             // Standard resource properties ID
-            public int? id { get; set; }
+            public long? id { get; set; }
             // Canonical URI
             public string url { get; set; }
             // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
@@ -258,7 +258,7 @@ namespace RingCentral
         public partial class PutRequest
         {
             // Standard resource properties ID
-            public int? id { get; set; }
+            public long? id { get; set; }
             // Canonical URI
             public string url { get; set; }
             // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'
@@ -321,7 +321,7 @@ namespace RingCentral
         public partial class PutResponse
         {
             // Standard resource properties ID
-            public int? id { get; set; }
+            public long? id { get; set; }
             // Canonical URI
             public string url { get; set; }
             // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'

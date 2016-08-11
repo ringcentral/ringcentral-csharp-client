@@ -25,9 +25,9 @@ namespace RingCentral
             // Sorts results by the specified property. The default value is 'City'
             public string orderBy { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default.
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
             // Internal identifier of a state
             public string stateId { get; set; }
             // Specifies if nxx codes are returned

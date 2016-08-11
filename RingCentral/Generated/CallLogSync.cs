@@ -29,7 +29,7 @@ namespace RingCentral
             // The start datetime for resulting records in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is the current moment
             public string dateFrom { get; set; }
             // For FSync the parameter is mandatory, it limits the number of records to be returned in response. For ISync it specifies with how many records to extend sync Frame to the past, the maximum number of records is 250
-            public int? recordCount { get; set; }
+            public long? recordCount { get; set; }
             // Type of calls to be returned. The default value is 'All'
             public string statusGroup { get; set; }
         }

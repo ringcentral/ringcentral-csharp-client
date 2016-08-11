@@ -56,7 +56,7 @@ namespace RingCentral
             // Shipping information, according to which devices (in case of "HardPhone") or e911 stickers (in case of "SoftPhone" and "OtherPhone") will be delivered to the customer
             public ShippingInfo shipping { get; set; }
             // Box billing identifier of a device. Applicable only for HardPhones. It is an alternative way to identify the device to be ordered. Either "model" structure, or "boxBillingId" must be specified for HardPhone
-            public int? boxBillingId { get; set; }
+            public long? boxBillingId { get; set; }
         }
     }
 }

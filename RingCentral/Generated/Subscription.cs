@@ -51,7 +51,7 @@ namespace RingCentral
             // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string expirationTime { get; set; }
             // Subscription lifetime in seconds. The default value is 900
-            public int? expiresIn { get; set; }
+            public long? expiresIn { get; set; }
             // Subscription status
             public string status { get; set; }
             // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
@@ -78,7 +78,7 @@ namespace RingCentral
             // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string expirationTime { get; set; }
             // Subscription lifetime in seconds. The default value is 900
-            public int? expiresIn { get; set; }
+            public long? expiresIn { get; set; }
             // Subscription status
             public string status { get; set; }
             // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
@@ -123,7 +123,7 @@ namespace RingCentral
             // Subscription expiration datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
             public string expirationTime { get; set; }
             // Subscription lifetime in seconds. The default value is 900
-            public int? expiresIn { get; set; }
+            public long? expiresIn { get; set; }
             // Subscription status
             public string status { get; set; }
             // Subscription creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z

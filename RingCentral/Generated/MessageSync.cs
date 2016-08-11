@@ -35,7 +35,7 @@ namespace RingCentral
             // Type for the resulting messages. If not specified, all types of messages are returned. Multiple values are accepted
             public string messageType { get; set; }
             // Limits the number of records to be returned (works in combination with dateFrom and dateTo if specified)
-            public int? recordCount { get; set; }
+            public long? recordCount { get; set; }
             // Value of syncToken property of last sync request response
             public string syncToken { get; set; }
             // Type of message synchronization

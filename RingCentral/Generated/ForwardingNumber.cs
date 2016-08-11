@@ -40,7 +40,7 @@ namespace RingCentral
             // Type of option this phone number is used for. Multiple values are accepted
             public string features { get; set; }
             // Number assigned to the call flip phone number, corresponds to the shortcut dial number
-            public int? flipNumber { get; set; }
+            public long? flipNumber { get; set; }
         }
         public Task<ListResponse> List(object queryParams)
         {
@@ -53,9 +53,9 @@ namespace RingCentral
         public partial class ListQueryParams
         {
             // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
-            public int? page { get; set; }
+            public long? page { get; set; }
             // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public int? perPage { get; set; }
+            public long? perPage { get; set; }
         }
         public partial class ListResponse
         {
