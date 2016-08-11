@@ -40,10 +40,10 @@ namespace RingCentral
 
     public class ID
     {
-        private int? i = null;
+        private long? i = null;
         private string s = null;
 
-        public ID(int i)
+        public ID(long i)
         {
             this.i = i;
         }
@@ -53,7 +53,7 @@ namespace RingCentral
             this.s = s;
         }
 
-        public static implicit operator ID(int i)
+        public static implicit operator ID(long i)
         {
             return new ID(i);
         }
