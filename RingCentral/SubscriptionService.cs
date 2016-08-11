@@ -62,7 +62,7 @@ namespace RingCentral
                 {
                     if (!renewScheduled)
                     { // don't do duplicate schedule
-                        Task.Delay((_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith((action) =>
+                        Task.Delay((int)(_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith((action) =>
                         { // 2 minutes before expiration
                             renewScheduled = false;
                             Renew();
