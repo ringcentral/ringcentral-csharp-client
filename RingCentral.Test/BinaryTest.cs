@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Xunit;
 
 namespace RingCentral.Test
 {
     [Collection("RestClient collection")]
-    public class BinaryTest
+    public class BinaryTest : IDisposable
     {
         private RestClient rc;
         private byte[] bytes;
@@ -87,6 +88,11 @@ namespace RingCentral.Test
             Assert.NotNull(bytes);
             Assert.True(bytes.Length > 0);
             File.WriteAllBytes("test.wav", bytes);
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }

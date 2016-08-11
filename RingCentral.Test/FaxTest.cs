@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
+using System.Threading;
 using Xunit;
 
 namespace RingCentral.Test
 {
     [Collection("RestClient collection")]
-    public class FaxTest
+    public class FaxTest : IDisposable
     {
         private RestClient rc;
         public FaxTest(RestClientFixture fixture)
@@ -26,6 +28,11 @@ namespace RingCentral.Test
             }, attachments).Result;
             Assert.NotNull(response);
             Assert.Equal("High", response.faxResolution);
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }

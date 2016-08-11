@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.IO;
 
 namespace RingCentral.Test
@@ -14,8 +15,23 @@ namespace RingCentral.Test
             {
                 if (instance == null)
                 {
-                    var jsonStr = File.ReadAllText("config.json");
-                    instance = JsonConvert.DeserializeObject<Config>(jsonStr);
+                    if (File.Exists("config.json"))
+                    {
+                        var jsonStr = File.ReadAllText("config.json");
+                        instance = JsonConvert.DeserializeObject<Config>(jsonStr);
+                    }
+                    else
+                    {
+                        instance = new Config();
+                        instance.production = Environment.GetEnvironmentVariable("production") == "true";
+                        instance.server = Environment.GetEnvironmentVariable("server");
+                        instance.appKey = Environment.GetEnvironmentVariable("appKey");
+                        instance.appSecret = Environment.GetEnvironmentVariable("appSecret");
+                        instance.username = Environment.GetEnvironmentVariable("username");
+                        instance.extension = Environment.GetEnvironmentVariable("extension");
+                        instance.password = Environment.GetEnvironmentVariable("password");
+                        instance.receiver = Environment.GetEnvironmentVariable("receiver");
+                    }
                 }
                 return instance;
             }

@@ -5,7 +5,7 @@ using Xunit;
 namespace RingCentral.Test
 {
     [Collection("RestClient collection")]
-    public class SubscripotionTest
+    public class SubscripotionTest : IDisposable
     {
         private RestClient rc;
         public SubscripotionTest(RestClientFixture fixture)
@@ -54,6 +54,11 @@ namespace RingCentral.Test
             Assert.Equal(1, connectCount);
             Assert.True(messageCount >= 2);
             Assert.Equal(0, errorCount);
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }

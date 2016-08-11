@@ -1,10 +1,12 @@
-﻿using Xunit;
+﻿using System;
 using System.Linq;
+using System.Threading;
+using Xunit;
 
 namespace RingCentral.Test
 {
     [Collection("RestClient collection")]
-    public class ServiceInfoTest
+    public class ServiceInfoTest : IDisposable
     {
         private RestClient rc;
         public ServiceInfoTest(RestClientFixture fixture)
@@ -23,6 +25,11 @@ namespace RingCentral.Test
 
             // meeting service-info
             // todo: meeting api is not yet ready, so I cannot test it right now
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }

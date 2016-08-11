@@ -1,8 +1,10 @@
+using System;
+using System.Threading;
 using Xunit;
 
 namespace RingCentral.Test
 {
-    public class HttpTest
+    public class HttpTest : IDisposable
     {
         [Fact]
         public void GetTest()
@@ -19,6 +21,11 @@ namespace RingCentral.Test
             rc.Authorize(Config.Instance.username, Config.Instance.extension, Config.Instance.password);
 
             Assert.NotNull(rc.token.access_token);
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }

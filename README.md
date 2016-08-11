@@ -1,5 +1,7 @@
 # ringcentral-csharp-client
 
+![travis](https://travis-ci.org/ringcentral/ringcentral-csharp-client.svg)
+
 RingCentral C# client.
 
 **Notice:** any issues or questions, please do let me know by [creating an issue](https://github.com/tylerlong/ringcentral-csharp-client/issues/new).
@@ -47,10 +49,10 @@ If you use direct number as username, leave extension empty.
 
 ## Map URI to code
 
-This client library is built around URIs. 
+This client library is built around URIs.
 Please read this part carefully and make sure you get it before continuing.
 
-Let's go to the [RingCentral API Reference](https://developer.ringcentral.com/api-docs/latest/index.html#!#APIReference.html) to find 
+Let's go to the [RingCentral API Reference](https://developer.ringcentral.com/api-docs/latest/index.html#!#APIReference.html) to find
 [an example](https://developer.ringcentral.com/api-docs/latest/index.html#!#RefExtensionCallLogRecord.html).
 
 We can see that the URI pattern is:
@@ -312,7 +314,7 @@ try
 catch (FlurlHttpException fhe)
 {
     if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
-    { 
+    {
         Console.WriteLine("The resource doesn't exist");
     }
 }

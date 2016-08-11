@@ -1,0 +1,24 @@
+language: csharp
+solution: RingCentral.sln
+install:
+  - nuget restore RingCentral.sln
+  - nuget install xunit.runner.console -Version 2.2.0-beta2-build3300 -OutputDirectory testrunner
+  - nuget install coveralls.net -Version 0.7.0-beta0001 -OutputDirectory testrunner
+  - sudo apt-get install gtk-sharp2
+  - curl -sS https://api.nuget.org/packages/mono.cecil.0.9.5.4.nupkg > /tmp/mono.cecil.0.9.5.4.nupkg.zip
+  - unzip /tmp/mono.cecil.0.9.5.4.nupkg.zip -d /tmp/cecil
+  - cp /tmp/cecil/lib/net40/Mono.Cecil.dll .
+  - cp /tmp/cecil/lib/net40/Mono.Cecil.dll /tmp/cecil/
+  - git clone --depth=50 git://github.com/csMACnz/monocov.git ../../ringcentral/monocov
+  - cd ../../ringcentral/monocov
+  - cp /tmp/cecil/Mono.Cecil.dll .
+  - ./configure
+  - make
+  - sudo make install
+  - cd ../../ringcentral/ringcentral-csharp-client
+script:
+  - xbuild /p:Configuration=Release RingCentral.sln
+  - mono ./testrunner/xunit.runner.console.2.2.0-beta2-build3300/tools/xunit.console.exe ./RingCentral.Test/bin/Release/RingCentral.Test.dll
+  - mono --debug --profile=monocov:outfile=monocov.cov ./testrunner/xunit.runner.console.2.2.0-beta2-build3300/tools/xunit.console.exe ./RingCentral.Test/bin/Release/RingCentral.Test.dll
+  - monocov --export-xml=monocov monocov.cov
+  - mono ./testrunner/coveralls.net.0.7.0-beta0001/tools/csmacnz.Coveralls.exe --monocov -i ./monocov --repoToken $COVERALLS_REPO_TOKEN --commitId $TRAVIS_COMMIT --commitBranch $TRAVIS_BRANCH --commitAuthor "$REPO_COMMIT_AUTHOR" --commitEmail "$REPO_COMMIT_AUTHOR_EMAIL" --commitMessage "$REPO_COMMIT_MESSAGE" --jobId $TRAVIS_JOB_ID  --serviceName "travis-ci"

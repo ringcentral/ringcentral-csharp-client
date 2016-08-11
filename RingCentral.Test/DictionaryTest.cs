@@ -1,10 +1,12 @@
+using System;
 using System.Net;
+using System.Threading;
 using Xunit;
 
 namespace RingCentral.Test
 {
     [Collection("RestClient collection")]
-    public class DictionaryTest
+    public class DictionaryTest : IDisposable
     {
         private RestClient rc;
         public DictionaryTest(RestClientFixture fixture)
@@ -44,6 +46,11 @@ namespace RingCentral.Test
             var methodInfo = rc.Restapi().GetType().GetMethod("Dictionary");
             var parameters = methodInfo.GetParameters();
             Assert.Equal(0, parameters.Length);
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }

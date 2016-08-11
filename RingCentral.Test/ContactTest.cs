@@ -1,10 +1,11 @@
+using System;
 using System.Threading;
 using Xunit;
 
 namespace RingCentral.Test
 {
     [Collection("RestClient collection")]
-    public class ContactTest
+    public class ContactTest : IDisposable
     {
         private RestClient rc;
         public ContactTest(RestClientFixture fixture)
@@ -71,6 +72,11 @@ namespace RingCentral.Test
             // search again
             list = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
             Assert.Equal(0, list.paging.totalElements);
+        }
+
+        public void Dispose()
+        {
+            Thread.Sleep(3000);
         }
     }
 }
