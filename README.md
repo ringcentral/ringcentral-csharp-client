@@ -312,12 +312,21 @@ try
 {
     ...
 }
-catch (FlurlHttpException fhe)
+catch (AggregateException ae)
 {
-    if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
+    ae.Handle((x) =>
     {
-        Console.WriteLine("The resource doesn't exist");
-    }
+        if (x is FlurlHttpException) // This we know how to handle.
+        {
+			var fhe = x as FlurlHttpException;
+            if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
+			{
+				Console.WriteLine("The resource doesn't exist");
+				return true; // exception handled
+			}
+        }
+        return false; // exception unhandled
+    });
 }
 ```
 

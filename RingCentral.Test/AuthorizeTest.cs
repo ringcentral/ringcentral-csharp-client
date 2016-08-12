@@ -1,6 +1,8 @@
 ﻿using Flurl;
+using Flurl.Http;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using Xunit;
 
@@ -31,9 +33,27 @@ namespace RingCentral.Test
         [Fact]
         public void AuthorizeUri()
         {
-            var uri = rc.AuthorizeUri("http://localhost:3000/callback", "myState");
+            var redirectUri = "http://localhost:3000/callback";
+            var uri = rc.AuthorizeUri(redirectUri, "myState");
             Assert.NotNull(uri);
             Assert.Equal("myState", Url.ParseQueryParams(uri).First(qp => qp.Name == "state").Value.ToString());
+            try
+            {
+                rc.Authorize("fakeCode", redirectUri);
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle((x) =>
+                {
+                    if (x is FlurlHttpException) // This we know how to handle.
+                    {
+                        var fhe = x as FlurlHttpException;
+                        Assert.Equal(fhe.Call.Response.StatusCode, HttpStatusCode.Unauthorized);
+                        return true;
+                    }
+                    return false;
+                });
+            }
         }
 
         public void Dispose()
