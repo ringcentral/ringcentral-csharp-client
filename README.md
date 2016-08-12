@@ -1,7 +1,5 @@
 # ringcentral-csharp-client
 
-![travis](https://travis-ci.org/ringcentral/ringcentral-csharp-client.svg)
-
 RingCentral C# client.
 
 **Notice:** any issues or questions, please do let me know by [creating an issue](https://github.com/tylerlong/ringcentral-csharp-client/issues/new).

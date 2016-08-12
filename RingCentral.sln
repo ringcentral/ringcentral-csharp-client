@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingCentral", "RingCentral\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{13067057-FB70-49DB-AEE7-C05D844FE2AF}"
 	ProjectSection(SolutionItems) = preProject
-		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
 		README.md = README.md
 		ringcentral.nuspec = ringcentral.nuspec
 	EndProjectSection
