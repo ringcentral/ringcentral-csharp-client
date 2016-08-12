@@ -28,6 +28,9 @@ namespace RingCentral.Test
             var temp = new RestClient("", "");
             temp.Refresh(); // refresh null token
             Assert.Null(temp.token);
+
+            temp.Revoke(); // revoke null token
+            Assert.Null(temp.token);
         }
 
         [Fact]

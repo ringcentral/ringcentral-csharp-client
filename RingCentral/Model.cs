@@ -2,7 +2,7 @@ using Flurl;
 
 namespace RingCentral
 {
-    public abstract partial class Model
+    public abstract class Model
     {
         public string _id;
         protected abstract string PathSegment { get; }
