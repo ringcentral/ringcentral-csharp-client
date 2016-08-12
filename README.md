@@ -1,5 +1,7 @@
 # ringcentral-csharp-client
 
+[![Build status](https://ci.appveyor.com/api/projects/status/lqsl5lx1y570k063?svg=true)](https://ci.appveyor.com/project/tylerlong/ringcentral-csharp-client)
+
 RingCentral C# client.
 
 **Notice:** any issues or questions, please do let me know by [creating an issue](https://github.com/tylerlong/ringcentral-csharp-client/issues/new).
