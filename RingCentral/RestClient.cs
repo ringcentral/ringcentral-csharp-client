@@ -35,6 +35,7 @@ namespace RingCentral
         }
 
 
+        private bool autoRefresh = true;
         private bool refreshScheduled = false;
         private Token.PostResponse _token;
         public Token.PostResponse token
@@ -46,7 +47,7 @@ namespace RingCentral
             set
             {
                 _token = value;
-                if (_token != null)
+                if (autoRefresh && _token != null)
                 {
                     if (!refreshScheduled)
                     { // don't do duplicate schedule
@@ -67,8 +68,9 @@ namespace RingCentral
         /// <param name="username">Username</param>
         /// <param name="extension">Extension, can be null or empty</param>
         /// <param name="password">Password</param>
-        public void Authorize(string username, string extension, string password)
+        public void Authorize(string username, string extension, string password, bool autoRefresh = true)
         {
+            this.autoRefresh = autoRefresh;
             var url = server.AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new Token.PostRequest
@@ -90,7 +92,7 @@ namespace RingCentral
         /// <summary>
         /// Refresh the token
         /// </summary>
-        private void Refresh()
+        public void Refresh()
         {
             if (token == null)
             {
