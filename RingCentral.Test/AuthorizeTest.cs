@@ -61,7 +61,7 @@ namespace RingCentral.Test
 
         public void Dispose()
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
         }
     }
 }

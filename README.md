@@ -1,7 +1,7 @@
 # ringcentral-csharp-client
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lqsl5lx1y570k063?svg=true)](https://ci.appveyor.com/project/tylerlong/ringcentral-csharp-client)
-[![Coverage Status](https://coveralls.io/repos/github/ringcentral/ringcentral-csharp-client/badge.svg?branch=master)](https://coveralls.io/github/ringcentral/ringcentral-csharp-client?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/ringcentral/ringcentral-csharp-client/badge.svg?branch=master&t=20160812)](https://coveralls.io/github/ringcentral/ringcentral-csharp-client?branch=master)
 
 RingCentral C# client.
 
