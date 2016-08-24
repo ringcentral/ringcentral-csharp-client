@@ -98,6 +98,7 @@
     <Compile Include="ContactTest.cs" />
     <Compile Include="DictionaryTest.cs" />
     <Compile Include="AuthorizeTest.cs" />
+    <Compile Include="DialingPlanTest.cs" />
     <Compile Include="FaxTest.cs" />
     <Compile Include="HttpTest.cs" />
     <Compile Include="ModelTest.cs" />
