@@ -38,6 +38,12 @@ By default the clients talk to sandbox server. If you want production server:
 rc = new RestClient("appKey", "appSecret", true);
 ```
 
+Or you can specify the server url explicitly:
+
+```cs
+rc = new RestClient("appKey", "appSecret", "https://platform.devtest.ringcentral.com");
+```
+
 
 ## Authorization
 
@@ -46,6 +52,17 @@ rc.Authorize("username", "extension", "password");
 ```
 
 If you use direct number as username, leave extension empty.
+
+
+### Auto refresh
+
+By default, there is a background timer calling `rc.Refresh()` periodically, so the authorization never expires.
+
+But if you would like to call `Refresh` manually, please use the following code to authorize:
+
+```cs
+rc.Authorize("username", "extension", "password", false);
+```
 
 
 ## Map URI to code
