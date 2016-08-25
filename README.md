@@ -58,17 +58,10 @@ If you use direct number as username, leave extension empty.
 
 By default, there is a background timer calling `rc.Refresh()` periodically, so the authorization never expires.
 
-But if you would like to call `Refresh` manually, please use the following code to authorize:
+But if you would like to call `Refresh` manually:
 
 ```cs
-rc.Authorize("username", "extension", "password", false);
-```
-
-You can also disable auto refresh like following:
-
-
-```cs
-rc.autoRefresh = false;
+rc.AutoRefreshToken = false;
 ```
 
 
