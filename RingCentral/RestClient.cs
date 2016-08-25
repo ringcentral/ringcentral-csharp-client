@@ -139,8 +139,9 @@ namespace RingCentral
         /// </summary>
         /// <param name="authCode">The authorization code returned from server</param>
         /// <param name="redirectUri">The same redirectUri when you were obtaining the authCode in previous step</param>
-        public void Authorize(string authCode, string redirectUri)
+        public void Authorize(string authCode, string redirectUri, bool autoRefresh = true)
         {
+            this.autoRefresh = autoRefresh;
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new AuthCodeRequest
