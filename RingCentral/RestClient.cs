@@ -35,7 +35,7 @@ namespace RingCentral
         }
 
 
-        private bool autoRefresh = true;
+        public bool autoRefresh = true;
         private bool refreshScheduled = false;
         private Token.PostResponse _token;
         public Token.PostResponse token
@@ -92,8 +92,19 @@ namespace RingCentral
         /// <summary>
         /// Refresh the token
         /// </summary>
-        public void Refresh()
+        public void Refresh(string refreshToken = null)
         {
+            if (refreshToken != null)
+            {
+                if (token != null)
+                {
+                    token.refresh_token = refreshToken;
+                }
+                else
+                {
+                    token = new Token.PostResponse { refresh_token = refreshToken };
+                }
+            }
             if (token == null)
             {
                 return;

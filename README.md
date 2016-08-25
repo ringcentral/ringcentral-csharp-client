@@ -64,6 +64,13 @@ But if you would like to call `Refresh` manually, please use the following code 
 rc.Authorize("username", "extension", "password", false);
 ```
 
+You can also disable auto refresh like following:
+
+
+```cs
+rc.autoRefresh = false;
+```
+
 
 ## Map URI to code
 
