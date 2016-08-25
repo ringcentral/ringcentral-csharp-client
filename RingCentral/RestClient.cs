@@ -2,12 +2,24 @@ using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
 using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
 
 namespace RingCentral
 {
+    public class TokenEventArgs : EventArgs
+    {
+        public Token.PostResponse Token { get; private set; }
+        public TokenEventArgs(Token.PostResponse token)
+        {
+            Token = token;
+        }
+    }
+
     public partial class RestClient
     {
+        public event EventHandler<TokenEventArgs> TokenRefreshed;
+
         public const string SandboxServer = "https://platform.devtest.ringcentral.com";
         public const string ProductionServer = "https://platform.ringcentral.com";
 
@@ -118,6 +130,7 @@ namespace RingCentral
                 endpoint_id = token.endpoint_id
             };
             token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            TokenRefreshed?.Invoke(this, new TokenEventArgs(token));
         }
 
 
