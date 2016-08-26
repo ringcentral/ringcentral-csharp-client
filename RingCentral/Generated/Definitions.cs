@@ -1,3 +1,6 @@
+namespace RingCentral
+{
+
 public partial class AccountInfo
 {
     // Internal identifier of an account
@@ -1678,3 +1681,4 @@ public partial class WeeklyScheduleInfo
 }
 
 
+}
