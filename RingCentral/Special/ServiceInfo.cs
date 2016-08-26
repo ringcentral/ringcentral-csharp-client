@@ -2,6 +2,7 @@
 {
     public partial class ServiceInfo
     {
+        public ServiceInfo() : base(null, null) { }
         public partial class GetResponse
         {
             // Account Service Plan name
