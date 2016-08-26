@@ -12,7 +12,11 @@ namespace RingCentral
                 return "service-info";
             }
         }
-        public partial class MeetingServiceInfo
+        public Task<GetResponse> Get()
+        {
+            return RC.Get<GetResponse>(Endpoint(false), null);
+        }
+        public partial class GetResponse
         {
             // Canonical URI of a meeting service info resource
             public string uri { get; set; }
@@ -24,17 +28,6 @@ namespace RingCentral
             public ExternalUserInfo externalUserInfo { get; set; }
             // Dial-in numbers data
             public DialInNumbers dialInNumbers { get; set; }
-        }
-        public partial class AccountServiceInfo
-        {
-            // Canonical URI of the account Service Info resource
-            public string uri { get; set; }
-            // Account Service Plan name
-            public string servicePlanName { get; set; }
-            // Service features information, see Service Feature List
-            public ServiceFeatureInfo[] serviceFeatures { get; set; }
-            // Limits which are effective for the account
-            public AccountLimits limits { get; set; }
         }
     }
 }
