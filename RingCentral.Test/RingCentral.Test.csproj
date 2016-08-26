@@ -96,6 +96,7 @@
     <Compile Include="BinaryTest.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ContactTest.cs" />
+    <Compile Include="AccountTest.cs" />
     <Compile Include="EventsTest.cs" />
     <Compile Include="DictionaryTest.cs" />
     <Compile Include="AuthorizeTest.cs" />
