@@ -19,7 +19,7 @@ namespace RingCentral.Test
         {
             // account service-info
             var account = rc.Restapi().Account();
-            var accountServiceInfo = account.ServiceInfo().Get<ServiceInfo.AccountServiceInfo>().Result;
+            var accountServiceInfo = account.ServiceInfo().Get().Result;
             var faxReceiving = accountServiceInfo.serviceFeatures.First(item => item.featureName == "FaxReceiving").enabled;
             Assert.True(faxReceiving);
 

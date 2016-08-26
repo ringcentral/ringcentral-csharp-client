@@ -348,20 +348,6 @@ catch (AggregateException ae)
 ```
 
 
-## ServiceInfo
-
-There are two types of ServiceInfo: `.../account/~/service-info` and `.../meeting/service-info`.
-
-```cs
-// account service info
-var account = rc.Restapi().Account();
-var accountServiceInfo = account.ServiceInfo().Get<ServiceInfo.AccountServiceInfo>().Result;
-
-// meeting service info
-var meetingServiceInfo = extension.Meeting().ServiceInfo().Get<ServiceInfo.MeetingServiceInfo>().Result;
-```
-
-
 ## Sample code
 
 The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
