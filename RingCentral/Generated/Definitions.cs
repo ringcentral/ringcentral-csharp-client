@@ -775,6 +775,13 @@ public partial class GroupInfo
 }
 
 
+public partial class ImageUri
+{
+    // Link to an image.
+    public string uri { get; set; }
+}
+
+
 public partial class LanguageInfo
 {
     // Internal identifier of a language
@@ -1274,7 +1281,7 @@ public partial class ProfileImageInfo
     // The type of an image
     public string contentType { get; set; }
     // List of URIs to profile images in different dimensions
-    public string[] scales { get; set; }
+    public ImageUri[] scales { get; set; }
 }
 
 
