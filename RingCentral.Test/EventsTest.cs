@@ -28,6 +28,7 @@ namespace RingCentral.Test
             await rc.Refresh();
             Assert.Equal(3, temp);
         }
+        
         public void Dispose()
         {
             Thread.Sleep(5000);
