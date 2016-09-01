@@ -177,7 +177,7 @@ namespace RingCentral
             // Contact detailed information
             public ContactInfo contact { get; set; }
             // Information on department extension(s), to which the requested extension belongs. Returned only for user extensions, members of department, requested by single extensionId
-            public DepartmentInfo departments { get; set; }
+            public DepartmentInfo[] departments { get; set; }
             // Number of department extension
             public string extensionNumber { get; set; }
             // Extension user name
@@ -216,7 +216,7 @@ namespace RingCentral
             // Contact detailed information
             public ContactInfo contact { get; set; }
             // Information on department extension(s), to which the requested extension belongs. Returned only for user extensions, members of department, requested by single extensionId
-            public DepartmentInfo departments { get; set; }
+            public DepartmentInfo[] departments { get; set; }
             // Number of department extension
             public string extensionNumber { get; set; }
             // Extension user name
