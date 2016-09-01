@@ -239,6 +239,7 @@ namespace RingCentral.Test
             var ext = JsonConvert.DeserializeObject<Extension.GetResponse>(s);
             Assert.NotNull(ext);
             Assert.Equal("101", ext.extensionNumber);
+            Assert.Equal(3, ext.departments.Length);
         }
 
         public void Dispose()
