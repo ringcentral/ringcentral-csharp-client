@@ -90,15 +90,15 @@ namespace RingCentral
             }
         }
 
-        private void Subscribe()
+        private async void Subscribe()
         {
-            var temp = rc.Restapi().Subscription().Post(requestBody).Result;
+            var temp = await rc.Restapi().Subscription().Post(requestBody);
             subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(temp));
             pubnub = new Pubnub(null, subscriptionInfo.deliveryMode.subscriberKey);
             pubnub.Subscribe<string>(subscriptionInfo.deliveryMode.address, OnSubscribe, OnConnect, OnError);
         }
 
-        private void Renew()
+        private async void Renew()
         {
             if (!Alive())
             { // Remove() has been called
@@ -106,7 +106,7 @@ namespace RingCentral
             }
             try
             {
-                var response = rc.Restapi().Subscription(subscriptionInfo.id).Put(requestBody).Result;
+                var response = await rc.Restapi().Subscription(subscriptionInfo.id).Put(requestBody);
                 subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(response));
             }
             catch (FlurlHttpException fhe)
@@ -120,13 +120,13 @@ namespace RingCentral
             }
         }
 
-        public void Remove()
+        public async void Remove()
         {
             if (!Alive())
             { // has been removed
                 return;
             }
-            var temp = rc.Restapi().Subscription(subscriptionInfo.id).Delete().Result;
+            var temp = await rc.Restapi().Subscription(subscriptionInfo.id).Delete();
             subscriptionInfo = null;
             pubnub = null;
         }

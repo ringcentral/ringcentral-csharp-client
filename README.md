@@ -120,7 +120,7 @@ var callLog = extension.CallLog("ASsQ3xLOZfrLBwM");
 For example, the following line is for sending fax:
 
 ```cs
-var response = extension.Fax().Post(requestBody, attachments).Result;
+var response = await extension.Fax().Post(requestBody, attachments);
 ```
 
 To create the `requestBody` object, you can define it as following:
@@ -166,13 +166,7 @@ Or if you prefer the query parameters as a typed model:
 var callLogs = await extension.CallLog().List(new CallLog.ListQueryParams { direction = "Inbound" });
 ```
 
-All the HTTP calls are by default async, so you can use the `await` keyword of C#.
-
-Or you can append `.Result` to the end to turn it into sync:
-
-```cs
-var callLogs = extension.CallLog().List(new { direction = "Inbound" }).Result;
-```
+All the HTTP calls are by default async, so you should use the `await` keyword of C#.
 
 
 ##### Get a call log by ID
@@ -227,9 +221,9 @@ var response = await extension.MessageStore(messageId).Delete();
 
 ```cs
 var endpoint = rc.Restapi().Dictionary().Timezone("6").Endpoint(); // "/restapi/v1.0/dictionary/timezone/6"
-var response = rc.Get(endpoint).Result; // make http request
+var response = await rc.Get(endpoint); // make http request
 var statusCode = response.StatusCode; // check status code
-var str = response.Content.ReadAsStringAsync().Result; // get response string
+var str = await response.Content.ReadAsStringAsync(); // get response string
 ```
 
 
@@ -261,10 +255,10 @@ subscription.Register();
 var attachment1 = new Attachment { fileName = "test.txt", contentType = "text/plain", bytes = Encoding.UTF8.GetBytes("hello world") };
 var attachment2 = new Attachment { fileName = "test.pdf", contentType = "application/pdf", bytes = File.ReadAllBytes("test.pdf") };
 var attachments = new Attachment[] { attachment1, attachment2 };
-var response = extension.Fax().Post(new Fax.PostRequest
+var response = await extension.Fax().Post(new Fax.PostRequest
 {
     to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } }
-}, attachments).Result;
+}, attachments);
 ```
 
 
@@ -275,26 +269,27 @@ var response = extension.Fax().Post(new Fax.PostRequest
 ```cs
 // create
 var bytes = File.ReadAllBytes("test.png");
-var response = extension.ProfileImage().Post(bytes, "test.png").Result;
+var response = await extension.ProfileImage().Post(bytes, "test.png");
 
 // update
 var bytes = File.ReadAllBytes("test.png");
-var response = extension.ProfileImage().Put(bytes, "test.png").Result;
+var response = await extension.ProfileImage().Put(bytes, "test.png");
 ```
 
 #### Get message content
 
 ```cs
-var messages = extension.MessageStore().List().Result.records;
+var response = await extension.MessageStore().List()
+var messages = resposne.records;
 
 // sms
 var message = messages.Where(m => m.type == "SMS" && m.attachments != null && m.attachments.Length > 0).First();
-var bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+var bytes = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
 var content = System.Text.Encoding.UTF8.GetString(bytes);
 
 // fax
 message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
-bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+bytes = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
 File.WriteAllBytes("test.pdf", bytes);
 ```
 
@@ -313,11 +308,11 @@ var queryParams = new CallLog.ListQueryParams
     withRecording = true,
     perPage = 10,
 };
-var callLogs = account.CallLog().List(queryParams).Result;
+var callLogs = await account.CallLog().List(queryParams);
 
 // download a call recording
 var callLog = callLogs.records[0];
-var bytes = account.Recording(callLog.recording.id).Content().Get().Result;
+var bytes = await account.Recording(callLog.recording.id).Content().Get();
 File.WriteAllBytes("test.wav", bytes);
 ```
 
@@ -327,23 +322,14 @@ File.WriteAllBytes("test.wav", bytes);
 ```cs
 try
 {
-    ...
+    await ...
 }
-catch (AggregateException ae)
+catch (FlurlHttpException fhe)
 {
-    ae.Handle((x) =>
-    {
-        if (x is FlurlHttpException) // This we know how to handle.
-        {
-			var fhe = x as FlurlHttpException;
-            if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
-			{
-				Console.WriteLine("The resource doesn't exist");
-				return true; // exception handled
-			}
-        }
-        return false; // exception unhandled
-    });
+    if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
+	{
+		Console.WriteLine("The resource doesn't exist");
+	}
 }
 ```
 

@@ -79,7 +79,7 @@ namespace RingCentral
         /// <param name="username">Username</param>
         /// <param name="extension">Extension, can be null or empty</param>
         /// <param name="password">Password</param>
-        public void Authorize(string username, string extension, string password)
+        public async Task<Token.PostResponse> Authorize(string username, string extension, string password)
         {
             var url = server.AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
@@ -90,7 +90,8 @@ namespace RingCentral
                 password = password,
                 grant_type = "password"
             };
-            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
+            return token;
         }
 
         public class RefreshRequest
@@ -102,7 +103,7 @@ namespace RingCentral
         /// <summary>
         /// Refresh the token
         /// </summary>
-        public void Refresh(string refreshToken = null)
+        public async Task<Token.PostResponse> Refresh(string refreshToken = null)
         {
             if (refreshToken != null)
             {
@@ -117,7 +118,7 @@ namespace RingCentral
             }
             if (token == null)
             {
-                return;
+                return null;
             }
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
@@ -127,8 +128,9 @@ namespace RingCentral
                 refresh_token = token.refresh_token,
                 endpoint_id = token.endpoint_id
             };
-            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
             TokenRefreshed?.Invoke(this, new TokenEventArgs(token));
+            return token;
         }
 
 
@@ -161,7 +163,7 @@ namespace RingCentral
         /// </summary>
         /// <param name="authCode">The authorization code returned from server</param>
         /// <param name="redirectUri">The same redirectUri when you were obtaining the authCode in previous step</param>
-        public void Authorize(string authCode, string redirectUri)
+        public async Task<Token.PostResponse> Authorize(string authCode, string redirectUri)
         {
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
@@ -171,23 +173,25 @@ namespace RingCentral
                 redirect_uri = redirectUri,
                 code = authCode
             };
-            token = client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>().Result;
+            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
+            return token;
         }
 
         /// <summary>
-        /// Revoke acess token
+        /// Revoke access token
         /// </summary>
-        public void Revoke()
+        public async Task<bool> Revoke()
         {
             if (token == null)
             {
-                return;
+                return true;
             }
             var url = new Url(server).AppendPathSegment("/restapi/oauth/revoke");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new { token = token.access_token };
-            client.PostUrlEncodedAsync(requestBody);
+            await client.PostUrlEncodedAsync(requestBody);
             token = null;
+            return true;
         }
 
 

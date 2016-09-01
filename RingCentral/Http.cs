@@ -42,7 +42,8 @@ namespace RingCentral
         public async Task<T> Get<T>(string endpoint, object queryParams = null)
         {
             var response = await Get(endpoint, queryParams);
-            return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+            var str = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(str);
         }
 
         public async Task<byte[]> GetBinary(string endpoint, object queryParams = null)
@@ -55,7 +56,8 @@ namespace RingCentral
         public async Task<T> Post<T>(string endpoint, object requestBody, object queryParams = null)
         {
             var response = await Post(endpoint, requestBody, queryParams);
-            return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+            var str = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(str);
         }
 
         public Task<HttpResponseMessage> PostContent(string endpoint, HttpContent content, object queryParams = null)
@@ -66,7 +68,8 @@ namespace RingCentral
         public async Task<T> Put<T>(string endpoint, object requestBody, object queryParams = null)
         {
             var response = await Put(endpoint, requestBody, queryParams);
-            return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+            var str = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(str);
         }
 
         public Task<HttpResponseMessage> PutContent(string endpoint, HttpContent content, object queryParams = null)
