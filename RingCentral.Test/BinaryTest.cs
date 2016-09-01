@@ -18,55 +18,56 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void ProfileImage()
+        public async void ProfileImage()
         {
             var extension = rc.Restapi().Account().Extension();
 
-            var temp = extension.ProfileImage().Post(bytes, "test.png").Result;
+            var temp = await extension.ProfileImage().Post(bytes, "test.png");
             Assert.NotNull(temp);
 
-            var bytes3 = extension.ProfileImage().Get().Result;
+            var bytes3 = await extension.ProfileImage().Get();
             Assert.NotNull(bytes3);
             Assert.Equal(bytes, bytes3);
 
-            var bytes4 = extension.ProfileImage("90x90").Get().Result;
+            var bytes4 = await extension.ProfileImage("90x90").Get();
             Assert.NotNull(bytes4);
 
-            temp = extension.ProfileImage().Put(bytes, "test.png").Result;
+            temp = await extension.ProfileImage().Put(bytes, "test.png");
             Assert.NotNull(temp);
 
-            var bytes5 = extension.ProfileImage().Get().Result;
+            var bytes5 = await extension.ProfileImage().Get();
             Assert.NotNull(bytes5);
             Assert.Equal(bytes, bytes5);
 
-            var bytes6 = extension.ProfileImage("90x90").Get().Result;
+            var bytes6 = await extension.ProfileImage("90x90").Get();
             Assert.NotNull(bytes6);
         }
 
         [Fact]
-        public void MessageContent()
+        public async void MessageContent()
         {
             var extension = rc.Restapi().Account().Extension();
 
-            var messages = extension.MessageStore().List().Result.records;
+            var response = await extension.MessageStore().List();
+            var messages = response.records;
 
             // sms
             var message = messages.Where(m => m.type == "SMS" && m.attachments != null && m.attachments.Length > 0).First();
-            var bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+            var bytes = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
             var content = System.Text.Encoding.UTF8.GetString(bytes);
             Assert.NotNull(content);
             Assert.True(content.Length > 0);
 
             // fax
             message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
-            bytes = extension.MessageStore(message.id).Content(message.attachments[0].id).Get().Result;
+            bytes = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
             Assert.NotNull(bytes);
             Assert.True(bytes.Length > 0);
             File.WriteAllBytes("test.pdf", bytes);
         }
 
         [Fact]
-        public void RecordingContent()
+        public async void RecordingContent()
         {
             var account = rc.Restapi().Account();
 
@@ -79,12 +80,12 @@ namespace RingCentral.Test
                 withRecording = true,
                 perPage = 10,
             };
-            var callLogs = account.CallLog().List(queryParams).Result;
+            var callLogs = await account.CallLog().List(queryParams);
             Assert.Equal(10, callLogs.records.Length);
 
             // download a call recording
             var callLog = callLogs.records[0];
-            var bytes = account.Recording(callLog.recording.id).Content().Get().Result;
+            var bytes = await account.Recording(callLog.recording.id).Content().Get();
             Assert.NotNull(bytes);
             Assert.True(bytes.Length > 0);
             File.WriteAllBytes("test.wav", bytes);

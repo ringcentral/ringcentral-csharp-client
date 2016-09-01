@@ -14,9 +14,9 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void TestGet()
+        public async void TestGet()
         {
-            var extension = rc.Restapi().Account().Extension().Get().Result;
+            var extension = await rc.Restapi().Account().Extension().Get();
             Assert.NotNull(extension);
             Assert.True(extension.contact.firstName.Length > 0);
         }

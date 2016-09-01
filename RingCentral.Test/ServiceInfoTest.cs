@@ -15,11 +15,11 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void ServiceInfo()
+        public async void ServiceInfo()
         {
             // account service-info
             var account = rc.Restapi().Account();
-            var accountServiceInfo = account.ServiceInfo().Get().Result;
+            var accountServiceInfo = await account.ServiceInfo().Get();
             var faxReceiving = accountServiceInfo.serviceFeatures.First(item => item.featureName == "FaxReceiving").enabled;
             Assert.True(faxReceiving);
 

@@ -14,9 +14,9 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void GetAccount()
+        public async void GetAccount()
         {
-            var account = rc.Restapi().Account().Get().Result;
+            var account = await rc.Restapi().Account().Get();
             Assert.NotNull(account);
             Assert.NotNull(account.serviceInfo);
         }

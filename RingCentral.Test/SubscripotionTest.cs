@@ -13,7 +13,7 @@ namespace RingCentral.Test
             rc = fixture.rc;
         }
 
-        private void SendSMS()
+        private async void SendSMS()
         {
             var requestBody = new
             {
@@ -21,7 +21,7 @@ namespace RingCentral.Test
                 from = new { phoneNumber = Config.Instance.username },
                 to = new object[] { new { phoneNumber = Config.Instance.receiver } }
             };
-            var temp = rc.Restapi().Account().Extension().Sms().Post(requestBody).Result;
+            var temp = await rc.Restapi().Account().Extension().Sms().Post(requestBody);
         }
 
         [Fact]

@@ -7,7 +7,7 @@ namespace RingCentral.Test
     public class HttpTest : IDisposable
     {
         [Fact]
-        public void GetTest()
+        public async void GetTest()
         {
             RestClient rc = null;
             if (!string.IsNullOrWhiteSpace(Config.Instance.server))
@@ -18,7 +18,7 @@ namespace RingCentral.Test
             {
                 rc = new RestClient(Config.Instance.appKey, Config.Instance.appSecret, Config.Instance.production.Value);
             }
-            rc.Authorize(Config.Instance.username, Config.Instance.extension, Config.Instance.password);
+            await rc.Authorize(Config.Instance.username, Config.Instance.extension, Config.Instance.password);
 
             Assert.NotNull(rc.token.access_token);
         }

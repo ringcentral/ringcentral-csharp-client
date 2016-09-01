@@ -14,10 +14,10 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void GetDialingPlans()
+        public async void GetDialingPlans()
         {
             var account = rc.Restapi().Account();
-            var result = account.DialingPlan().List().Result;
+            var result = await account.DialingPlan().List();
             Assert.NotNull(result);
             Assert.NotEmpty(result.records);
         }

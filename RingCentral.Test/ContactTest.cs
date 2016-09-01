@@ -14,52 +14,52 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void ContactActions()
+        public async void ContactActions()
         {
             const string phoneNumber = "+15889546648";
             var addressBook = rc.Restapi().Account().Extension().AddressBook();
 
-            var listt = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
+            var listt = await addressBook.Contact().List(new { phoneNumber = phoneNumber });
             foreach (var item in listt.records)
             {
-                var temp = addressBook.Contact(item.id).Delete().Result;
+                var temp = await addressBook.Contact(item.id).Delete();
             }
 
             // list
-            var list = addressBook.Contact().List().Result;
+            var list = await addressBook.Contact().List();
             Assert.NotNull(list);
             Assert.Equal(1, list.paging.page);
             var total = list.paging.totalElements;
 
             // create
-            var contact = addressBook.Contact().Post(new Contact.PostRequest
+            var contact = await addressBook.Contact().Post(new Contact.PostRequest
             {
                 firstName = "Tyler",
                 lastName = "Long",
                 homePhone = phoneNumber
-            }).Result;
+            });
             Assert.NotNull(contact);
             Assert.Equal("Long", contact.lastName);
 
             // list again
-            list = addressBook.Contact().List().Result;
+            list = await addressBook.Contact().List();
             Assert.Equal(total + 1, list.paging.totalElements);
 
             Thread.Sleep(5000); // avoid 429
 
             // search
-            list = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
+            list = await addressBook.Contact().List(new { phoneNumber = phoneNumber });
             Assert.Equal(1, list.paging.totalElements);
             var contactId = list.records[0].id;
 
             // update
             contact.lastName = "Liu";
-            var contact2 = addressBook.Contact(contactId).Put(contact).Result;
+            var contact2 = await addressBook.Contact(contactId).Put(contact);
             Assert.NotNull(contact2);
             Assert.Equal("Liu", contact2.lastName);
 
             // get
-            var contact3 = addressBook.Contact(contactId).Get().Result;
+            var contact3 = await addressBook.Contact(contactId).Get();
             Assert.NotNull(contact3);
             Assert.Equal("Tyler", contact3.firstName);
             Assert.Equal("Liu", contact3.lastName);
@@ -67,10 +67,10 @@ namespace RingCentral.Test
             Thread.Sleep(5000); // avoid 429
 
             // delete
-            var response = addressBook.Contact(contactId).Delete().Result;
+            var response = await addressBook.Contact(contactId).Delete();
 
             // search again
-            list = addressBook.Contact().List(new { phoneNumber = phoneNumber }).Result;
+            list = await addressBook.Contact().List(new { phoneNumber = phoneNumber });
             Assert.Equal(0, list.paging.totalElements);
         }
 

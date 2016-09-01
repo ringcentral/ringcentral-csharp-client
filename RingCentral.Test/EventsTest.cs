@@ -14,18 +14,18 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void TokenEvent()
+        public async void TokenEvent()
         {
             var temp = 0;
             rc.TokenRefreshed += (object sender, TokenEventArgs e) =>
             {
                 temp += 1;
             };
-            rc.Refresh();
+            await rc.Refresh();
             Thread.Sleep(5000);
-            rc.Refresh();
+            await rc.Refresh();
             Thread.Sleep(5000);
-            rc.Refresh();
+            await rc.Refresh();
             Assert.Equal(3, temp);
         }
         public void Dispose()

@@ -18,23 +18,23 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void Refresh()
+        public async void Refresh()
         {
             var oldToken = rc.token.access_token;
-            rc.Refresh();
+            await rc.Refresh();
             Assert.NotNull(rc.token);
             Assert.NotEqual(oldToken, rc.token.access_token);
 
             var temp = new RestClient("", "");
-            temp.Refresh(); // refresh null token
+            await temp.Refresh(); // refresh null token
             Assert.Null(temp.token);
 
-            temp.Revoke(); // revoke null token
+            await temp.Revoke(); // revoke null token
             Assert.Null(temp.token);
         }
 
         [Fact]
-        public void AuthorizeUri()
+        public async void AuthorizeUri()
         {
             var redirectUri = "http://localhost:3000/callback";
             var uri = rc.AuthorizeUri(redirectUri, "myState");
@@ -42,20 +42,11 @@ namespace RingCentral.Test
             Assert.Equal("myState", Url.ParseQueryParams(uri).First(qp => qp.Name == "state").Value.ToString());
             try
             {
-                rc.Authorize("fakeCode", redirectUri);
+                await rc.Authorize("fakeCode", redirectUri);
             }
-            catch (AggregateException ae)
+            catch (FlurlHttpException fhe)
             {
-                ae.Handle((x) =>
-                {
-                    if (x is FlurlHttpException) // This we know how to handle.
-                    {
-                        var fhe = x as FlurlHttpException;
-                        Assert.Equal(fhe.Call.Response.StatusCode, HttpStatusCode.Unauthorized);
-                        return true;
-                    }
-                    return false;
-                });
+                Assert.Equal(fhe.Call.Response.StatusCode, HttpStatusCode.Unauthorized);
             }
         }
 

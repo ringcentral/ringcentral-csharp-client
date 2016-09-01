@@ -17,12 +17,12 @@ namespace RingCentral.Test
             {
                 rc = new RestClient(Config.Instance.appKey, Config.Instance.appSecret, Config.Instance.production.Value);
             }
-            rc.Authorize(Config.Instance.username, Config.Instance.extension, Config.Instance.password);
+            var temp = rc.Authorize(Config.Instance.username, Config.Instance.extension, Config.Instance.password).Result;
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
-            rc.Revoke();
+            await rc.Revoke();
         }
     }
 

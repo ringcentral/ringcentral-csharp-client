@@ -27,16 +27,16 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void TestGet()
+        public async void TestGet()
         {
             var country = rc.Restapi().Dictionary().Country("46");
-            var response = rc.Get(country.Endpoint()).Result;
+            var response = await rc.Get(country.Endpoint());
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Contains("China", response.Content.ReadAsStringAsync().Result);
+            Assert.Contains("China", await response.Content.ReadAsStringAsync());
 
-            var countryResponse = rc.Get<Country.GetResponse>(country.Endpoint()).Result;
-            var countryResponse2 = rc.Restapi().Dictionary().Country("46").Get().Result;
+            var countryResponse = await rc.Get<Country.GetResponse>(country.Endpoint());
+            var countryResponse2 = await rc.Restapi().Dictionary().Country("46").Get();
             TestUtil.DeepEqual(countryResponse2, countryResponse);
         }
 
