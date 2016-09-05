@@ -26,6 +26,8 @@ namespace RingCentral
         public string appKey;
         public string appSecret;
         public string server;
+        public int access_token_ttl = 3600;
+        public int refresh_token_ttl = 604800;
 
         public static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
@@ -88,7 +90,9 @@ namespace RingCentral
                 username = username,
                 extension = extension,
                 password = password,
-                grant_type = "password"
+                grant_type = "password",
+                access_token_ttl = access_token_ttl,
+                refresh_token_ttl = refresh_token_ttl
             };
             token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
             return token;
@@ -99,6 +103,8 @@ namespace RingCentral
             public string grant_type { get; set; }
             public string refresh_token { get; set; }
             public string endpoint_id { get; set; }
+            public int access_token_ttl { get; set; }
+            public int refresh_token_ttl { get; set; }
         }
         /// <summary>
         /// Refresh the token
@@ -126,7 +132,9 @@ namespace RingCentral
             {
                 grant_type = "refresh_token",
                 refresh_token = token.refresh_token,
-                endpoint_id = token.endpoint_id
+                endpoint_id = token.endpoint_id,
+                access_token_ttl = access_token_ttl,
+                refresh_token_ttl = refresh_token_ttl
             };
             token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
             TokenRefreshed?.Invoke(this, new TokenEventArgs(token));
@@ -157,6 +165,8 @@ namespace RingCentral
             public string grant_type { get; set; }
             public string redirect_uri { get; set; }
             public string code { get; set; }
+            public int access_token_ttl { get; set; }
+            public int refresh_token_ttl { get; set; }
         }
         /// <summary>
         /// Do authorization with the authorization code returned from server
@@ -171,7 +181,9 @@ namespace RingCentral
             {
                 grant_type = "authorization_code",
                 redirect_uri = redirectUri,
-                code = authCode
+                code = authCode,
+                access_token_ttl = access_token_ttl,
+                refresh_token_ttl = refresh_token_ttl
             };
             token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
             return token;

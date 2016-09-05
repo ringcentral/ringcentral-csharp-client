@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>RingCentral.Client</id>
-    <version>1.0.0-rc4</version>
+    <version>1.0.0-rc5</version>
     <title>RingCentral Client</title>
     <authors>Tyler Long</authors>
     <owners>RingCentral</owners>
@@ -27,7 +27,7 @@
       </group>
     </dependencies>
   </metadata>
-  <files>  
+  <files>
     <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/net45" />
     <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/netcore45" />
     <file src="RingCentral/bin/Release/RingCentral.dll" target="lib/monoandroid" />
