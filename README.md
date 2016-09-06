@@ -48,7 +48,7 @@ rc = new RestClient("appKey", "appSecret", "https://platform.devtest.ringcentral
 ## Authorization
 
 ```cs
-rc.Authorize("username", "extension", "password");
+await rc.Authorize("username", "extension", "password");
 ```
 
 If you use direct number as username, leave extension empty.
@@ -245,7 +245,7 @@ subscription.ErrorEvent += (sender, args) => {
     Console.WriteLine("Error:");
     Console.WriteLine(args.Message);
 };
-subscription.Register();
+await subscription.Register();
 ```
 
 

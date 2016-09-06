@@ -25,7 +25,7 @@ namespace RingCentral.Test
         }
 
         [Fact]
-        public void MessageNotifications()
+        public async void MessageNotifications()
         {
             var subscription = rc.Restapi().Subscription().New();
             subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
@@ -45,12 +45,12 @@ namespace RingCentral.Test
                 errorCount += 1;
                 Console.WriteLine(args.Message);
             };
-            subscription.Register();
+            await subscription.Register();
             SendSMS();
             Thread.Sleep(15000);
             SendSMS();
             Thread.Sleep(15000);
-            subscription.Remove();
+            await subscription.Remove();
             Assert.Equal(1, connectCount);
             Assert.True(messageCount >= 2);
             Assert.Equal(0, errorCount);

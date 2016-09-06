@@ -64,10 +64,10 @@ namespace RingCentral
                 {
                     if (!refreshScheduled)
                     { // don't do duplicate schedule
-                        Task.Delay((int)(_token.expires_in.Value - 120) * 1000).ContinueWith((action) =>
+                        Task.Delay((int)(_token.expires_in.Value - 120) * 1000).ContinueWith(async (action) =>
                         { // 2 minutes before expiration
                             refreshScheduled = false;
-                            Refresh();
+                            await Refresh();
                         });
                         refreshScheduled = true;
                     }

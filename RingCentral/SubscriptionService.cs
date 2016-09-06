@@ -38,7 +38,8 @@ namespace RingCentral
         {
             get
             {
-                return new {
+                return new
+                {
                     eventFilters = EventFilters,
                     deliveryMode = new { transportType = "PubNub", encryption = true }
                 };
@@ -62,10 +63,10 @@ namespace RingCentral
                 {
                     if (!renewScheduled)
                     { // don't do duplicate schedule
-                        Task.Delay((int)(_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith((action) =>
+                        Task.Delay((int)(_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith(async (action) =>
                         { // 2 minutes before expiration
                             renewScheduled = false;
-                            Renew();
+                            await Renew();
                         });
                         renewScheduled = true;
                     }
@@ -78,57 +79,59 @@ namespace RingCentral
             this.rc = rc;
         }
 
-        public void Register()
+        public async Task<bool> Register()
         {
             if (!Alive())
             {
-                Subscribe();
+                return await Subscribe();
             }
             else
             {
-                Renew();
+                return await Renew();
             }
         }
 
-        private async void Subscribe()
+        private async Task<bool> Subscribe()
         {
             var temp = await rc.Restapi().Subscription().Post(requestBody);
             subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(temp));
             pubnub = new Pubnub(null, subscriptionInfo.deliveryMode.subscriberKey);
             pubnub.Subscribe<string>(subscriptionInfo.deliveryMode.address, OnSubscribe, OnConnect, OnError);
+            return true;
         }
 
-        private async void Renew()
+        private async Task<bool> Renew()
         {
             if (!Alive())
             { // Remove() has been called
-                return;
+                return false;
             }
             try
             {
                 var response = await rc.Restapi().Subscription(subscriptionInfo.id).Put(requestBody);
                 subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(response));
+                return true;
             }
             catch (FlurlHttpException fhe)
             {
                 if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 { // subscription not found on server side
-                    Subscribe();
-                    return;
+                    return await Subscribe();
                 }
                 throw fhe;
             }
         }
 
-        public async void Remove()
+        public async Task<bool> Remove()
         {
             if (!Alive())
             { // has been removed
-                return;
+                return true;
             }
             var temp = await rc.Restapi().Subscription(subscriptionInfo.id).Delete();
             subscriptionInfo = null;
             pubnub = null;
+            return true;
         }
 
         public bool Alive()
