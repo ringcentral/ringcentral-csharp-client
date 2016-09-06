@@ -1,5 +1,6 @@
 ﻿using Flurl;
 using Flurl.Http;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Net;
@@ -48,6 +49,52 @@ namespace RingCentral.Test
             {
                 Assert.Equal(fhe.Call.Response.StatusCode, HttpStatusCode.Unauthorized);
             }
+        }
+
+
+        [Fact]
+        public async void TestRefreshWithTokenOnly()
+        {
+            // 假设 data 是从文件读出来的
+            var data = JsonConvert.SerializeObject(rc.token);
+
+            // 假设当前的 token 是 null， 也就是没登录
+            rc.token = null;
+
+            // 反序列得出 token
+            var token = JsonConvert.DeserializeObject<Token.PostResponse>(data);
+
+            // 直接根据token参数进行refresh
+            await rc.Refresh(token.refresh_token);
+
+            // 成功从服务器端获取了 token
+            Assert.NotNull(rc.token);
+
+            // 验证 access_token 不为空
+            Assert.NotNull(rc.token.access_token);
+        }
+
+        [Fact]
+        public async void TestRefreshWithSavedToken()
+        {
+            // 假设 data 是从文件读出来的
+            var data = JsonConvert.SerializeObject(rc.token);
+
+            // 假设当前的 token 是 null， 也就是没登录
+            rc.token = null;
+
+            // 反序列得出 token
+            var token = JsonConvert.DeserializeObject<Token.PostResponse>(data);
+            rc.token = token;
+
+            // refresh
+            await rc.Refresh();
+
+            // 成功从服务器端获取了 token
+            Assert.NotNull(rc.token);
+
+            // 验证 access_token 不为空
+            Assert.NotNull(rc.token.access_token);
         }
 
         public void Dispose()
