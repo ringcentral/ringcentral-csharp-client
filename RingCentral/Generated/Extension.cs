@@ -32,6 +32,10 @@ namespace RingCentral
         {
             return new AnsweringRule(this, null);
         }
+        public AuthzProfile AuthzProfile()
+        {
+            return new AuthzProfile(this);
+        }
         public BlockedNumber BlockedNumber(ID _id)
         {
             return new BlockedNumber(this, _id);

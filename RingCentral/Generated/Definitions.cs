@@ -1094,6 +1094,13 @@ public partial class ParsePhoneNumber_PhoneNumberInfo
 }
 
 
+public partial class PermissionDetailsInfo
+{
+    // Information on a permission checked
+    public UserPermissionInfo permission { get; set; }
+}
+
+
 public partial class PermissionInfo
 {
     // Specifies if a permission is enabled or not
@@ -1644,6 +1651,24 @@ public partial class UnconditionalForwardingInfo
 {
     // Phone number to which the call is forwarded
     public string phoneNumber { get; set; }
+}
+
+
+public partial class UserPermission
+{
+    // Information on a permission granted
+    public UserPermissionInfo permission { get; set; }
+    // List of active scopes for permission
+    public string[] scopes { get; set; }
+}
+
+
+public partial class UserPermissionInfo
+{
+    // Internal identifier of a permission
+    public string id { get; set; }
+    // Canonical URI of a permission resource
+    public string uri { get; set; }
 }
 
 
