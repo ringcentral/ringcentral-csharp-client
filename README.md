@@ -5,7 +5,7 @@
 
 RingCentral C# client.
 
-**Notice:** any issues or questions, please do let me know by [creating an issue](https://github.com/tylerlong/ringcentral-csharp-client/issues/new).
+**Notice:** any issues or questions, please do let me know by [creating an issue](https://github.com/ringcentral/ringcentral-csharp-client/issues/new).
 
 Feel free to :star: and :fork_and_knife: this repository.
 
@@ -336,8 +336,8 @@ catch (FlurlHttpException fhe)
 
 ## Sample code
 
-The [unit test project](https://github.com/tylerlong/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
-Such as this [test class](https://github.com/tylerlong/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
+The [unit test project](https://github.com/ringcentral/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
+Such as this [test class](https://github.com/ringcentral/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
 
 
 ## Lisence
