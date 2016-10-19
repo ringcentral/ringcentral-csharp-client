@@ -76,12 +76,12 @@ namespace RingCentral.Test
             {
                 type = "Voice",
                 view = "Detailed",
-                dateFrom = DateTime.UtcNow.AddDays(-100).ToString("o"),
+                dateFrom = DateTime.UtcNow.AddDays(-365).ToString("o"),
                 withRecording = true,
                 perPage = 10,
             };
             var callLogs = await account.CallLog().List(queryParams);
-            Assert.Equal(10, callLogs.records.Length);
+            Assert.True(callLogs.records.Length > 0);
 
             // download a call recording
             var callLog = callLogs.records[0];
