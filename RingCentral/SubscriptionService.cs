@@ -100,7 +100,7 @@ namespace RingCentral
             return true;
         }
 
-        private async Task<bool> Renew()
+        public async Task<bool> Renew()
         {
             if (!Alive())
             { // Remove() has been called

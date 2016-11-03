@@ -248,6 +248,12 @@ subscription.ErrorEvent += (sender, args) => {
 await subscription.Register();
 ```
 
+The subscription will renew itself automatically before it expires. In rare cases you might need to renew it manually:
+
+```cs
+await subscription.Renew();
+```
+
 
 ## Send Fax
 
