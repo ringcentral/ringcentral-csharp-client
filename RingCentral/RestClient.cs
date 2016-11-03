@@ -60,17 +60,14 @@ namespace RingCentral
             set
             {
                 _token = value;
-                if (AutoRefreshToken && _token != null)
+                if (AutoRefreshToken && _token != null && !refreshScheduled)
                 {
-                    if (!refreshScheduled)
-                    { // don't do duplicate schedule
-                        Task.Delay((int)(_token.expires_in.Value - 120) * 1000).ContinueWith(async (action) =>
-                        { // 2 minutes before expiration
-                            refreshScheduled = false;
-                            await Refresh();
-                        });
-                        refreshScheduled = true;
-                    }
+                    Task.Delay((int)(_token.expires_in.Value - 120) * 1000).ContinueWith(async (action) =>
+                    { // 2 minutes before expiration
+                        refreshScheduled = false;
+                        await Refresh();
+                    });
+                    refreshScheduled = true;
                 }
             }
         }

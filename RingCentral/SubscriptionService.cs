@@ -59,17 +59,14 @@ namespace RingCentral
             set
             {
                 _subscriptionInfo = value;
-                if (_subscriptionInfo != null)
+                if (_subscriptionInfo != null && !renewScheduled)
                 {
-                    if (!renewScheduled)
-                    { // don't do duplicate schedule
-                        Task.Delay((int)(_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith(async (action) =>
-                        { // 2 minutes before expiration
+                    Task.Delay((int)(_subscriptionInfo.expiresIn.Value - 120) * 1000).ContinueWith(async (action) =>
+                    { // 2 minutes before expiration
                             renewScheduled = false;
-                            await Renew();
-                        });
-                        renewScheduled = true;
-                    }
+                        await Renew();
+                    });
+                    renewScheduled = true;
                 }
             }
         }
