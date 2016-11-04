@@ -27,18 +27,18 @@ namespace RingCentral
             return multipartFormDataContent;
         }
 
-        public async Task<byte[]> Post(byte[] requestBody, string imageFileName)
+        public async Task<bool> Post(byte[] requestBody, string imageFileName)
         {
             var content = GetContent(requestBody, imageFileName);
             var response = await RC.PostContent(Endpoint(false), content);
-            return await response.Content.ReadAsByteArrayAsync();
+            return true;
         }
 
-        public async Task<byte[]> Put(byte[] requestBody, string imageFileName)
+        public async Task<bool> Put(byte[] requestBody, string imageFileName)
         {
             var content = GetContent(requestBody, imageFileName);
             var response = await RC.PutContent(Endpoint(false), content);
-            return await response.Content.ReadAsByteArrayAsync();
+            return true;
         }
     }
 }

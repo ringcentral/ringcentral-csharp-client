@@ -23,7 +23,7 @@ namespace RingCentral.Test
             var extension = rc.Restapi().Account().Extension();
 
             var temp = await extension.ProfileImage().Post(bytes, "test.png");
-            Assert.NotNull(temp);
+            Assert.True(temp);
 
             var bytes3 = await extension.ProfileImage().Get();
             Assert.NotNull(bytes3);
@@ -33,7 +33,7 @@ namespace RingCentral.Test
             Assert.NotNull(bytes4);
 
             temp = await extension.ProfileImage().Put(bytes, "test.png");
-            Assert.NotNull(temp);
+            Assert.True(temp);
 
             var bytes5 = await extension.ProfileImage().Get();
             Assert.NotNull(bytes5);
