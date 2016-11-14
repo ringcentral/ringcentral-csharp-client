@@ -232,7 +232,7 @@ var str = await response.Content.ReadAsStringAsync(); // get response string
 ```cs
 var subscription = rc.Restapi().Subscription().New();
 subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
-subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence");
+subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence?detailedTelephonyState=true");
 subscription.ConnectEvent += (sender, args) => {
     Console.WriteLine("Connected:");
     Console.WriteLine(args.Message);
@@ -353,5 +353,4 @@ MIT
 
 ## todo
 
-1. Subscription models
 1. update readme doc

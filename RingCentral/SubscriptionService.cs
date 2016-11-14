@@ -27,10 +27,18 @@ namespace RingCentral
             Message = message;
         }
     }
+    public class NotificatioEventArgs : EventArgs
+    {
+        public Notification notification { get; private set; }
+        public NotificatioEventArgs(Notification notification)
+        {
+            this.notification = notification;
+        }
+    }
 
     public class SubscriptionService
     {
-        public event EventHandler<SubscriptionEventArgs> NotificationEvent;
+        public event EventHandler<NotificatioEventArgs> NotificationEvent;
         public event EventHandler<SubscriptionEventArgs> ConnectEvent;
         public event EventHandler<SubscriptionEventArgs> ErrorEvent;
         public List<string> EventFilters { get; set; } = new List<string>();
@@ -140,7 +148,8 @@ namespace RingCentral
         private void OnSubscribe(string result)
         {
             var message = JsonConvert.DeserializeObject<string[]>(result)[0];
-            NotificationEvent?.Invoke(this, new SubscriptionEventArgs(Decrypt(message)));
+            var notification = new Notification(Decrypt(message));
+            NotificationEvent?.Invoke(this, new NotificatioEventArgs(notification));
         }
 
         private void OnConnect(string connectMessage)
@@ -153,7 +162,7 @@ namespace RingCentral
             ErrorEvent?.Invoke(this, new SubscriptionEventArgs(pubnubError));
         }
 
-        private object Decrypt(string dataString)
+        private string Decrypt(string dataString)
         {
             var key = Convert.FromBase64String(subscriptionInfo.deliveryMode.encryptionKey);
             var keyParameter = ParameterUtilities.CreateKeyParameter("AES", key);
@@ -173,8 +182,7 @@ namespace RingCentral
                 resultStream.Write(buffer, 0, length);
             }
             var resultBytes = resultStream.ToArray();
-            var result = Encoding.UTF8.GetString(resultBytes, 0, resultBytes.Length);
-            return JsonConvert.DeserializeObject(result);
+            return Encoding.UTF8.GetString(resultBytes, 0, resultBytes.Length);
         }
     }
 }

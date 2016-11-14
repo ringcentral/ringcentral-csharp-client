@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace RingCentral
@@ -85,4 +86,119 @@ namespace RingCentral
             return true;
         }
     }
+
+
+    // notification models
+    public interface INotification { }
+    public enum NotificationType
+    {
+        DetailedPresence, DetailedPresenceWithSIP, ExtensionInfo, ExtensionList, IncomingCall, InstantMessage, Message, PresenceLine, Presence
+    }
+    public partial class DetailedPresenceNotification : INotification
+    {
+    }
+    public partial class DetailedPresenceWithSIPNotification : INotification
+    {
+    }
+    public partial class ExtensionInfoNotification : INotification
+    {
+    }
+    public partial class ExtensionListNotification : INotification
+    {
+    }
+    public partial class IncomingCallNotification : INotification
+    {
+    }
+    public partial class InstantMessageNotification : INotification
+    {
+    }
+    public partial class MessageNotification : INotification
+    {
+    }
+    public partial class PresenceLineNotification : INotification
+    {
+    }
+    public partial class PresenceNotification : INotification
+    {
+    }
+    public class Notification
+    {
+        public string json { get; set; }
+        public string @event { get; set; }
+
+        public Notification() { }
+        public Notification(string json)
+        {
+            this.@event = JsonConvert.DeserializeObject<Notification>(json).@event;
+            this.json = json;
+        }
+
+        private NotificationType? PresenceType()
+        {
+            if (@event == null)
+            {
+                return null;
+            }
+            var result = NotificationType.Presence;
+            if (@event.Contains("detailedTelephonyState="))
+            {
+                result = NotificationType.DetailedPresence;
+            }
+            if (@event.Contains("sipData="))
+            {
+                result = NotificationType.DetailedPresenceWithSIP;
+            }
+            return result;
+        }
+
+        public NotificationType? type
+        {
+            get
+            {
+                if (@event == null)
+                {
+                    return null;
+                }
+                if (new Regex("/account/\\d+/extension/\\d+/message-store/instant").Match(@event).Success)
+                {
+                    return NotificationType.InstantMessage;
+                }
+                else if (new Regex("/account/\\d+/extension/\\d+/message-store").Match(@event).Success)
+                {
+                    return NotificationType.Message;
+                }
+                else if (new Regex("/account/\\d+/extension/\\d+/presence/line/presence").Match(@event).Success)
+                {
+                    return PresenceType();
+                }
+                else if (new Regex("/account/\\d+/extension/\\d+/presence/line").Match(@event).Success)
+                {
+                    return NotificationType.PresenceLine;
+                }
+                else if (new Regex("/account/\\d+/extension/\\d+/presence").Match(@event).Success)
+                {
+                    return PresenceType();
+                }
+                else if (new Regex("/account/\\d+/extension/\\d+/incoming-call-pickup").Match(@event).Success)
+                {
+                    return NotificationType.IncomingCall;
+                }
+                else if (new Regex("/account/\\d+/extension/\\d+").Match(@event).Success)
+                {
+                    return NotificationType.ExtensionInfo;
+                }
+                else if (new Regex("account/\\d+/extension").Match(@event).Success)
+                {
+                    return NotificationType.ExtensionList;
+                }
+                return null;
+            }
+        }
+
+        public T Downcast<T>() where T: INotification
+        {
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+    }
+
 }
