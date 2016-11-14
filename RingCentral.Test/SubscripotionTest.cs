@@ -40,15 +40,17 @@ namespace RingCentral.Test
             subscription.NotificationEvent += (sender, args) => {
                 messageCount += 1;
                 var notification = args.notification;
-                Console.WriteLine(notification.@event);
-                if (notification.type == NotificationType.Message)
+                switch (notification.type)
                 {
-                    var messageNotification = notification.Downcast<MessageNotification>();
-                    messageNotificationCount += 1;
-                }
-                else if (notification.type == NotificationType.DetailedPresence)
-                {
-                    var detailedPresenceNotification = notification.Downcast<DetailedPresenceNotification>();
+                    case NotificationType.Message:
+                        var messageNotification = notification.Downcast<MessageNotification>();
+                        messageNotificationCount += 1;
+                        break;
+                    case NotificationType.DetailedPresence:
+                        var detailedPresenceNotification = notification.Downcast<DetailedPresenceNotification>();
+                        break;
+                    default:
+                        break;
                 }
             };
             var errorCount = 0;

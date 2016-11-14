@@ -126,7 +126,7 @@ var response = await extension.Fax().Post(requestBody, attachments);
 To create the `requestBody` object, you can define it as following:
 
 ```cs
-var requestBody = new Fax.PostRequest
+var requestBody = new FaxPath.PostParameters
 {
     to = new CallerInfo[] { new CallerInfo { phoneNumber = "123456789" } }
 }
@@ -163,7 +163,7 @@ var callLogs = await extension.CallLog().List(new { direction = "Inbound" });
 Or if you prefer the query parameters as a typed model:
 
 ```cs
-var callLogs = await extension.CallLog().List(new CallLog.ListQueryParams { direction = "Inbound" });
+var callLogs = await extension.CallLog().List(new CallLog.ListParameters { direction = "Inbound" });
 ```
 
 All the HTTP calls are by default async, so you should use the `await` keyword of C#.
@@ -233,17 +233,21 @@ var str = await response.Content.ReadAsStringAsync(); // get response string
 var subscription = rc.Restapi().Subscription().New();
 subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
 subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence?detailedTelephonyState=true");
-subscription.ConnectEvent += (sender, args) => {
-    Console.WriteLine("Connected:");
-    Console.WriteLine(args.Message);
-};
 subscription.NotificationEvent += (sender, args) => {
-    Console.WriteLine("Notification:");
-    Console.WriteLine(args.Message);
-};
-subscription.ErrorEvent += (sender, args) => {
-    Console.WriteLine("Error:");
-    Console.WriteLine(args.Message);
+    var notification = args.notification;
+    switch (notification.type)
+    {
+        case NotificationType.Message:
+            var messageNotification = notification.Downcast<MessageNotification>();
+            // do something with messageNotification
+            break;
+        case NotificationType.DetailedPresence:
+            var detailedPresenceNotification = notification.Downcast<DetailedPresenceNotification>();
+            // do something with detailedPresenceNotification
+            break;
+        default:
+            break;
+    }
 };
 await subscription.Register();
 ```
@@ -261,7 +265,7 @@ await subscription.Renew();
 var attachment1 = new Attachment { fileName = "test.txt", contentType = "text/plain", bytes = Encoding.UTF8.GetBytes("hello world") };
 var attachment2 = new Attachment { fileName = "test.pdf", contentType = "application/pdf", bytes = File.ReadAllBytes("test.pdf") };
 var attachments = new Attachment[] { attachment1, attachment2 };
-var response = await extension.Fax().Post(new Fax.PostRequest
+var response = await extension.Fax().Post(new FaxPath.PostParameters
 {
     to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } }
 }, attachments);
@@ -286,17 +290,17 @@ var response = await extension.ProfileImage().Put(bytes, "test.png");
 
 ```cs
 var response = await extension.MessageStore().List()
-var messages = resposne.records;
+var messages = response.records;
 
 // sms
 var message = messages.Where(m => m.type == "SMS" && m.attachments != null && m.attachments.Length > 0).First();
-var bytes = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
-var content = System.Text.Encoding.UTF8.GetString(bytes);
+var content = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
+var str = System.Text.Encoding.UTF8.GetString(content.data);
 
 // fax
 message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
-bytes = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
-File.WriteAllBytes("test.pdf", bytes);
+content = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
+File.WriteAllBytes("test.pdf", content.data);
 ```
 
 
@@ -306,7 +310,7 @@ File.WriteAllBytes("test.pdf", bytes);
 var account = rc.Restapi().Account();
 
 // List call Logs
-var queryParams = new CallLog.ListQueryParams
+var queryParams = new CallLogPath.ListParameters
 {
     type = "Voice",
     view = "Detailed",
@@ -318,8 +322,8 @@ var callLogs = await account.CallLog().List(queryParams);
 
 // download a call recording
 var callLog = callLogs.records[0];
-var bytes = await account.Recording(callLog.recording.id).Content().Get();
-File.WriteAllBytes("test.wav", bytes);
+var content = await account.Recording(callLog.recording.id).Content().Get();
+File.WriteAllBytes("test.wav", content.data);
 ```
 
 
@@ -349,8 +353,3 @@ Such as this [test class](https://github.com/ringcentral/ringcentral-csharp-clie
 ## Lisence
 
 MIT
-
-
-## todo
-
-1. update readme doc
