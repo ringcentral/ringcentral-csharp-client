@@ -35,7 +35,7 @@ namespace RingCentral.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Contains("China", await response.Content.ReadAsStringAsync());
 
-            var countryResponse = await rc.Get<Country.GetResponse>(country.Endpoint());
+            var countryResponse = await rc.Get<FullCountryInfo>(country.Endpoint());
             var countryResponse2 = await rc.Restapi().Dictionary().Country("46").Get();
             TestUtil.DeepEqual(countryResponse2, countryResponse);
         }

@@ -32,7 +32,7 @@ namespace RingCentral.Test
             var total = list.paging.totalElements;
 
             // create
-            var contact = await addressBook.Contact().Post(new Contact.PostRequest
+            var contact = await addressBook.Contact().Post(new PersonalContactInfo
             {
                 firstName = "Tyler",
                 lastName = "Long",

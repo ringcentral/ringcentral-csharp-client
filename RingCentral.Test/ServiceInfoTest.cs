@@ -24,7 +24,9 @@ namespace RingCentral.Test
             Assert.True(faxReceiving);
 
             // meeting service-info
-            // todo: meeting api is not yet ready, so I cannot test it right now
+            //var meetingServiceInfo = await account.Extension().MeetingServiceInfo().Get();
+            //Assert.NotNull(meetingServiceInfo);
+            // todo: meeting api is internal, so I always get 403
         }
 
         public void Dispose()

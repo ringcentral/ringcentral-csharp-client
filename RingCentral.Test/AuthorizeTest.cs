@@ -62,7 +62,7 @@ namespace RingCentral.Test
             rc.token = null;
 
             // 反序列得出 token
-            var token = JsonConvert.DeserializeObject<Token.PostResponse>(data);
+            var token = JsonConvert.DeserializeObject<TokenInfo>(data);
 
             // 直接根据token参数进行refresh
             await rc.Refresh(token.refresh_token);
@@ -84,7 +84,7 @@ namespace RingCentral.Test
             rc.token = null;
 
             // 反序列得出 token
-            var token = JsonConvert.DeserializeObject<Token.PostResponse>(data);
+            var token = JsonConvert.DeserializeObject<TokenInfo>(data);
             rc.token = token;
 
             // refresh
