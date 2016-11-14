@@ -39,11 +39,20 @@ namespace RingCentral
             return GetClient(endpoint, queryParams).DeleteAsync();
         }
 
-        public async Task<T> Get<T>(string endpoint, object queryParams = null)
+        public async Task<T> Get<T>(string endpoint, object queryParams = null) where T: class
         {
-            var response = await Get(endpoint, queryParams);
-            var str = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(str);
+            if (typeof(Binary) == typeof(T))
+            {
+                var bytes = await GetBinary(endpoint, queryParams);
+                var binary = new Binary { data = bytes };
+                return binary as T;
+            }
+            else
+            {
+                var response = await Get(endpoint, queryParams);
+                var str = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(str);
+            }
         }
 
         public async Task<byte[]> GetBinary(string endpoint, object queryParams = null)
