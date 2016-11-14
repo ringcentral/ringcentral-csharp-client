@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
-    public partial class Subscription
+    public partial class SubscriptionPath
     {
         public SubscriptionService New()
         {
@@ -48,9 +48,9 @@ namespace RingCentral
 
         private RestClient rc;
         private Pubnub pubnub;
-        private Subscription.GetResponse _subscriptionInfo;
+        private SubscriptionInfo _subscriptionInfo;
         private bool renewScheduled = false;
-        private Subscription.GetResponse subscriptionInfo
+        private SubscriptionInfo subscriptionInfo
         {
             get
             {
@@ -91,7 +91,7 @@ namespace RingCentral
         private async Task<bool> Subscribe()
         {
             var temp = await rc.Restapi().Subscription().Post(requestBody);
-            subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(temp));
+            subscriptionInfo = JsonConvert.DeserializeObject<SubscriptionInfo>(JsonConvert.SerializeObject(temp));
             pubnub = new Pubnub(null, subscriptionInfo.deliveryMode.subscriberKey);
             pubnub.Subscribe<string>(subscriptionInfo.deliveryMode.address, OnSubscribe, OnConnect, OnError);
             return true;
@@ -106,7 +106,7 @@ namespace RingCentral
             try
             {
                 var response = await rc.Restapi().Subscription(subscriptionInfo.id).Put(requestBody);
-                subscriptionInfo = JsonConvert.DeserializeObject<Subscription.GetResponse>(JsonConvert.SerializeObject(response));
+                subscriptionInfo = JsonConvert.DeserializeObject<SubscriptionInfo>(JsonConvert.SerializeObject(response));
                 return true;
             }
             catch (FlurlHttpException fhe)

@@ -349,3 +349,9 @@ Such as this [test class](https://github.com/ringcentral/ringcentral-csharp-clie
 ## Lisence
 
 MIT
+
+
+## todo
+
+1. Subscription models
+1. update readme doc
