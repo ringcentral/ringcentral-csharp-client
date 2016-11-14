@@ -9,8 +9,8 @@ namespace RingCentral
 {
     public class TokenEventArgs : EventArgs
     {
-        public Token.PostResponse Token { get; private set; }
-        public TokenEventArgs(Token.PostResponse token)
+        public TokenInfo Token { get; private set; }
+        public TokenEventArgs(TokenInfo token)
         {
             Token = token;
         }
@@ -50,8 +50,8 @@ namespace RingCentral
 
         public bool AutoRefreshToken = true;
         private bool refreshScheduled = false;
-        private Token.PostResponse _token;
-        public Token.PostResponse token
+        private TokenInfo _token;
+        public TokenInfo token
         {
             get
             {
@@ -78,11 +78,11 @@ namespace RingCentral
         /// <param name="username">Username</param>
         /// <param name="extension">Extension, can be null or empty</param>
         /// <param name="password">Password</param>
-        public async Task<Token.PostResponse> Authorize(string username, string extension, string password)
+        public async Task<TokenInfo> Authorize(string username, string extension, string password)
         {
             var url = server.AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
-            var requestBody = new Token.PostRequest
+            var requestBody = new
             {
                 username = username,
                 extension = extension,
@@ -91,7 +91,7 @@ namespace RingCentral
                 access_token_ttl = access_token_ttl,
                 refresh_token_ttl = refresh_token_ttl
             };
-            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
+            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<TokenInfo>();
             return token;
         }
 
@@ -106,7 +106,7 @@ namespace RingCentral
         /// <summary>
         /// Refresh the token
         /// </summary>
-        public async Task<Token.PostResponse> Refresh(string refreshToken = null)
+        public async Task<TokenInfo> Refresh(string refreshToken = null)
         {
             if (refreshToken != null)
             {
@@ -116,7 +116,7 @@ namespace RingCentral
                 }
                 else
                 {
-                    token = new Token.PostResponse { refresh_token = refreshToken };
+                    token = new TokenInfo { refresh_token = refreshToken };
                 }
             }
             if (token == null)
@@ -133,7 +133,7 @@ namespace RingCentral
                 access_token_ttl = access_token_ttl,
                 refresh_token_ttl = refresh_token_ttl
             };
-            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
+            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<TokenInfo>();
             TokenRefreshed?.Invoke(this, new TokenEventArgs(token));
             return token;
         }
@@ -170,7 +170,7 @@ namespace RingCentral
         /// </summary>
         /// <param name="authCode">The authorization code returned from server</param>
         /// <param name="redirectUri">The same redirectUri when you were obtaining the authCode in previous step</param>
-        public async Task<Token.PostResponse> Authorize(string authCode, string redirectUri)
+        public async Task<TokenInfo> Authorize(string authCode, string redirectUri)
         {
             var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
@@ -182,7 +182,7 @@ namespace RingCentral
                 access_token_ttl = access_token_ttl,
                 refresh_token_ttl = refresh_token_ttl
             };
-            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<Token.PostResponse>();
+            token = await client.PostUrlEncodedAsync(requestBody).ReceiveJson<TokenInfo>();
             return token;
         }
 
@@ -204,9 +204,9 @@ namespace RingCentral
         }
 
 
-        public Restapi Restapi(string _id = "v1.0")
+        public RestapiPath Restapi(string _id = "v1.0")
         {
-            return new Restapi(new MockModel(this), _id);
+            return new RestapiPath(new MockModel(this), _id);
         }
     }
 }
