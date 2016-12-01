@@ -11,7 +11,7 @@ namespace RingCentral
                 return "message-store";
             }
         }
-        public ContentPath Content(ID _id)
+        public ContentPath Content(string _id)
         {
             return new ContentPath(this, _id);
         }

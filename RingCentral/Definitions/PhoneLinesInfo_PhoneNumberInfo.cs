@@ -3,7 +3,7 @@ namespace RingCentral
     public partial class PhoneLinesInfo_PhoneNumberInfo
     {
         // Internal identifier of a phone number
-        public long? @id { get; set; }
+        public string @id { get; set; }
         // Brief information on a phone number country
         public CountryInfo @country { get; set; }
         // Location (City, State). Filled for local US numbers

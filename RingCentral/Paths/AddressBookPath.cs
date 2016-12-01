@@ -11,7 +11,7 @@ namespace RingCentral
                 return "address-book";
             }
         }
-        public ContactPath Contact(ID _id)
+        public ContactPath Contact(string _id)
         {
             return new ContactPath(this, _id);
         }
@@ -19,7 +19,7 @@ namespace RingCentral
         {
             return new ContactPath(this);
         }
-        public GroupPath Group(ID _id)
+        public GroupPath Group(string _id)
         {
             return new GroupPath(this, _id);
         }

@@ -3,7 +3,7 @@ namespace RingCentral
     public partial class PhoneNumberInfo
     {
         // Internal identifier of a phone number
-        public long? @id { get; set; }
+        public string @id { get; set; }
         // Brief information on a phone number country
         public CountryInfo @country { get; set; }
         // Information on the extension, to which the phone number is assigned. Returned only for the request of Account phone number list

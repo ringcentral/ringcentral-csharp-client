@@ -15,7 +15,7 @@ namespace RingCentral
         {
             return new OauthPath(this);
         }
-        public AccountPath Account(ID _id)
+        public AccountPath Account(string _id)
         {
             return new AccountPath(this, _id);
         }
@@ -39,7 +39,7 @@ namespace RingCentral
         {
             return new NumberPoolPath(this);
         }
-        public SubscriptionPath Subscription(ID _id)
+        public SubscriptionPath Subscription(string _id)
         {
             return new SubscriptionPath(this, _id);
         }

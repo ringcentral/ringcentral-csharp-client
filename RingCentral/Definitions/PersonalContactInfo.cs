@@ -3,7 +3,7 @@ namespace RingCentral
     public partial class PersonalContactInfo
     {
         // Standard resource properties ID
-        public long? @id { get; set; }
+        public string @id { get; set; }
         // Canonical URI
         public string @url { get; set; }
         // This property has a special meaning only on Address Book Sync (e.g. a contact can be 'Deleted'). For simple contact list reading it has always the default value - 'Alive'

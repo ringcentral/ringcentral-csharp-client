@@ -11,7 +11,7 @@ namespace RingCentral
                 return "dictionary";
             }
         }
-        public CountryPath Country(ID _id)
+        public CountryPath Country(string _id)
         {
             return new CountryPath(this, _id);
         }
@@ -19,7 +19,7 @@ namespace RingCentral
         {
             return new CountryPath(this);
         }
-        public LanguagePath Language(ID _id)
+        public LanguagePath Language(string _id)
         {
             return new LanguagePath(this, _id);
         }
@@ -31,7 +31,7 @@ namespace RingCentral
         {
             return new LocationPath(this);
         }
-        public StatePath State(ID _id)
+        public StatePath State(string _id)
         {
             return new StatePath(this, _id);
         }
@@ -39,7 +39,7 @@ namespace RingCentral
         {
             return new StatePath(this);
         }
-        public TimezonePath Timezone(ID _id)
+        public TimezonePath Timezone(string _id)
         {
             return new TimezonePath(this, _id);
         }

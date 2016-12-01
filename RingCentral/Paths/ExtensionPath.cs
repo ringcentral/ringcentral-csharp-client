@@ -23,7 +23,7 @@ namespace RingCentral
         {
             return new AddressBookPath(this);
         }
-        public AnsweringRulePath AnsweringRule(ID _id)
+        public AnsweringRulePath AnsweringRule(string _id)
         {
             return new AnsweringRulePath(this, _id);
         }
@@ -35,7 +35,7 @@ namespace RingCentral
         {
             return new AuthzProfilePath(this);
         }
-        public BlockedNumberPath BlockedNumber(ID _id)
+        public BlockedNumberPath BlockedNumber(string _id)
         {
             return new BlockedNumberPath(this, _id);
         }
@@ -47,7 +47,7 @@ namespace RingCentral
         {
             return new BusinessHoursPath(this);
         }
-        public CallLogPath CallLog(ID _id)
+        public CallLogPath CallLog(string _id)
         {
             return new CallLogPath(this, _id);
         }
@@ -67,7 +67,7 @@ namespace RingCentral
         {
             return new ConferencingPath(this);
         }
-        public DevicePath Device(ID _id)
+        public DevicePath Device(string _id)
         {
             return new DevicePath(this, _id);
         }
@@ -87,7 +87,7 @@ namespace RingCentral
         {
             return new GrantPath(this);
         }
-        public GreetingPath Greeting(ID _id)
+        public GreetingPath Greeting(string _id)
         {
             return new GreetingPath(this, _id);
         }
@@ -95,7 +95,7 @@ namespace RingCentral
         {
             return new GreetingPath(this);
         }
-        public MeetingPath Meeting(ID _id)
+        public MeetingPath Meeting(string _id)
         {
             return new MeetingPath(this, _id);
         }
@@ -107,7 +107,7 @@ namespace RingCentral
         {
             return new MeetingServiceInfoPath(this);
         }
-        public MessageStorePath MessageStore(ID _id)
+        public MessageStorePath MessageStore(string _id)
         {
             return new MessageStorePath(this, _id);
         }
@@ -119,7 +119,7 @@ namespace RingCentral
         {
             return new MessageSyncPath(this);
         }
-        public PhoneNumberPath PhoneNumber(ID _id)
+        public PhoneNumberPath PhoneNumber(string _id)
         {
             return new PhoneNumberPath(this, _id);
         }
@@ -131,7 +131,7 @@ namespace RingCentral
         {
             return new PresencePath(this);
         }
-        public ProfileImagePath ProfileImage(ID _id)
+        public ProfileImagePath ProfileImage(string _id)
         {
             return new ProfileImagePath(this, _id);
         }
@@ -139,7 +139,7 @@ namespace RingCentral
         {
             return new ProfileImagePath(this);
         }
-        public RingoutPath Ringout(ID _id)
+        public RingoutPath Ringout(string _id)
         {
             return new RingoutPath(this, _id);
         }

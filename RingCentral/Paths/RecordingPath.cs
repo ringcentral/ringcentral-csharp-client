@@ -11,7 +11,7 @@ namespace RingCentral
                 return "recording";
             }
         }
-        public ContentPath Content(ID _id)
+        public ContentPath Content(string _id)
         {
             return new ContentPath(this, _id);
         }
@@ -27,7 +27,7 @@ namespace RingCentral
         public partial class GetResponse
         {
             // Internal identifier of the call recording
-            public long? @id { get; set; }
+            public string @id { get; set; }
             // Link to the call recording binary content
             public string @contentUri { get; set; }
             // Call recording file format. Supported format is audio/x-wav

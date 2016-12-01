@@ -38,42 +38,6 @@ namespace RingCentral
         }
     }
 
-    public class ID
-    {
-        private long? i = null;
-        private string s = null;
-
-        public ID(long i)
-        {
-            this.i = i;
-        }
-
-        public ID(string s)
-        {
-            this.s = s;
-        }
-
-        public static implicit operator ID(long i)
-        {
-            return new ID(i);
-        }
-
-        public static implicit operator ID(string s)
-        {
-            return new ID(s);
-        }
-
-        public static implicit operator string(ID id)
-        {
-            return id.ToString();
-        }
-
-        public override string ToString()
-        {
-            return i.HasValue ? i.ToString() : s;
-        }
-    }
-
     public class MockModel : Model
     {
         public MockModel(RestClient rc) : base(null)

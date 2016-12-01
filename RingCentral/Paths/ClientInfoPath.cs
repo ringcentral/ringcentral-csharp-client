@@ -11,7 +11,7 @@ namespace RingCentral
                 return "client-info";
             }
         }
-        public CustomDataPath CustomData(ID _id)
+        public CustomDataPath CustomData(string _id)
         {
             return new CustomDataPath(this, _id);
         }
