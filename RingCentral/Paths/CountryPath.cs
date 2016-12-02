@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class CountryPath : Model
+    public partial class CountryPath : PathSegment
     {
-        internal CountryPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal CountryPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

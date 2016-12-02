@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class CompanyPagerPath : Model
+    public partial class CompanyPagerPath : PathSegment
     {
-        internal CompanyPagerPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal CompanyPagerPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

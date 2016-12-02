@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class TimezonePath : Model
+    public partial class TimezonePath : PathSegment
     {
-        internal TimezonePath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal TimezonePath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

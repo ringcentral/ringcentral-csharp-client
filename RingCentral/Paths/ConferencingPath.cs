@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class ConferencingPath : Model
+    public partial class ConferencingPath : PathSegment
     {
-        internal ConferencingPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal ConferencingPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

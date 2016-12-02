@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class BlockedNumberPath : Model
+    public partial class BlockedNumberPath : PathSegment
     {
-        internal BlockedNumberPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal BlockedNumberPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

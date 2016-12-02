@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class CallLogSyncPath : Model
+    public partial class CallLogSyncPath : PathSegment
     {
-        internal CallLogSyncPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal CallLogSyncPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

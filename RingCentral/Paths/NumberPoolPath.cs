@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class NumberPoolPath : Model
+    public partial class NumberPoolPath : PathSegment
     {
-        internal NumberPoolPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal NumberPoolPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

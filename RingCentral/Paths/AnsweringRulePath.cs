@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class AnsweringRulePath : Model
+    public partial class AnsweringRulePath : PathSegment
     {
-        internal AnsweringRulePath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal AnsweringRulePath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

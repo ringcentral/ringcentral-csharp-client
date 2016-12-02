@@ -2,13 +2,13 @@ using Flurl;
 
 namespace RingCentral
 {
-    public abstract class Model
+    public abstract class PathSegment
     {
         public string _id;
-        protected abstract string PathSegment { get; }
-        protected Model parent;
+        protected abstract string Segment { get; }
+        protected PathSegment parent;
 
-        protected Model(Model parent, string _id = null)
+        protected PathSegment(PathSegment parent, string _id = null)
         {
             this.parent = parent;
             this._id = _id;
@@ -16,7 +16,7 @@ namespace RingCentral
 
         public virtual string Endpoint(bool withId = true)
         {
-            var url = parent.Endpoint().AppendPathSegment(PathSegment);
+            var url = parent.Endpoint().AppendPathSegment(Segment);
             if (withId && _id != null)
             {
                 url = url.AppendPathSegment(_id);
@@ -38,14 +38,14 @@ namespace RingCentral
         }
     }
 
-    public class MockModel : Model
+    public class MockModel : PathSegment
     {
         public MockModel(RestClient rc) : base(null)
         {
             this.rc = rc;
         }
 
-        protected override string PathSegment
+        protected override string Segment
         {
             get
             {

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class ForwardingNumberPath : Model
+    public partial class ForwardingNumberPath : PathSegment
     {
-        internal ForwardingNumberPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal ForwardingNumberPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

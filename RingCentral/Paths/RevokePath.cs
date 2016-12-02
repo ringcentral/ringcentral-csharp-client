@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class RevokePath : Model
+    public partial class RevokePath : PathSegment
     {
-        internal RevokePath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal RevokePath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class DictionaryPath : Model
+    public partial class DictionaryPath : PathSegment
     {
-        internal DictionaryPath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal DictionaryPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {

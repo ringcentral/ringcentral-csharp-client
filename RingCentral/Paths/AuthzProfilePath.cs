@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 namespace RingCentral
 {
-    public partial class AuthzProfilePath : Model
+    public partial class AuthzProfilePath : PathSegment
     {
-        internal AuthzProfilePath(Model parent, string _id = null) : base(parent, _id) { }
-        protected override string PathSegment
+        internal AuthzProfilePath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
         {
             get
             {
