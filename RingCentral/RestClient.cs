@@ -206,7 +206,7 @@ namespace RingCentral
 
         public RestapiPath Restapi(string _id = "v1.0")
         {
-            return new RestapiPath(new MockModel(this), _id);
+            return new RestapiPath(new MockPathSegment(this), _id);
         }
     }
 }

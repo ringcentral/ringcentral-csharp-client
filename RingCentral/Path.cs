@@ -38,9 +38,9 @@ namespace RingCentral
         }
     }
 
-    public class MockModel : PathSegment
+    public class MockPathSegment : PathSegment
     {
-        public MockModel(RestClient rc) : base(null)
+        public MockPathSegment(RestClient rc) : base(null)
         {
             this.rc = rc;
         }

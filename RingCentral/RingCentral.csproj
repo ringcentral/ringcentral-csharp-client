@@ -192,7 +192,7 @@
     <Compile Include="Definitions\VoicemailInfo.cs" />
     <Compile Include="Definitions\WeeklyScheduleInfo.cs" />
     <Compile Include="Http.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="Paths\AccountPath.cs" />
     <Compile Include="Paths\ActiveCallsPath.cs" />
     <Compile Include="Paths\AddressBookPath.cs" />
