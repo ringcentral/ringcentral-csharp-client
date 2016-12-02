@@ -11,12 +11,7 @@ namespace RingCentral
         private FlurlClient GetClient(string endpoint, object queryParams)
         {
             var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams);
-            var client = new FlurlClient(url);
-            if (token != null)
-            {
-                client = client.WithOAuthBearerToken(token.access_token);
-            }
-            return client;
+            return url.WithOAuthBearerToken(token == null ? "" : token.access_token);
         }
 
         public Task<HttpResponseMessage> Get(string endpoint, object queryParams = null)
@@ -39,7 +34,7 @@ namespace RingCentral
             return GetClient(endpoint, queryParams).DeleteAsync();
         }
 
-        public async Task<T> Get<T>(string endpoint, object queryParams = null) where T: class
+        public async Task<T> Get<T>(string endpoint, object queryParams = null) where T : class
         {
             if (typeof(Binary) == typeof(T))
             {
