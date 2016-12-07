@@ -8,7 +8,7 @@ namespace RingCentral
 {
     public partial class RestClient
     {
-        private FlurlClient GetClient(string endpoint, object queryParams)
+        private IFlurlClient GetClient(string endpoint, object queryParams)
         {
             var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams);
             return url.WithOAuthBearerToken(token == null ? "" : token.access_token);
