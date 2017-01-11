@@ -81,14 +81,15 @@ namespace RingCentral.Test
                 perPage = 10,
             };
             var callLogs = await account.CallLog().List(queryParams);
-            Assert.True(callLogs.records.Length > 0);
-
-            // download a call recording
-            var callLog = callLogs.records[0];
-            var content = await account.Recording(callLog.recording.id).Content().Get();
-            Assert.NotNull(content);
-            Assert.True(content.data.Length > 0);
-            File.WriteAllBytes("test.wav", content.data);
+            if (callLogs.records.Length > 0)
+            {
+                // download a call recording
+                var callLog = callLogs.records[0];
+                var content = await account.Recording(callLog.recording.id).Content().Get();
+                Assert.NotNull(content);
+                Assert.True(content.data.Length > 0);
+                File.WriteAllBytes("test.wav", content.data);
+            }
         }
 
         public void Dispose()

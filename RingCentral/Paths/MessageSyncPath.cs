@@ -12,21 +12,21 @@ namespace RingCentral
             }
         }
         // Message Synchronization
-        public Task<GetResponse> Get()
+        public Task<ListResponse> List()
         {
-            return RC.Get<GetResponse>(Endpoint(true), null);
+            return RC.Get<ListResponse>(Endpoint(false), null);
         }
         // Message Synchronization
-        public Task<GetResponse> Get(object parameters)
+        public Task<ListResponse> List(object parameters)
         {
-            return RC.Get<GetResponse>(Endpoint(true), parameters);
+            return RC.Get<ListResponse>(Endpoint(false), parameters);
         }
         // Message Synchronization
-        public Task<GetResponse> Get(GetParameters parameters)
+        public Task<ListResponse> List(ListParameters parameters)
         {
-            return Get(parameters as object);
+            return List(parameters as object);
         }
-        public partial class GetParameters
+        public partial class ListParameters
         {
             // Conversation identifier for the resulting messages. Meaningful for SMS and Pager messages only.
             public long? @conversationId { get; set; }
@@ -47,7 +47,7 @@ namespace RingCentral
             // Type of message synchronization
             public string @syncType { get; set; }
         }
-        public partial class GetResponse
+        public partial class ListResponse
         {
             // List of message records with synchronization information
             public MessageInfo[] @records { get; set; }

@@ -19,10 +19,6 @@ namespace RingCentral
         {
             return new ContactPath(this);
         }
-        public GroupPath Group(string _id)
-        {
-            return new GroupPath(this, _id);
-        }
         public GroupPath Group()
         {
             return new GroupPath(this);

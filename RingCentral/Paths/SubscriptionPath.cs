@@ -33,6 +33,18 @@ namespace RingCentral
             // Notification delivery settings
             public Subscription_Request_DeliveryMode @deliveryMode { get; set; }
         }
+        // Get Subscription List
+        public Task<ListResponse> List()
+        {
+            return RC.Get<ListResponse>(Endpoint(false), null);
+        }
+        public partial class ListResponse
+        {
+            // Canonical URI of a subscription resource
+            public string @uri { get; set; }
+            // List of subscriptions for the current user and application
+            public SubscriptionInfo[] @records { get; set; }
+        }
         // Cancel Subscription by ID
         public async Task<bool> Delete()
         {

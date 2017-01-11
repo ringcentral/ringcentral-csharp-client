@@ -12,21 +12,21 @@ namespace RingCentral
             }
         }
         // Call Log Synchronization
-        public Task<GetResponse> Get()
+        public Task<ListResponse> List()
         {
-            return RC.Get<GetResponse>(Endpoint(true), null);
+            return RC.Get<ListResponse>(Endpoint(false), null);
         }
         // Call Log Synchronization
-        public Task<GetResponse> Get(object parameters)
+        public Task<ListResponse> List(object parameters)
         {
-            return RC.Get<GetResponse>(Endpoint(true), parameters);
+            return RC.Get<ListResponse>(Endpoint(false), parameters);
         }
         // Call Log Synchronization
-        public Task<GetResponse> Get(GetParameters parameters)
+        public Task<ListResponse> List(ListParameters parameters)
         {
-            return Get(parameters as object);
+            return List(parameters as object);
         }
-        public partial class GetParameters
+        public partial class ListParameters
         {
             // Type of synchronization. 'FSync' is a default value
             public string @syncType { get; set; }
@@ -39,7 +39,7 @@ namespace RingCentral
             // Type of calls to be returned. The default value is 'All'
             public string @statusGroup { get; set; }
         }
-        public partial class GetResponse
+        public partial class ListResponse
         {
             // List of call log records with synchronization information. For ISync the total number of returned records is limited to 250; this includes both new records and the old ones, specified by the recordCount parameter
             public CallLogRecord[] @records { get; set; }

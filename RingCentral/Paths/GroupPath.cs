@@ -25,10 +25,5 @@ namespace RingCentral
             // Information on paging
             public PagingInfo @paging { get; set; }
         }
-        // Get Contact Group by ID
-        public Task<GroupInfo> Get()
-        {
-            return RC.Get<GroupInfo>(Endpoint(true), null);
-        }
     }
 }
