@@ -17,7 +17,7 @@
 
         public override string Endpoint(bool withId)
         {
-            return "";
+            return Segment;
         }
 
         private RestClient rc;
