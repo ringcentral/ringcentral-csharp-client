@@ -13,7 +13,7 @@ Feel free to :star: and :fork_and_knife: this repository.
 ## Installation
 
 ```powershell
-Install-Package RingCentral.Client -Pre
+Install-Package RingCentral.Client
 ```
 
 
