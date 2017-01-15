@@ -65,6 +65,11 @@ rc.AutoRefreshToken = false;
 ```
 
 
+### Token Revoke
+
+When you no longer need a token, don't forget to revoke it: `rc.Revoke()`.
+
+
 ## Map URI to code
 
 This client library is built around URIs.
