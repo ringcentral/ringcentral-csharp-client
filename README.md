@@ -240,6 +240,9 @@ subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store
 subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence?detailedTelephonyState=true");
 subscription.NotificationEvent += (sender, args) => {
     var notification = args.notification;
+    Console.WriteLine(notification.json);
+    // If you want to play with plain JSON instead
+    // You can ignore the switch statement below.
     switch (notification.type)
     {
         case NotificationType.Message:
