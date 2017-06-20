@@ -5,11 +5,11 @@
 
 ```
 cp config.sample.json bin/Debug/config.json
-edit config.json
+cp test.png bin/Debug/
+cp test.pdf bin/Debug/
+edit bin/Debug/config.json
 ```
 
-Copy a sample pdf file named `test.pdf` into `bin/Debug/` folder.
-This file is used for testing sending fax.
+`test.pdf` is used for testing sending fax.
 
-Copy a sample png file named `test.png` into `bin/Debug/` folder.
-This file is used for testing profile image.
+`test.png` is used for testing profile image.
