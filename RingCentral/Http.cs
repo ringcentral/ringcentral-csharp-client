@@ -8,9 +8,12 @@ namespace RingCentral
 {
     public partial class RestClient
     {
+        public string userAgent = "";
         private IFlurlClient GetClient(string endpoint, object queryParams)
         {
-            var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams);
+            var userAgentHeader = string.Join(" ", "RC-CSHARP-CLIENT", userAgent);
+            var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams)
+                .WithHeader("User-Agent", userAgentHeader).WithHeader("RC-User-Agent", userAgentHeader);
             return url.WithOAuthBearerToken(token == null ? "" : token.access_token);
         }
 
