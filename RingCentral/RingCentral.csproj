@@ -256,6 +256,15 @@
     <Compile Include="RestClient.cs" />
     <Compile Include="Special.cs" />
     <Compile Include="SubscriptionService.cs" />
+    <Compile Include="Paths\BulkAssignPath.cs" />
+    <Compile Include="Paths\CompaniesPath.cs" />
+    <Compile Include="Paths\GlipPath.cs" />
+    <Compile Include="Paths\GroupsPath.cs" />
+    <Compile Include="Paths\PersonsPath.cs" />
+    <Compile Include="Paths\PostsPath.cs" />
+    <Compile Include="Definitions\GlipGroupInfo.cs" />
+    <Compile Include="Definitions\GlipNavigationInfo.cs" />
+    <Compile Include="Definitions\GlipPostInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

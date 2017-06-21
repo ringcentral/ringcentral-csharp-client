@@ -31,6 +31,10 @@ namespace RingCentral
         {
             return new DictionaryPath(this);
         }
+        public GlipPath Glip()
+        {
+            return new GlipPath(this);
+        }
         public NumberParserPath NumberParser()
         {
             return new NumberParserPath(this);
