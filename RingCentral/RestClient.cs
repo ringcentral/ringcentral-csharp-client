@@ -123,7 +123,7 @@ namespace RingCentral
             {
                 return null;
             }
-            var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
+            var url = server.AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new RefreshRequest
             {
@@ -148,7 +148,7 @@ namespace RingCentral
         /// <returns>Uri for 3-legged authorization</returns>
         public string AuthorizeUri(string redirectUri, string state = "")
         {
-            var baseUrl = new Url(server).AppendPathSegment("/restapi/oauth/authorize");
+            var baseUrl = server.AppendPathSegment("/restapi/oauth/authorize");
             baseUrl.SetQueryParam("response_type", "code");
             baseUrl.SetQueryParam("state", state);
             baseUrl.SetQueryParam("redirect_uri", redirectUri);
@@ -172,7 +172,7 @@ namespace RingCentral
         /// <param name="redirectUri">The same redirectUri when you were obtaining the authCode in previous step</param>
         public async Task<TokenInfo> Authorize(string authCode, string redirectUri)
         {
-            var url = new Url(server).AppendPathSegment("/restapi/oauth/token");
+            var url = server.AppendPathSegment("/restapi/oauth/token");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new AuthCodeRequest
             {
@@ -195,7 +195,7 @@ namespace RingCentral
             {
                 return true;
             }
-            var url = new Url(server).AppendPathSegment("/restapi/oauth/revoke");
+            var url = server.AppendPathSegment("/restapi/oauth/revoke");
             var client = url.WithBasicAuth(appKey, appSecret);
             var requestBody = new { token = token.access_token };
             await client.PostUrlEncodedAsync(requestBody);
