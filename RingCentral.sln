@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{13067057-FB70-49DB-AEE7-C05D844FE2AF}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		dev-notes.md = dev-notes.md
 		README.md = README.md
 		ringcentral.nuspec = ringcentral.nuspec
 	EndProjectSection
