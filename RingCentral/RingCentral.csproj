@@ -46,6 +46,7 @@
     <Compile Include="Definitions\AnsweringRuleInfo_CallerInfo.cs" />
     <Compile Include="Definitions\AnsweringRule_ScheduleInfo.cs" />
     <Compile Include="Definitions\AttachmentInfo.cs" />
+    <Compile Include="Definitions\BillingInfo.cs" />
     <Compile Include="Definitions\BillingPlanInfo.cs" />
     <Compile Include="Definitions\Binary.cs" />
     <Compile Include="Definitions\BlockedNumberInfo.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Definitions\UserPermissionInfo.cs" />
     <Compile Include="Definitions\VersionInfo.cs" />
     <Compile Include="Definitions\VoicemailInfo.cs" />
+    <Compile Include="Definitions\VoicemailMessageInfo.cs" />
     <Compile Include="Definitions\WeeklyScheduleInfo.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="Path\MockPathSegment.cs" />
