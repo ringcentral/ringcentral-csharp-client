@@ -345,10 +345,12 @@ try
 }
 catch (FlurlHttpException fhe)
 {
+    string errorMessage = fhe.GetResponseString();
+    Console.WriteLine(errorMessage);
     if (fhe.Call.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
-	{
-		Console.WriteLine("The resource doesn't exist");
-	}
+    {
+        Console.WriteLine("The resource doesn't exist");
+    }
 }
 ```
 
