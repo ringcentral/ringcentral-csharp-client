@@ -97,6 +97,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="ContactTest.cs" />
     <Compile Include="AccountTest.cs" />
+    <Compile Include="MmsTest.cs" />
     <Compile Include="TtlTest.cs" />
     <Compile Include="ExtensionTest.cs" />
     <Compile Include="EventsTest.cs" />

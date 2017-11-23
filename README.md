@@ -281,6 +281,11 @@ var response = await extension.Fax().Post(new FaxPath.PostParameters
 ```
 
 
+## Send Mms
+
+[Sample code](./RingCentral.Test/MmsTest.cs)
+
+
 ## Binary data
 
 #### Create/Update profile image

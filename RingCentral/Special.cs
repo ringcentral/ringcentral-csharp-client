@@ -18,6 +18,56 @@ namespace RingCentral
     public partial class ExtensionInfo_Request_PartnerId : ExtensionParameters { }
     public partial class ExtensionInfo_Request_Provision : ExtensionParameters { }
 
+    // mms
+    public partial class MmsPath : PathSegment
+    {
+        internal MmsPath(PathSegment parent, string _id = null) : base(parent, _id) { }
+        protected override string Segment
+        {
+            get
+            {
+                return "sms";
+            }
+        }
+        public Task<MessageInfo> Post(object requestBody, IEnumerable<Attachment> attachments)
+        {
+            var multipartFormDataContent = new MultipartFormDataContent();
+            multipartFormDataContent.Headers.ContentType.CharSet = "UTF-8";
+            multipartFormDataContent.Headers.ContentType.MediaType = "multipart/mixed";
+            var jsonBody = JsonConvert.SerializeObject(requestBody, RestClient.jsonSerializerSettings);
+            multipartFormDataContent.Add(new StringContent(jsonBody, Encoding.UTF8, "application/json"));
+            foreach (var attachment in attachments)
+            {
+                var fileContent = new ByteArrayContent(attachment.bytes);
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = attachment.fileName
+                };
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(attachment.contentType);
+                multipartFormDataContent.Add(fileContent);
+            }
+            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<MessageInfo>();
+        }
+        public Task<MessageInfo> Post(PostParameters requestBody, IEnumerable<Attachment> attachments)
+        {
+            return Post(requestBody as object, attachments);
+        }
+        public partial class PostParameters
+        {
+            public CallerInfo @from { get; set; }
+            public CallerInfo[] @to { get; set; }
+            public string text { get; set; }
+
+        }
+    }
+    public partial class ExtensionPath
+    {
+        public MmsPath Mms()
+        {
+            return new MmsPath(this);
+        }
+    }
+
 
     // fax
     public partial class FaxPath
