@@ -22,7 +22,7 @@ namespace RingCentral
     // fax
     public partial class FaxPath
     {
-        public Task<MessageInfo> Post(object requestBody, IEnumerable<Attachment> attachments)
+        public Task<FaxResponse> Post(object requestBody, IEnumerable<Attachment> attachments)
         {
             var multipartFormDataContent = new MultipartFormDataContent();
             multipartFormDataContent.Headers.ContentType.CharSet = "UTF-8";
@@ -39,7 +39,7 @@ namespace RingCentral
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue(attachment.contentType);
                 multipartFormDataContent.Add(fileContent);
             }
-            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<MessageInfo>();
+            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<FaxResponse>();
         }
         //public Task<MessageInfo> Post(PostParameters requestBody, IEnumerable<Attachment> attachments)
         //{

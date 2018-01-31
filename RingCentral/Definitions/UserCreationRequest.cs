@@ -17,6 +17,6 @@ namespace RingCentral
         // User addresses
         public AddressInfoRequest @addresses { get; set; }
         // Urn link
-        //public UrnInfoRequest @urn:ietf:params:scim:schemas:extension:enterprise:2.0:User { get; set; }
+        // public UrnInfoRequest @urn:ietf:params:scim:schemas:extension:enterprise:2.0:User { get; set; }
     }
 }

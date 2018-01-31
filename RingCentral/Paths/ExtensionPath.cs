@@ -59,14 +59,14 @@ namespace RingCentral
         {
             return new MessageSyncPath(this);
         }
-        public RingOutPath RingOut(string _id)
-        {
-            return new RingOutPath(this, _id);
-        }
-        public RingOutPath RingOut()
-        {
-            return new RingOutPath(this);
-        }
+        //public RingOutPath RingOut(string _id)
+        //{
+        //    return new RingOutPath(this, _id);
+        //}
+        //public RingOutPath RingOut()
+        //{
+        //    return new RingOutPath(this);
+        //}
         public DirectRingOutPath DirectRingOut()
         {
             return new DirectRingOutPath(this);
