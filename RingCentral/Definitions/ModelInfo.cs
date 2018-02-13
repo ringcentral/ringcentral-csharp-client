@@ -7,6 +7,6 @@ namespace RingCentral
         // Device name
         public string @name { get; set; }
         // Addons description
-        public AddonInfo @addons { get; set; }
+        public AddonInfo[] @addons { get; set; }
     }
 }

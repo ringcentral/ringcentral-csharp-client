@@ -21,19 +21,17 @@ namespace RingCentral
             return RC.Get<MeetingsResource>(Endpoint(false), null);
         }
         //
-        public async Task<bool> Post()
+        public Task<MeetingResponseResource> Post()
         {
-            await RC.Post(Endpoint(true), null);
-            return true;
+            return RC.Post<MeetingResponseResource>(Endpoint(true), null);
         }
         //
-        public async Task<bool> Post(object parameters)
+        public Task<MeetingResponseResource> Post(object parameters)
         {
-            await RC.Post(Endpoint(true), parameters);
-            return true;
+            return RC.Post<MeetingResponseResource>(Endpoint(true), parameters);
         }
         //
-        public Task<bool> Post(MeetingRequestResource parameters)
+        public Task<MeetingResponseResource> Post(MeetingRequestResource parameters)
         {
             return Post(parameters as object);
         }

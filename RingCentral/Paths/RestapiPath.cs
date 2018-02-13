@@ -51,10 +51,6 @@ namespace RingCentral
         {
             return new NumberPoolPath(this);
         }
-        public ScimPath Scim()
-        {
-            return new ScimPath(this);
-        }
         // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns current API version(s) and server info.</p><h4>Usage Plan Group</h4><p>Light</p>
         public Task<GetVersionsResponse> List()
         {

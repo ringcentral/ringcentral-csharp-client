@@ -2,8 +2,6 @@ namespace RingCentral
 {
     public partial class AddressInfo
     {
-        // Specifies if this is the main user address
-        public bool? @primary { get; set; }
         // User street address
         public string @streetAddress { get; set; }
         // User city

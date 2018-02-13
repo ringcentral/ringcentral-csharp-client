@@ -5,7 +5,7 @@ namespace RingCentral
         //
         public string @lineType { get; set; }
         //
-        public PhoneNumberResource @phoneInfo { get; set; }
+        public PhoneNumberResourceIntId @phoneInfo { get; set; }
         //
         public EmergencyAddress @emergencyAddress { get; set; }
     }

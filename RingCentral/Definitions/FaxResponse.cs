@@ -3,7 +3,7 @@ namespace RingCentral
     public partial class FaxResponse
     {
         // Internal identifier of a message
-        public string @id { get; set; }
+        public long? @id { get; set; }
         // Canonical URI of a message
         public string @uri { get; set; }
         // Message type - 'Fax'
@@ -19,7 +19,7 @@ namespace RingCentral
         // Message priority
         public string @priority { get; set; }
         // The list of message attachments
-        public MessageAttachmentInfo[] @attachments { get; set; }
+        public MessageAttachmentInfoIntId[] @attachments { get; set; }
         // Message direction
         public string @direction { get; set; }
         // Message availability status. Message in 'Deleted' state is still preserved with all its attachments and can be restored. 'Purged' means that all attachments are already deleted and the message itself is about to be physically deleted shortly

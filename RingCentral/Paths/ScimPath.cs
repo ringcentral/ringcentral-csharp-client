@@ -11,6 +11,10 @@ namespace RingCentral
                 return "scim";
             }
         }
+        public ServiceProviderConfigPath ServiceProviderConfig()
+        {
+            return new ServiceProviderConfigPath(this);
+        }
         public UsersPath Users(string _id)
         {
             return new UsersPath(this, _id);

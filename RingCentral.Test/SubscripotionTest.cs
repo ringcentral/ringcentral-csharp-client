@@ -29,7 +29,6 @@ namespace RingCentral.Test
         {
             var subscription = rc.Restapi().Subscription().New();
             subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
-            subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence?detailedTelephonyState=true");
             var presenceCount = 0;
             subscription.PresenceEvent += (sender, args) => {
                 presenceCount += 1;

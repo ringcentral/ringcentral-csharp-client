@@ -3,7 +3,7 @@ namespace RingCentral
     public partial class GetExtensionInfoResponse
     {
         // Internal identifier of an extension
-        public string @id { get; set; }
+        public long? @id { get; set; }
         // Canonical URI of an extension
         public string @uri { get; set; }
         // Contact detailed information

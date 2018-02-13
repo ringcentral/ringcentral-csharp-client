@@ -27,10 +27,6 @@ namespace RingCentral
         {
             return new PersonsPath(this, _id);
         }
-        public PostsPath Posts()
-        {
-            return new PostsPath(this);
-        }
         public FilesPath Files(string _id)
         {
             return new FilesPath(this, _id);

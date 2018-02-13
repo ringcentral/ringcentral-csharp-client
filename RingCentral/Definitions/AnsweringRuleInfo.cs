@@ -4,7 +4,7 @@ namespace RingCentral
     {
         // Canonical URI to the answering rule resource
         public string @uri { get; set; }
-        // Internal identifier of an asnwering rule
+        // Internal identifier of an answering rule
         public string @id { get; set; }
         // Type of an answering rule
         public string @type { get; set; }

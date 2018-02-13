@@ -28,8 +28,6 @@ namespace RingCentral
         }
         public partial class ListParameters
         {
-            // Identifier of a group to filter posts
-            public string @groupId { get; set; }
             // Token of a page to be returned, see Glip Navigation Info
             public string @pageToken { get; set; }
             // Max numbers of records to be returned. The default/maximum value is 250

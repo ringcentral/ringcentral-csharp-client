@@ -21,14 +21,14 @@ namespace RingCentral
         // HardPhone model information
         public DeviceModelResource @model { get; set; }
         // This attribute can be omitted for unassigned devices
-        public ExtensionResource @extension { get; set; }
+        public ExtensionResourceIntId @extension { get; set; }
         // Phone lines information
-        public PhoneLineResource @phoneLines { get; set; }
+        public PhoneLineResource[] @phoneLines { get; set; }
         //  Address for emergency cases. The same emergency address is assigned to all numbers of a single device ,
         public EmergencyServiceAddressResource @emergencyServiceAddress { get; set; }
         // Shipping information, according to which devices (in case of HardPhone ) or e911 stickers (in case of SoftPhone and OtherPhone ) will be delivered to the customer
         public ShippingResource @shipping { get; set; }
-        // Box billing identifier of a device. Applicable only for HardPhones. It is an alternative way to identify the device to be ordered. Either  model structure, or boxBillingId must be specified for HardPhone
+        // Box billing identifier of a device. Applicable only for HardPhones. It is an alternative way to identify the device to be ordered. Either model structure, or boxBillingId must be specified for HardPhone
         public long? @boxBillingId { get; set; }
         // Pooling type of a deviceHost - device with standalone paid phone line which can be linked to Glip/Softphone instanceGuest - device with a linked phone lineNone - device without a phone line or with specific line (free, BLA, etc.) = ['Host', 'Guest', 'None']
         public string @linePooling { get; set; }
