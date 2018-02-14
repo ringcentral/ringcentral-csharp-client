@@ -58,7 +58,7 @@ namespace RingCentral.Test
             Assert.True(str.Length > 0);
 
             // fax
-            message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
+            message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).Last();
             content = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
             Assert.NotNull(content);
             Assert.True(content.data.Length > 0);

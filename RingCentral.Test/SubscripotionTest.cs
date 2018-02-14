@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Xunit;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace RingCentral.Test
 {
@@ -38,18 +41,19 @@ namespace RingCentral.Test
             var messageNotificationCount = 0;
             subscription.NotificationEvent += (sender, args) => {
                 messageCount += 1;
-                var notification = args.notification;
-                switch (notification.type)
-                {
-                    case NotificationType.Message:
-                        var messageNotification = notification.Downcast<MessageNotification>();
-                        messageNotificationCount += 1;
-                        break;
-                    case NotificationType.DetailedPresence:
-                        var detailedPresenceNotification = notification.Downcast<DetailedPresenceNotification>();
-                        break;
-                    default:
-                        break;
+                var message = args.message;
+                Console.WriteLine(message);
+                dynamic jObject = JObject.Parse(message);
+                var eventString = (string)jObject.@event;
+                if(new Regex("/account/\\d+/extension/\\d+/message-store").Match(eventString).Success) {
+                    messageNotificationCount += 1;
+                    Console.WriteLine("hello world 1");
+                    var bodyString = JsonConvert.SerializeObject(jObject.body);
+                    Console.WriteLine("hello world 1");
+                    var messageEvent = JsonConvert.DeserializeObject<MessageEvent>(bodyString);
+                    Console.WriteLine("hello world 3");
+                    Console.WriteLine(messageEvent.extensionId);
+                    Console.WriteLine(messageEvent.changes[0].type);
                 }
             };
             var statusCount = 0;
@@ -59,12 +63,12 @@ namespace RingCentral.Test
             };
             await subscription.Register();
             SendSMS();
-            Thread.Sleep(10000);
+            Thread.Sleep(15000);
             await subscription.Remove();
             Assert.Equal(0, presenceCount);
             Assert.True(messageCount >= 1);
             Assert.True(messageNotificationCount >= 1);
-            Assert.Equal(1, statusCount);
+            Assert.True(statusCount >= 1);
         }
 
         public void Dispose()

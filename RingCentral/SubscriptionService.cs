@@ -29,10 +29,10 @@ namespace RingCentral
     }
     public class NotificatioEventArgs : EventArgs
     {
-        public Notification notification { get; private set; }
-        public NotificatioEventArgs(Notification notification)
+        public string message { get; private set; }
+        public NotificatioEventArgs(string message)
         {
-            this.notification = notification;
+            this.message = message;
         }
     }
 
@@ -105,8 +105,7 @@ namespace RingCentral
             pubnub = new Pubnub(pnConfig);
             pubnub.AddListener(new SubscribeCallbackExt(
                 (pubnubObj, message) => {
-                    var notification = new Notification(Decrypt(message.Message.ToString()));
-                    NotificationEvent?.Invoke(this, new NotificatioEventArgs(notification));
+                    NotificationEvent?.Invoke(this, new NotificatioEventArgs(Decrypt(message.Message.ToString())));
                 }, 
                 (pubnubObj, presence) => {
                     PresenceEvent?.Invoke(this, new SubscriptionEventArgs(presence));

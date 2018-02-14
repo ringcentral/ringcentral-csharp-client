@@ -240,22 +240,14 @@ var subscription = rc.Restapi().Subscription().New();
 subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
 subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence?detailedTelephonyState=true");
 subscription.NotificationEvent += (sender, args) => {
-    var notification = args.notification;
-    Console.WriteLine(notification.json);
-    // If you want to play with plain JSON instead
-    // You can ignore the switch statement below.
-    switch (notification.type)
-    {
-        case NotificationType.Message:
-            var messageNotification = notification.Downcast<MessageNotification>();
-            // do something with messageNotification
-            break;
-        case NotificationType.DetailedPresence:
-            var detailedPresenceNotification = notification.Downcast<DetailedPresenceNotification>();
-            // do something with detailedPresenceNotification
-            break;
-        default:
-            break;
+    var message = args.message;
+    dynamic jObject = JObject.Parse(message);
+    var eventString = (string)jObject.@event;
+    if(new Regex("/account/\\d+/extension/\\d+/message-store").Match(eventString).Success) {
+        var bodyString = JsonConvert.SerializeObject(jObject.body);
+        // If you want to play with raw json string, you can ignore the content below
+        var messageEvent = JsonConvert.DeserializeObject<MessageEvent>(bodyString); // deserialize body to MessageEvent object.
+        Console.WriteLine(messageEvent.changes[0].type);
     }
 };
 await subscription.Register();
