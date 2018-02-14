@@ -47,11 +47,8 @@ namespace RingCentral.Test
                 var eventString = (string)jObject.@event;
                 if(new Regex("/account/\\d+/extension/\\d+/message-store").Match(eventString).Success) {
                     messageNotificationCount += 1;
-                    Console.WriteLine("hello world 1");
                     var bodyString = JsonConvert.SerializeObject(jObject.body);
-                    Console.WriteLine("hello world 1");
                     var messageEvent = JsonConvert.DeserializeObject<MessageEvent>(bodyString);
-                    Console.WriteLine("hello world 3");
                     Console.WriteLine(messageEvent.extensionId);
                     Console.WriteLine(messageEvent.changes[0].type);
                 }
