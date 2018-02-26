@@ -354,6 +354,6 @@ The [unit test project](https://github.com/ringcentral/ringcentral-csharp-client
 Such as this [test class](https://github.com/ringcentral/ringcentral-csharp-client/blob/master/RingCentral.Test/ContactTest.cs).
 
 
-## Lisence
+## License
 
 MIT
