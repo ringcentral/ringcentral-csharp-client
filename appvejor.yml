@@ -1,10 +1,13 @@
-version: 2.1.{build}
-configuration: Release
+version: 1.0.0-{branch}-{build}
+
 image: Visual Studio 2017
 
 branches:
   only:
     - master
+
+init:
+  - dotnet --version
 
 install:
   - nuget restore
