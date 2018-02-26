@@ -1,0 +1,7 @@
+language: csharp
+solution: RingCentral.sln
+dotnet: 2.1.4
+install:
+  - nuget restore RingCentral.sln
+script:
+  - dotnet build
