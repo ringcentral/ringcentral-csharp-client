@@ -1,9 +1,10 @@
 language: csharp
 solution: RingCentral.sln
+dotnet: 2.1.4
 install:
   - nuget restore RingCentral.sln
   - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release RingCentral.sln
+  - dotnet build
   - ls -l ./RingCentral.Test/bin/Release/
-  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./RingCentral.Test/bin/Release/RingCentral.Test.dll
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./RingCentral.Test/bin/Release/netcoreapp2.0/RingCentral.Test.dll
