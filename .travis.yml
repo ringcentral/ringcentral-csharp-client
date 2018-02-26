@@ -6,5 +6,4 @@ install:
   - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
 script:
   - dotnet build
-  - ls -l ./RingCentral.Test/bin/Release/
-  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./RingCentral.Test/bin/Release/netcoreapp2.0/RingCentral.Test.dll
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./RingCentral.Test/bin/Debug/netcoreapp2.0/RingCentral.Test.dll
