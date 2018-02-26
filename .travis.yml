@@ -1,7 +1,11 @@
-language: csharp
+language: csharp  
+mono: none
+dotnet: 2.0.0
+dist: trusty
+sudo: false
 solution: RingCentral.sln
-dotnet: 2.1.4
-install:
-  - nuget restore RingCentral.sln
+
 script:
+  - dotnet restore
   - dotnet build
+  - dotnet test RingCentral.Test/RingCentral.Test.csproj
