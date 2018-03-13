@@ -13,7 +13,9 @@ namespace RingCentral
         {
             var userAgentHeader = string.Join(" ", "RC-CSHARP-CLIENT", userAgent);
             var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams)
-                .WithHeader("User-Agent", userAgentHeader).WithHeader("RC-User-Agent", userAgentHeader);
+                            .WithHeader("User-Agent", userAgentHeader)
+                            .WithHeader("RC-User-Agent", userAgentHeader)
+                            .WithHeader("X-User-Agent", userAgentHeader);
             if (token == null)
             {
                 return url.WithBasicAuth(clientId, clientSecret);
@@ -37,6 +39,11 @@ namespace RingCentral
         public Task<HttpResponseMessage> Put(string endpoint, object requestBody, object queryParams = null)
         {
             return GetClient(endpoint, queryParams).PutJsonAsync(requestBody);
+        }
+
+        public Task<HttpResponseMessage> Patch(string endpoint, object requestBody, object queryParams = null)
+        {
+            return GetClient(endpoint, queryParams).PatchJsonAsync(requestBody);
         }
 
         public Task<HttpResponseMessage> Delete(string endpoint, object queryParams = null)
@@ -82,6 +89,13 @@ namespace RingCentral
         public async Task<T> Put<T>(string endpoint, object requestBody, object queryParams = null)
         {
             var response = await Put(endpoint, requestBody, queryParams);
+            var str = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(str);
+        }
+
+        public async Task<T> Patch<T>(string endpoint, object requestBody, object queryParams = null)
+        {
+            var response = await Patch(endpoint, requestBody, queryParams);
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(str);
         }
