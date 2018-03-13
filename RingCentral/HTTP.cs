@@ -16,7 +16,7 @@ namespace RingCentral
                 .WithHeader("User-Agent", userAgentHeader).WithHeader("RC-User-Agent", userAgentHeader);
             if (token == null)
             {
-                return url.WithBasicAuth(appKey, appSecret);
+                return url.WithBasicAuth(clientId, clientSecret);
             }
             else
             {

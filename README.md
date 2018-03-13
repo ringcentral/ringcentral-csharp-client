@@ -31,19 +31,19 @@ Please note: as a guest reader, you can only read the basic version of API Refer
 ```cs
 using RingCentral;
 
-rc = new RestClient("appKey", "appSecret");
+rc = new RestClient("clientId", "clientSecret");
 ```
 
 By default the clients talk to sandbox server. If you want production server:
 
 ```cs
-rc = new RestClient("appKey", "appSecret", true);
+rc = new RestClient("clientId", "clientSecret", true);
 ```
 
 Or you can specify the server url explicitly:
 
 ```cs
-rc = new RestClient("appKey", "appSecret", "https://platform.devtest.ringcentral.com");
+rc = new RestClient("clientId", "clientSecret", "https://platform.devtest.ringcentral.com");
 ```
 
 

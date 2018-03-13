@@ -1,8 +1,8 @@
 {
     "production": false,
     "server": "apiServer",
-    "appKey": "myAppKey",
-    "appSecret": "myAppSecret",
+    "clientId": "myClientId",
+    "clientSecret": "myClientSecret",
     "username": "myUsername",
     "extension": "myExtension",
 		"password": "myPassword",

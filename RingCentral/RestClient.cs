@@ -23,8 +23,8 @@ namespace RingCentral
         public const string SandboxServer = "https://platform.devtest.ringcentral.com";
         public const string ProductionServer = "https://platform.ringcentral.com";
 
-        public string appKey;
-        public string appSecret;
+        public string clientId;
+        public string clientSecret;
         public string server;
         public int access_token_ttl = 3600;
         public int refresh_token_ttl = 604800;
@@ -37,14 +37,14 @@ namespace RingCentral
             FlurlHttp.Configure(c => c.JsonSerializer = jsonSerializer);
         }
 
-        public RestClient(string appKey, string appSecret, string server)
+        public RestClient(string clientId, string clientSecret, string server)
         {
-            this.appKey = appKey;
-            this.appSecret = appSecret;
+            this.clientId = clientId;
+            this.clientSecret = clientSecret;
             this.server = server;
         }
-        public RestClient(string appKey, string appSecret, bool production = false)
-            : this(appKey, appSecret, production ? ProductionServer : SandboxServer)
+        public RestClient(string clientId, string clientSecret, bool production = false)
+            : this(clientId, clientSecret, production ? ProductionServer : SandboxServer)
         {
         }
 
@@ -81,7 +81,7 @@ namespace RingCentral
         public async Task<TokenInfo> Authorize(string username, string extension, string password)
         {
             var url = server.AppendPathSegment("/restapi/oauth/token");
-            var client = url.WithBasicAuth(appKey, appSecret);
+            var client = url.WithBasicAuth(clientId, clientSecret);
             var requestBody = new
             {
                 username = username,
@@ -124,7 +124,7 @@ namespace RingCentral
                 return null;
             }
             var url = server.AppendPathSegment("/restapi/oauth/token");
-            var client = url.WithBasicAuth(appKey, appSecret);
+            var client = url.WithBasicAuth(clientId, clientSecret);
             var requestBody = new RefreshRequest
             {
                 grant_type = "refresh_token",
@@ -152,7 +152,7 @@ namespace RingCentral
             baseUrl.SetQueryParam("response_type", "code");
             baseUrl.SetQueryParam("state", state);
             baseUrl.SetQueryParam("redirect_uri", redirectUri);
-            baseUrl.SetQueryParam("client_id", appKey);
+            baseUrl.SetQueryParam("client_id", clientId);
             return baseUrl;
         }
 
@@ -173,7 +173,7 @@ namespace RingCentral
         public async Task<TokenInfo> Authorize(string authCode, string redirectUri)
         {
             var url = server.AppendPathSegment("/restapi/oauth/token");
-            var client = url.WithBasicAuth(appKey, appSecret);
+            var client = url.WithBasicAuth(clientId, clientSecret);
             var requestBody = new AuthCodeRequest
             {
                 grant_type = "authorization_code",
@@ -196,7 +196,7 @@ namespace RingCentral
                 return true;
             }
             var url = server.AppendPathSegment("/restapi/oauth/revoke");
-            var client = url.WithBasicAuth(appKey, appSecret);
+            var client = url.WithBasicAuth(clientId, clientSecret);
             var requestBody = new { token = token.access_token };
             await client.PostUrlEncodedAsync(requestBody);
             token = null;

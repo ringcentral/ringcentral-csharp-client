@@ -12,11 +12,11 @@ namespace RingCentral.Test
             RestClient rc = null;
             if (!string.IsNullOrWhiteSpace(Config.Instance.server))
             {
-                rc = new RestClient(Config.Instance.appKey, Config.Instance.appSecret, Config.Instance.server);
+                rc = new RestClient(Config.Instance.clientId, Config.Instance.clientSecret, Config.Instance.server);
             }
             else
             {
-                rc = new RestClient(Config.Instance.appKey, Config.Instance.appSecret, Config.Instance.production.Value);
+                rc = new RestClient(Config.Instance.clientId, Config.Instance.clientSecret, Config.Instance.production.Value);
             }
             await rc.Authorize(Config.Instance.username, Config.Instance.extension, Config.Instance.password);
 
