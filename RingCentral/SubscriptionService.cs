@@ -58,7 +58,7 @@ namespace RingCentral
         private Pubnub pubnub;
         private SubscriptionInfo _subscriptionInfo;
         private bool renewScheduled = false;
-        private SubscriptionInfo subscriptionInfo
+        public SubscriptionInfo subscriptionInfo
         {
             get
             {
