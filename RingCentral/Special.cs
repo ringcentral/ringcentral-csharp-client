@@ -5,7 +5,6 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace RingCentral
@@ -25,26 +24,32 @@ namespace RingCentral
         public Task<FaxResponse> Post(object requestBody, IEnumerable<Attachment> attachments)
         {
             var multipartFormDataContent = new MultipartFormDataContent();
-            multipartFormDataContent.Headers.ContentType.CharSet = "UTF-8";
-            multipartFormDataContent.Headers.ContentType.MediaType = "multipart/mixed";
+            multipartFormDataContent.Headers.ContentType.MediaType = "multipart/form-data";
+
             var jsonBody = JsonConvert.SerializeObject(requestBody, RestClient.jsonSerializerSettings);
-            multipartFormDataContent.Add(new StringContent(jsonBody, Encoding.UTF8, "application/json"));
+            var jsonFileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(jsonBody));
+            jsonFileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name="json",
+                FileName = "request.json"
+            };
+            jsonFileContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            multipartFormDataContent.Add(jsonFileContent);
+
             foreach (var attachment in attachments)
             {
                 var fileContent = new ByteArrayContent(attachment.bytes);
-                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                 {
+                    Name = "attachment",
                     FileName = attachment.fileName
                 };
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue(attachment.contentType);
                 multipartFormDataContent.Add(fileContent);
             }
+
             return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<FaxResponse>();
         }
-        //public Task<MessageInfo> Post(PostParameters requestBody, IEnumerable<Attachment> attachments)
-        //{
-        //    return Post(requestBody as object, attachments);
-        //}
     }
     public class Attachment
     {
