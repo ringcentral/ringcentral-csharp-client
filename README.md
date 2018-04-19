@@ -265,11 +265,27 @@ await subscription.Renew();
 
 ```cs
 var attachment1 = new Attachment { fileName = "test.txt", contentType = "text/plain", bytes = Encoding.UTF8.GetBytes("hello world") };
-var attachment2 = new Attachment { fileName = "test.pdf", contentType = "application/pdf", bytes = File.ReadAllBytes("test.pdf") };
+var attachment2 = new Attachment { fileName = "test.png", contentType = "image/png", bytes = File.ReadAllBytes("test.png") };
 var attachments = new Attachment[] { attachment1, attachment2 };
 var response = await extension.Fax().Post(new FaxPath.PostParameters
 {
     to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } }
+}, attachments);
+```
+
+
+## Send MMS
+
+MMS and SMS share the same API endpoint. You can deem MMS as SMS with attachments
+
+```cs
+var attachment1 = new Attachment { fileName = "test.png", contentType = "image/png", bytes = File.ReadAllBytes("test.png") };
+var attachments = new Attachment[] { attachment1 };
+var response = await extension.Sms().Post(new
+{
+    to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } },
+    from = new CallerInfo { phoneNumber = Config.Instance.username },
+    text = "Hello world again"
 }, attachments);
 ```
 

@@ -17,6 +17,40 @@ namespace RingCentral
     public partial class ExtensionInfo_Request_PartnerId : ExtensionParameters { }
     public partial class ExtensionInfo_Request_Provision : ExtensionParameters { }
 
+    // MMS
+    public partial class SmsPath
+    {
+        public Task<FaxResponse> Post(object requestBody, IEnumerable<Attachment> attachments)
+        {
+            var multipartFormDataContent = new MultipartFormDataContent();
+            multipartFormDataContent.Headers.ContentType.MediaType = "multipart/form-data";
+
+            var jsonBody = JsonConvert.SerializeObject(requestBody, RestClient.jsonSerializerSettings);
+            var jsonFileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(jsonBody));
+            jsonFileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "json",
+                FileName = "request.json"
+            };
+            jsonFileContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            multipartFormDataContent.Add(jsonFileContent);
+
+            foreach (var attachment in attachments)
+            {
+                var fileContent = new ByteArrayContent(attachment.bytes);
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "attachment",
+                    FileName = attachment.fileName
+                };
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(attachment.contentType);
+                multipartFormDataContent.Add(fileContent);
+            }
+
+            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<FaxResponse>();
+        }
+    }
+
 
     // fax
     public partial class FaxPath
