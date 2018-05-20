@@ -20,7 +20,7 @@ namespace RingCentral
     // MMS
     public partial class SmsPath
     {
-        public Task<FaxResponse> Post(object requestBody, IEnumerable<Attachment> attachments)
+        public Task<GetMessageInfoResponse> Post(object requestBody, IEnumerable<Attachment> attachments)
         {
             var multipartFormDataContent = new MultipartFormDataContent();
             multipartFormDataContent.Headers.ContentType.MediaType = "multipart/form-data";
@@ -47,7 +47,7 @@ namespace RingCentral
                 multipartFormDataContent.Add(fileContent);
             }
 
-            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<FaxResponse>();
+            return RC.PostContent(Endpoint(false), multipartFormDataContent).ReceiveJson<GetMessageInfoResponse>();
         }
     }
 
