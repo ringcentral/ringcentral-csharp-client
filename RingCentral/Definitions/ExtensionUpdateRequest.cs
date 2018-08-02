@@ -26,7 +26,7 @@ namespace RingCentral
         public string @password { get; set; }
         // For Department extension type only. Call queue settings
         public CallQueueInfoRequest @callQueueInfo { get; set; }
-        // For NotActivated extensions only. Welcome email setting
-        public string @transition { get; set; }
+        //
+        public UserTransitionInfo[] @transition { get; set; }
     }
 }

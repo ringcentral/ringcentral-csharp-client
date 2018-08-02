@@ -11,28 +11,28 @@ namespace RingCentral
                 return "fax-cover-page";
             }
         }
-        //
+        // Returns fax cover pages available for the current extension.
         public async Task<bool> Get()
         {
             await RC.Get(Endpoint(true), null);
             return true;
         }
-        //
+        // Returns fax cover pages available for the current extension.
         public async Task<bool> Get(object parameters)
         {
             await RC.Get(Endpoint(true), parameters);
             return true;
         }
-        //
+        // Returns fax cover pages available for the current extension.
         public Task<bool> Get(GetParameters parameters)
         {
             return Get(parameters as object);
         }
         public partial class GetParameters
         {
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are accepted
             public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
+            // Indicates the page size (number of items)
             public long? @perPage { get; set; }
         }
     }

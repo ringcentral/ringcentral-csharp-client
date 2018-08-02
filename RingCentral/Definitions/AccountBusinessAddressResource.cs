@@ -5,7 +5,7 @@ namespace RingCentral
         //
         public string @uri { get; set; }
         //
-        public ContactAddressInfo @businessAddress { get; set; }
+        public ContactBusinessAddressInfo @businessAddress { get; set; }
         //
         public string @company { get; set; }
         //

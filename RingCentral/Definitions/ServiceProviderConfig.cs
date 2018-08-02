@@ -18,5 +18,7 @@ namespace RingCentral
         public string[] @schemas { get; set; }
         //
         public Supported @sort { get; set; }
+        //
+        public Supported @xmlDataFormat { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace RingCentral
         public string @certificateName { get; set; }
         // For 'PubNub/APNS' and 'PubNub/GCM' transport types. Identifier of a registration
         public string @registrationId { get; set; }
+        // For 'Webhook' transport type. Subscription verification key ensuring data security
+        public string @verificationToken { get; set; }
     }
 }

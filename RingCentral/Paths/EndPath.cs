@@ -11,7 +11,7 @@ namespace RingCentral
                 return "end";
             }
         }
-        //
+        // Ends a meetings which is in progress.
         public async Task<bool> Post()
         {
             await RC.Post(Endpoint(true), null);

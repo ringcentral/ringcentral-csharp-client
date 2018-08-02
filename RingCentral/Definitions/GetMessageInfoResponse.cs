@@ -10,17 +10,19 @@ namespace RingCentral
         public MessageAttachmentInfo[] @attachments { get; set; }
         // Message availability status. Message in 'Deleted' state is still preserved with all its attachments and can be restored. 'Purged' means that all attachments are already deleted and the message itself is about to be physically deleted shortly
         public string @availability { get; set; }
-        // SMS and Pager only. Identifier of the conversation the message belongs to
+        // SMS and Pager only. Identifier of a conversation the message belongs to
         public long? @conversationId { get; set; }
+        // SMS and Pager only. Identifier of a conversation the message belongs to
+        public ConversationInfo @conversation { get; set; }
         // Message creation datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
         public string @creationTime { get; set; }
         // SMS only. Delivery error code returned by gateway
         public string @deliveryErrorCode { get; set; }
         // Message direction. Note that for some message types not all directions are allowed. For example voicemail messages can be only inbound
         public string @direction { get; set; }
-        // Fax only. Page count in fax message
+        // Fax only. Page count in a fax message
         public long? @faxPageCount { get; set; }
-        // Fax only. Resolution of fax message. ('High' for black and white image scanned at 200 dpi, 'Low' for black and white image scanned at 100 dpi)
+        // Fax only. Resolution of a fax message. 'High' for black and white image scanned at 200 dpi, 'Low' for black and white image scanned at 100 dpi
         public string @faxResolution { get; set; }
         // Sender information
         public MessageStoreCallerInfoResponse @from { get; set; }

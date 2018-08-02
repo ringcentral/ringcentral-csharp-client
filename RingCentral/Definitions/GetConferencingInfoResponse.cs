@@ -12,7 +12,7 @@ namespace RingCentral
         public string @mode { get; set; }
         // Access code for any participant
         public string @participantCode { get; set; }
-        // Primary conference phone number for user's home country returned in E.164 (11-digits) format
+        // Primary conference phone number for user's home country returned in [E.164](https://www.itu.int/rec/T-REC-E.164-201011-I) (11-digits) format
         public string @phoneNumber { get; set; }
         // Short URL leading to the service web page Tap to Join for audio conference bridge
         public string @tapToJoinUri { get; set; }

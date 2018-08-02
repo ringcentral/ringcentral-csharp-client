@@ -27,14 +27,6 @@ namespace RingCentral
         {
             return new ActiveCallsPath(this);
         }
-        public PhoneNumberPath PhoneNumber(string _id)
-        {
-            return new PhoneNumberPath(this, _id);
-        }
-        public PhoneNumberPath PhoneNumber()
-        {
-            return new PhoneNumberPath(this);
-        }
         public SmsPath Sms()
         {
             return new SmsPath(this);
@@ -59,6 +51,10 @@ namespace RingCentral
         {
             return new MessageSyncPath(this);
         }
+        public VoicemailPath Voicemail()
+        {
+            return new VoicemailPath(this);
+        }
         public RingOutPath RingOut(string _id)
         {
             return new RingOutPath(this, _id);
@@ -66,10 +62,6 @@ namespace RingCentral
         public RingOutPath RingOut()
         {
             return new RingOutPath(this);
-        }
-        public DirectRingOutPath DirectRingOut()
-        {
-            return new DirectRingOutPath(this);
         }
         public AddressBookPath AddressBook()
         {
@@ -103,6 +95,14 @@ namespace RingCentral
         {
             return new AuthzProfilePath(this);
         }
+        public BusinessHoursPath BusinessHours()
+        {
+            return new BusinessHoursPath(this);
+        }
+        public CallerBlockingPath CallerBlocking()
+        {
+            return new CallerBlockingPath(this);
+        }
         public ForwardingNumberPath ForwardingNumber(string _id)
         {
             return new ForwardingNumberPath(this, _id);
@@ -110,18 +110,6 @@ namespace RingCentral
         public ForwardingNumberPath ForwardingNumber()
         {
             return new ForwardingNumberPath(this);
-        }
-        public BlockedNumberPath BlockedNumber(string _id)
-        {
-            return new BlockedNumberPath(this, _id);
-        }
-        public BlockedNumberPath BlockedNumber()
-        {
-            return new BlockedNumberPath(this);
-        }
-        public BusinessHoursPath BusinessHours()
-        {
-            return new BusinessHoursPath(this);
         }
         public AnsweringRulePath AnsweringRule(string _id)
         {
@@ -139,13 +127,17 @@ namespace RingCentral
         {
             return new GreetingPath(this);
         }
+        public PhoneNumberPath PhoneNumber(string _id)
+        {
+            return new PhoneNumberPath(this, _id);
+        }
+        public PhoneNumberPath PhoneNumber()
+        {
+            return new PhoneNumberPath(this);
+        }
         public CallerIdPath CallerId()
         {
             return new CallerIdPath(this);
-        }
-        public CredentialsPath Credentials()
-        {
-            return new CredentialsPath(this);
         }
         public GrantPath Grant()
         {
@@ -167,10 +159,6 @@ namespace RingCentral
         {
             return new ConferencingPath(this);
         }
-        public FreeNumbersPath FreeNumbers()
-        {
-            return new FreeNumbersPath(this);
-        }
         public DevicePath Device(string _id)
         {
             return new DevicePath(this, _id);
@@ -179,76 +167,72 @@ namespace RingCentral
         {
             return new DevicePath(this);
         }
-        public ReportingPath Reporting()
+        // Returns basic information about a particular extension of an account.
+        public Task<GetExtensionInfoResponse> Get()
         {
-            return new ReportingPath(this);
+            return RC.Get<GetExtensionInfoResponse>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns the list of extensions created for a particular account. All types of extensions are included in this list.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>API Group</h4><p>Medium</p>
+        // Updates user settings.
+        public Task<GetExtensionInfoResponse> Put()
+        {
+            return RC.Put<GetExtensionInfoResponse>(Endpoint(true), null);
+        }
+        // Updates user settings.
+        public Task<GetExtensionInfoResponse> Put(object parameters)
+        {
+            return RC.Put<GetExtensionInfoResponse>(Endpoint(true), parameters);
+        }
+        // Updates user settings.
+        public Task<GetExtensionInfoResponse> Put(ExtensionUpdateRequest parameters)
+        {
+            return Put(parameters as object);
+        }
+        // Deletes extension(s) by ID(s).
+        public async Task<bool> Delete()
+        {
+            await RC.Delete(Endpoint(true), null);
+            return true;
+        }
+        // Returns the list of extensions created for a particular account. All types of extensions are included in this list.
         public Task<GetExtensionListResponse> List()
         {
             return RC.Get<GetExtensionListResponse>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns the list of extensions created for a particular account. All types of extensions are included in this list.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>API Group</h4><p>Medium</p>
+        // Returns the list of extensions created for a particular account. All types of extensions are included in this list.
         public Task<GetExtensionListResponse> List(object parameters)
         {
             return RC.Get<GetExtensionListResponse>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns the list of extensions created for a particular account. All types of extensions are included in this list.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>API Group</h4><p>Medium</p>
+        // Returns the list of extensions created for a particular account. All types of extensions are included in this list.
         public Task<GetExtensionListResponse> List(ListParameters parameters)
         {
             return List(parameters as object);
         }
         public partial class ListParameters
         {
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are allowed
             public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default.
+            // Indicates the page size (number of items)
             public long? @perPage { get; set; }
-            // Extension current state. Multiple values are supported. If 'Unassigned' is specified, then extensions without extensionNumber are returned. If not specified, then all extensions are returned
+            // Extension current state. Multiple values are supported. If 'Unassigned' is specified, then extensions without extensionNumber are returned. If not specified, then all extensions are returned.
             public string[] @status { get; set; }
             // Extension type. Multiple values are supported
             public string[] @type { get; set; }
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Creates an extension.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditAccounts</td><td>Viewing and updating user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>API Group</h4><p>Medium</p>
-        public Task<ExtensionInfo> Post()
+        // Creates an extension.
+        public Task<ExtensionCreationResponse> Post()
         {
-            return RC.Post<ExtensionInfo>(Endpoint(true), null);
+            return RC.Post<ExtensionCreationResponse>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Creates an extension.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditAccounts</td><td>Viewing and updating user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>API Group</h4><p>Medium</p>
-        public Task<ExtensionInfo> Post(object parameters)
+        // Creates an extension.
+        public Task<ExtensionCreationResponse> Post(object parameters)
         {
-            return RC.Post<ExtensionInfo>(Endpoint(true), parameters);
+            return RC.Post<ExtensionCreationResponse>(Endpoint(true), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Creates an extension.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditAccounts</td><td>Viewing and updating user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>API Group</h4><p>Medium</p>
-        public Task<ExtensionInfo> Post(ExtensionCreationRequest parameters)
+        // Creates an extension.
+        public Task<ExtensionCreationResponse> Post(ExtensionCreationRequest parameters)
         {
             return Post(parameters as object);
-        }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns basic information about a particular extension of an account.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
-        public Task<GetExtensionInfoResponse> Get()
-        {
-            return RC.Get<GetExtensionInfoResponse>(Endpoint(true), null);
-        }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditExtensions</td><td>Viewing and updating my extension info (includes extension name, number, email and phone number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Medium</p>
-        public Task<GetExtensionInfoResponse> Put()
-        {
-            return RC.Put<GetExtensionInfoResponse>(Endpoint(true), null);
-        }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditExtensions</td><td>Viewing and updating my extension info (includes extension name, number, email and phone number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Medium</p>
-        public Task<GetExtensionInfoResponse> Put(object parameters)
-        {
-            return RC.Put<GetExtensionInfoResponse>(Endpoint(true), parameters);
-        }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditExtensions</td><td>Viewing and updating my extension info (includes extension name, number, email and phone number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Medium</p>
-        public Task<GetExtensionInfoResponse> Put(ExtensionUpdateRequest parameters)
-        {
-            return Put(parameters as object);
-        }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Deletes extension(s) by ID(s).</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>EditAccounts</td><td>Viewing and updating user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Medium</p>
-        public async Task<bool> Delete()
-        {
-            await RC.Delete(Endpoint(true), null);
-            return true;
         }
     }
 }

@@ -27,10 +27,6 @@ namespace RingCentral
         {
             return new CallLogPath(this);
         }
-        public CallLogSyncPath CallLogSync()
-        {
-            return new CallLogSyncPath(this);
-        }
         public ActiveCallsPath ActiveCalls()
         {
             return new ActiveCallsPath(this);
@@ -43,33 +39,13 @@ namespace RingCentral
         {
             return new DirectoryPath(this);
         }
-        public BotPath Bot()
-        {
-            return new BotPath(this);
-        }
         public PresencePath Presence()
         {
             return new PresencePath(this);
         }
-        public UserRolePath UserRole(string _id)
-        {
-            return new UserRolePath(this, _id);
-        }
-        public UserRolePath UserRole()
-        {
-            return new UserRolePath(this);
-        }
         public BusinessHoursPath BusinessHours()
         {
             return new BusinessHoursPath(this);
-        }
-        public GreetingPath Greeting(string _id)
-        {
-            return new GreetingPath(this, _id);
-        }
-        public GreetingPath Greeting()
-        {
-            return new GreetingPath(this);
         }
         public AnsweringRulePath AnsweringRule(string _id)
         {
@@ -79,13 +55,13 @@ namespace RingCentral
         {
             return new AnsweringRulePath(this);
         }
-        public IvrMenusPath IvrMenus(string _id)
+        public GreetingPath Greeting(string _id)
         {
-            return new IvrMenusPath(this, _id);
+            return new GreetingPath(this, _id);
         }
-        public IvrMenusPath IvrMenus()
+        public GreetingPath Greeting()
         {
-            return new IvrMenusPath(this);
+            return new GreetingPath(this);
         }
         public IvrPromptsPath IvrPrompts(string _id)
         {
@@ -95,6 +71,14 @@ namespace RingCentral
         {
             return new IvrPromptsPath(this);
         }
+        public IvrMenusPath IvrMenus(string _id)
+        {
+            return new IvrMenusPath(this, _id);
+        }
+        public CallRecordingPath CallRecording()
+        {
+            return new CallRecordingPath(this);
+        }
         public BusinessAddressPath BusinessAddress()
         {
             return new BusinessAddressPath(this);
@@ -102,10 +86,6 @@ namespace RingCentral
         public ServiceInfoPath ServiceInfo()
         {
             return new ServiceInfoPath(this);
-        }
-        public DialingPlanPath DialingPlan()
-        {
-            return new DialingPlanPath(this);
         }
         public PhoneNumberPath PhoneNumber(string _id)
         {
@@ -115,21 +95,21 @@ namespace RingCentral
         {
             return new PhoneNumberPath(this);
         }
-        public DevicePath Device(string _id)
+        public TemplatesPath Templates(string _id)
         {
-            return new DevicePath(this, _id);
+            return new TemplatesPath(this, _id);
         }
-        public DevicePath Device()
+        public TemplatesPath Templates()
         {
-            return new DevicePath(this);
+            return new TemplatesPath(this);
         }
-        public OrderPath Order(string _id)
+        public BotsPath Bots()
         {
-            return new OrderPath(this, _id);
+            return new BotsPath(this);
         }
-        public OrderPath Order()
+        public PagingOnlyGroupsPath PagingOnlyGroups(string _id)
         {
-            return new OrderPath(this);
+            return new PagingOnlyGroupsPath(this, _id);
         }
         public LicensesPath Licenses(string _id)
         {
@@ -139,23 +119,31 @@ namespace RingCentral
         {
             return new LicensesPath(this);
         }
-        public DepartmentPath Department(string _id)
+        public CallQueuesPath CallQueues(string _id)
         {
-            return new DepartmentPath(this, _id);
+            return new CallQueuesPath(this, _id);
         }
-        public DepartmentPath Department()
+        public CallQueuesPath CallQueues()
         {
-            return new DepartmentPath(this);
+            return new CallQueuesPath(this);
         }
-        public PagingOnlyGroupsPath PagingOnlyGroups(string _id)
+        public CallMonitoringGroupsPath CallMonitoringGroups(string _id)
         {
-            return new PagingOnlyGroupsPath(this, _id);
+            return new CallMonitoringGroupsPath(this, _id);
         }
-        public ParkLocationsPath ParkLocations(string _id)
+        public CallMonitoringGroupsPath CallMonitoringGroups()
         {
-            return new ParkLocationsPath(this, _id);
+            return new CallMonitoringGroupsPath(this);
         }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns basic information about a particular RingCentral customer account.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
+        public DevicePath Device(string _id)
+        {
+            return new DevicePath(this, _id);
+        }
+        public DevicePath Device()
+        {
+            return new DevicePath(this);
+        }
+        // Returns basic information about a particular RingCentral customer account.
         public Task<GetAccountInfoResponse> Get()
         {
             return RC.Get<GetAccountInfoResponse>(Endpoint(true), null);

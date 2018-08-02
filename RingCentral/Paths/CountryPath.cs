@@ -11,17 +11,17 @@ namespace RingCentral
                 return "country";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns all the countries available for calling.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns all the countries available for calling.
         public Task<GetCountryListResponse> List()
         {
             return RC.Get<GetCountryListResponse>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns all the countries available for calling.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns all the countries available for calling.
         public Task<GetCountryListResponse> List(object parameters)
         {
             return RC.Get<GetCountryListResponse>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns all the countries available for calling.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns all the countries available for calling.
         public Task<GetCountryListResponse> List(ListParameters parameters)
         {
             return List(parameters as object);
@@ -34,14 +34,14 @@ namespace RingCentral
             public bool? @signupAllowed { get; set; }
             // Specifies if RingCentral sells phone numbers of this country
             public bool? @numberSelling { get; set; }
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are accepted
             public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
+            // Indicates the page size (number of items)
             public long? @perPage { get; set; }
             // Specifies if free phone line for softphone is available for a country or not
             public bool? @freeSoftphoneLine { get; set; }
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns the information on the required country.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns the information on a specific country.
         public Task<GetCountryInfoDictionaryResponse> Get()
         {
             return RC.Get<GetCountryInfoDictionaryResponse>(Endpoint(true), null);

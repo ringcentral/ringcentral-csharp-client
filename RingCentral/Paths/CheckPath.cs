@@ -11,17 +11,17 @@ namespace RingCentral
                 return "check";
             }
         }
-        //
+        // Checks if a certain user permission is activated for a particular extension.
         public Task<AuthProfileCheckResource> Get()
         {
             return RC.Get<AuthProfileCheckResource>(Endpoint(true), null);
         }
-        //
+        // Checks if a certain user permission is activated for a particular extension.
         public Task<AuthProfileCheckResource> Get(object parameters)
         {
             return RC.Get<AuthProfileCheckResource>(Endpoint(true), parameters);
         }
-        //
+        // Checks if a certain user permission is activated for a particular extension.
         public Task<AuthProfileCheckResource> Get(GetParameters parameters)
         {
             return Get(parameters as object);

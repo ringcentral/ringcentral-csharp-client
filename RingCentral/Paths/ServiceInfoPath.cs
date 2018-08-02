@@ -11,7 +11,7 @@ namespace RingCentral
                 return "service-info";
             }
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns the information about service plan, available features and limitations for a particular RingCentral customer account.
         public Task<GetServiceInfoResponse> Get()
         {
             return RC.Get<GetServiceInfoResponse>(Endpoint(true), null);

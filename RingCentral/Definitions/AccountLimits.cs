@@ -2,13 +2,17 @@ namespace RingCentral
 {
     public partial class AccountLimits
     {
-        // The maximum number of free softphone phone lines per user extension
+        // Max number of free softphone phone lines per user extension
         public long? @freeSoftPhoneLinesPerExtension { get; set; }
-        // The maximum number of participants in RingCentral Meeting hosted by this account's user
+        // Max number of participants in RingCentral Meeting hosted by this account's user
         public long? @meetingSize { get; set; }
-        // The maximum number of extensions which can be included in the list of users monitored for Presence
+        // Max number of extensions which can be included in the list of users monitored for Presence
         public long? @maxMonitoredExtensionsPerUser { get; set; }
-        // Maximum length for extension numbers of an account; depends on account type. The default value is 5
+        // Max length of extension numbers of an account; depends on account type
         public long? @maxExtensionNumberLength { get; set; }
+        // Length of a site code
+        public long? @siteCodeLength { get; set; }
+        // Length of a short extension number
+        public long? @shortExtensionNumberLength { get; set; }
     }
 }

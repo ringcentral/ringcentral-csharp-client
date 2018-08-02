@@ -11,7 +11,7 @@ namespace RingCentral
         // Forwarding/Call flip number title
         public string @label { get; set; }
         // Type of option this phone number is used for. Multiple values are accepted
-        public string @features { get; set; }
+        public string[] @features { get; set; }
         // Number assigned to the call flip phone number, corresponds to the shortcut dial number
         public long? @flipNumber { get; set; }
     }

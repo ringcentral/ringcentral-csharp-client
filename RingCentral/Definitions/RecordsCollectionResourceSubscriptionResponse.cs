@@ -5,6 +5,6 @@ namespace RingCentral
         //
         public string @uri { get; set; }
         //
-        public SubscriptionResponse[] @records { get; set; }
+        public SubscriptionInfo[] @records { get; set; }
     }
 }

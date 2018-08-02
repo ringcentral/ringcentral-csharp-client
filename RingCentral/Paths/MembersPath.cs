@@ -11,26 +11,26 @@ namespace RingCentral
                 return "members";
             }
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
-        public Task<DepartmentMemberList> List()
+        // Returns call queue group members.
+        public Task<CallQueueMembers> List()
         {
-            return RC.Get<DepartmentMemberList>(Endpoint(false), null);
+            return RC.Get<CallQueueMembers>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
-        public Task<DepartmentMemberList> List(object parameters)
+        // Returns call queue group members.
+        public Task<CallQueueMembers> List(object parameters)
         {
-            return RC.Get<DepartmentMemberList>(Endpoint(false), parameters);
+            return RC.Get<CallQueueMembers>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadAccounts</td><td>Viewing user account info (including name, business name, address and phone number/account number)</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
-        public Task<DepartmentMemberList> List(ListParameters parameters)
+        // Returns call queue group members.
+        public Task<CallQueueMembers> List(ListParameters parameters)
         {
             return List(parameters as object);
         }
         public partial class ListParameters
         {
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are allowed
             public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
+            // Indicates the page size (number of items)
             public long? @perPage { get; set; }
         }
     }

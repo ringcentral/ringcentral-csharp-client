@@ -11,10 +11,6 @@ namespace RingCentral
                 return "glip";
             }
         }
-        public CompaniesPath Companies(string _id)
-        {
-            return new CompaniesPath(this, _id);
-        }
         public GroupsPath Groups(string _id)
         {
             return new GroupsPath(this, _id);
@@ -23,21 +19,33 @@ namespace RingCentral
         {
             return new GroupsPath(this);
         }
-        public PersonsPath Persons(string _id)
-        {
-            return new PersonsPath(this, _id);
-        }
-        public FilesPath Files(string _id)
-        {
-            return new FilesPath(this, _id);
-        }
         public FilesPath Files()
         {
             return new FilesPath(this);
         }
-        public ProfilePath Profile()
+        public CardsPath Cards(string _id)
         {
-            return new ProfilePath(this);
+            return new CardsPath(this, _id);
+        }
+        public CardsPath Cards()
+        {
+            return new CardsPath(this);
+        }
+        public PersonsPath Persons(string _id)
+        {
+            return new PersonsPath(this, _id);
+        }
+        public CompaniesPath Companies(string _id)
+        {
+            return new CompaniesPath(this, _id);
+        }
+        public WebhooksPath Webhooks(string _id)
+        {
+            return new WebhooksPath(this, _id);
+        }
+        public WebhooksPath Webhooks()
+        {
+            return new WebhooksPath(this);
         }
     }
 }

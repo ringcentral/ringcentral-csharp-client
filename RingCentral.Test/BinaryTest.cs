@@ -74,7 +74,7 @@ namespace RingCentral.Test
             var queryParams = new CallLogPath.ListParameters
             {
                 type = new string[] { "Voice" },
-                view = new string[] { "Detailed" },
+                view = "Detailed",
                 dateFrom = DateTime.UtcNow.AddDays(-365).ToString("o"),
                 withRecording = true,
                 perPage = 10,

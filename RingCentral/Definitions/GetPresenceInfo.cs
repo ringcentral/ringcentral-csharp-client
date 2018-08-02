@@ -22,6 +22,8 @@ namespace RingCentral
         public string @telephonyStatus { get; set; }
         // User-defined presence status (as previously published by the user)
         public string @userStatus { get; set; }
+        // Zoom Meetings presence
+        public string @meetingsStatus { get; set; }
         // Information on active calls
         public ActiveCallInfo[] @activeCalls { get; set; }
     }

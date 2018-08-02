@@ -3,7 +3,7 @@ namespace RingCentral
     public partial class NotificationInfo
     {
         // Alert information
-        public AlertInfo @alerts { get; set; }
+        public AlertInfo @alert { get; set; }
         // Number of incoming messages
         public string @badge { get; set; }
         // Message sound

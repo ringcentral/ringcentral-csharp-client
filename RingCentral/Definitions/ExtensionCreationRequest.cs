@@ -10,15 +10,19 @@ namespace RingCentral
         public string @password { get; set; }
         // List of non-RC internal identifiers assigned to an extension
         public ReferenceInfo[] @references { get; set; }
+        //
+        public Roles[] @roles { get; set; }
         // Extension region data (timezone, home country, language)
         public RegionalSettings @regionalSettings { get; set; }
-        // Specifies extension configuration wizard state (web service setup). The default value is 'NotStarted' = ['NotStarted', 'Incomplete', 'Completed']
+        // Specifies extension configuration wizard state (web service setup).
         public string @setupWizardState { get; set; }
-        // Extension current state = ['Enabled', 'Disabled', 'NotActivated', 'Unassigned']
+        // Extension current state
         public string @status { get; set; }
         // Status information (reason, comment). For 'Disabled' status only
         public ExtensionStatusInfo @statusInfo { get; set; }
-        // Extension type = ['User', 'VirtualUser', 'DigitalUser', 'Department']
+        // Extension type
         public string @type { get; set; }
+        // Hides extension from showing in company directory. Supported for extensions of User type only. For unassigned extensions the value is set to 'True' by default. For assigned extensions the value is set to 'False' by default
+        public bool? @hidden { get; set; }
     }
 }

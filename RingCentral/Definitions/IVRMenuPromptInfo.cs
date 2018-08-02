@@ -2,7 +2,7 @@ namespace RingCentral
 {
     public partial class IVRMenuPromptInfo
     {
-        // Prompt mode: custom media or text = ['Audio', 'TextToSpeech']
+        // Prompt mode: custom media or text
         public string @mode { get; set; }
         // For 'Audio' mode only. Prompt media reference
         public PromptLanguageInfo @audio { get; set; }

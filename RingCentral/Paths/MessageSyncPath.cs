@@ -11,17 +11,17 @@ namespace RingCentral
                 return "message-sync";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.4 (Release 5.13)</p><p>Provides facilities to synchronize mailbox content stored externally with server state.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadMessages</td><td>Viewing user messages</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
+        // Synchronizes messages.
         public Task<GetMessageSyncResponse> List()
         {
             return RC.Get<GetMessageSyncResponse>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.4 (Release 5.13)</p><p>Provides facilities to synchronize mailbox content stored externally with server state.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadMessages</td><td>Viewing user messages</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
+        // Synchronizes messages.
         public Task<GetMessageSyncResponse> List(object parameters)
         {
             return RC.Get<GetMessageSyncResponse>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.4 (Release 5.13)</p><p>Provides facilities to synchronize mailbox content stored externally with server state.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadMessages</td><td>Viewing user messages</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Light</p>
+        // Synchronizes messages.
         public Task<GetMessageSyncResponse> List(ListParameters parameters)
         {
             return List(parameters as object);

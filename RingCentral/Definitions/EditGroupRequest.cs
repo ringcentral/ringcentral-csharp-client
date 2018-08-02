@@ -2,7 +2,7 @@ namespace RingCentral
 {
     public partial class EditGroupRequest
     {
-        // List of users to be added to the team
+        // List of users to be added to a team
         public string[] @addedPersonIds { get; set; }
         // List of user email addresses to be added to the team (i.e. as guests)
         public string[] @addedPersonEmails { get; set; }

@@ -14,7 +14,7 @@ namespace RingCentral
         public CallLogCallerInfo @to { get; set; }
         // Call type = ['Voice', 'Fax']
         public string @type { get; set; }
-        // Call direction = ['Inbound', 'Outbound']
+        // Call direction
         public string @direction { get; set; }
         // The call start datetime in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z
         public string @startTime { get; set; }

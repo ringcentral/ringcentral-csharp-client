@@ -4,7 +4,7 @@ namespace RingCentral
     {
         // Phone number of the caller. This number corresponds to the 1st leg of the RingOut call. This number can be one of user's configured forwarding numbers or arbitrary number
         public MakeRingOutCallerInfoRequestFrom @from { get; set; }
-        // Phone number of the called party. This number corresponds to the 2nd leg of the RingOut call
+        // Phone number of the called party. This number corresponds to the 2nd leg of a RingOut call
         public MakeRingOutCallerInfoRequestTo @to { get; set; }
         // The number which will be displayed to the called party
         public MakeRingOutCallerInfoRequestTo @callerId { get; set; }

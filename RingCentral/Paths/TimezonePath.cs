@@ -11,49 +11,49 @@ namespace RingCentral
                 return "timezone";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns all available timezones.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns all available timezones.
         public Task<GetTimezoneListResponse> List()
         {
             return RC.Get<GetTimezoneListResponse>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns all available timezones.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns all available timezones.
         public Task<GetTimezoneListResponse> List(object parameters)
         {
             return RC.Get<GetTimezoneListResponse>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns all available timezones.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns all available timezones.
         public Task<GetTimezoneListResponse> List(ListParameters parameters)
         {
             return List(parameters as object);
         }
         public partial class ListParameters
         {
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are accepted
             public string @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
+            // Indicates the page size (number of items)
             public string @perPage { get; set; }
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns the information on a certain timezone.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns the information on a certain timezone.
         public Task<GetTimezoneInfoResponse> Get()
         {
             return RC.Get<GetTimezoneInfoResponse>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns the information on a certain timezone.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns the information on a certain timezone.
         public Task<GetTimezoneInfoResponse> Get(object parameters)
         {
             return RC.Get<GetTimezoneInfoResponse>(Endpoint(true), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.10 (Release 6.2)</p><p>Returns the information on a certain timezone.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns the information on a certain timezone.
         public Task<GetTimezoneInfoResponse> Get(GetParameters parameters)
         {
             return Get(parameters as object);
         }
         public partial class GetParameters
         {
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
-            public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
-            public long? @perPage { get; set; }
+            // Indicates the page number to retrieve. Only positive number values are accepted
+            public string @page { get; set; }
+            // Indicates the page size (number of items)
+            public string @perPage { get; set; }
         }
     }
 }

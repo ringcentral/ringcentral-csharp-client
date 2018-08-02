@@ -10,7 +10,7 @@ namespace RingCentral
         public string @sku { get; set; }
         // Device type. The default value is 'HardPhone'
         public string @type { get; set; }
-        // Device name. Mandatory if ordering  SoftPhone  or  OtherPhone . Optional for  HardPhone . If not specified for HardPhone, then device model  name is used as device  name
+        // Device name. Mandatory if ordering  SoftPhone  or  OtherPhone . Optional for  HardPhone . If not specified for HardPhone, then device  model  name is used as device  name
         public string @name { get; set; }
         // Serial number for HardPhone (is returned only when the phone is shipped and provisioned); endpoint_id for softphone and mobile applications
         public string @serial { get; set; }
@@ -24,7 +24,7 @@ namespace RingCentral
         public EmergencyAddressInfo @emergencyServiceAddress { get; set; }
         // Phone lines information
         public PhoneLinesInfo[] @phoneLines { get; set; }
-        // Shipping information, according to which devices (in case of HardPhone ) or e911 stickers (in case of  SoftPhone  and  OtherPhone ) will be delivered to the customer
+        // Shipping information, according to which devices (in case of  HardPhone ) or e911 stickers (in case of  SoftPhone  and  OtherPhone ) will be delivered to the customer
         public ShippingInfo @shipping { get; set; }
         // Box billing identifier of a device. Applicable only for HardPhones. It is an alternative way to identify the device to be ordered. EitherT? model  structure, or  boxBillingId  must be specified forT?HardPhone
         public long? @boxBillingId { get; set; }

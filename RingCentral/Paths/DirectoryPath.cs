@@ -23,13 +23,5 @@ namespace RingCentral
         {
             return new FederationPath(this);
         }
-        public FederationConflictsPath FederationConflicts()
-        {
-            return new FederationConflictsPath(this);
-        }
-        public ExtensionNumbersPath ExtensionNumbers()
-        {
-            return new ExtensionNumbersPath(this);
-        }
     }
 }

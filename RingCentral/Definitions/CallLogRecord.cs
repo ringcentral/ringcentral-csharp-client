@@ -30,7 +30,15 @@ namespace RingCentral
         public string @lastModifiedTime { get; set; }
         // For 'Detailed' view only. Call transport
         public string @transport { get; set; }
+        // Information about extension on whose behalf a call is initiated. For Secretary call log the Boss extension info is returned
+        public ActiveCallsRecordExtensionInfo @extension { get; set; }
+        // Information on a delegate extension that actually implemented a call action. For Secretary call log the field is returned if the current extension implemented a call. For Boss call log the field contains information on a Secretary extension which actually implemented a call on behalf of the current extension
+        public DelegateInfo @delegate { get; set; }
         // For 'Detailed' view only. Leg description
         public CallLogRecordLegInfo[] @legs { get; set; }
+        //
+        public CallLogRecordMessage @message { get; set; }
+        // Returned only if this call was deleted. Value is set to 'True' in this case
+        public bool? @deleted { get; set; }
     }
 }

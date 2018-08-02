@@ -11,30 +11,32 @@ namespace RingCentral
                 return "active-calls";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.13 (Release 6.5)</p><p>Returns records of all extension calls that are in progress, ordered by start time in descending order.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadCallLog</td><td>Viewing user call logs</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
-        public Task<ExtensionActiveCallsResponse> List()
+        // Returns records of all extension calls that are in progress, ordered by start time in descending order.
+        public Task<ActiveCallsResponse> List()
         {
-            return RC.Get<ExtensionActiveCallsResponse>(Endpoint(false), null);
+            return RC.Get<ActiveCallsResponse>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.13 (Release 6.5)</p><p>Returns records of all extension calls that are in progress, ordered by start time in descending order.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadCallLog</td><td>Viewing user call logs</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
-        public Task<ExtensionActiveCallsResponse> List(object parameters)
+        // Returns records of all extension calls that are in progress, ordered by start time in descending order.
+        public Task<ActiveCallsResponse> List(object parameters)
         {
-            return RC.Get<ExtensionActiveCallsResponse>(Endpoint(false), parameters);
+            return RC.Get<ActiveCallsResponse>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.13 (Release 6.5)</p><p>Returns records of all extension calls that are in progress, ordered by start time in descending order.</p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadCallLog</td><td>Viewing user call logs</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
-        public Task<ExtensionActiveCallsResponse> List(ListParameters parameters)
+        // Returns records of all extension calls that are in progress, ordered by start time in descending order.
+        public Task<ActiveCallsResponse> List(ListParameters parameters)
         {
             return List(parameters as object);
         }
         public partial class ListParameters
         {
-            // The direction for the result records. It is allowed to specify more than one direction. If not specified, both inbound and outbound records are returned. Multiple values are accepted
+            // The direction for the result records. If not specified, both inbound and outbound records are returned. Multiple values are accepted
             public string[] @direction { get; set; }
-            // Call type of a record. It is allowed to specify more than one type. If not specified, all call types are returned. Multiple values are accepted
+            //
+            public string @view { get; set; }
+            // Call type of a record. If not specified, all call types are returned. Multiple values are accepted
             public string[] @type { get; set; }
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are allowed
             public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
+            // Indicates the page size (number of items)
             public long? @perPage { get; set; }
         }
     }

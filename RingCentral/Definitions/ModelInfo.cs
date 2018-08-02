@@ -8,5 +8,7 @@ namespace RingCentral
         public string @name { get; set; }
         // Addons description
         public AddonInfo[] @addons { get; set; }
+        // Device feature or multiple features supported
+        public string[] @features { get; set; }
     }
 }

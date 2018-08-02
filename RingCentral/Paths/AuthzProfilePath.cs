@@ -15,7 +15,7 @@ namespace RingCentral
         {
             return new CheckPath(this);
         }
-        //
+        // Returns a list of user permissions granted at authorization procedure. Please note: Some permissions may be restricted by extension type.
         public Task<AuthProfileResource> Get()
         {
             return RC.Get<AuthProfileResource>(Endpoint(true), null);

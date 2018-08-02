@@ -11,17 +11,17 @@ namespace RingCentral
                 return "contact";
             }
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Returns user personal contacts.
         public Task<ContactList> List()
         {
             return RC.Get<ContactList>(Endpoint(false), null);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Returns user personal contacts.
         public Task<ContactList> List(object parameters)
         {
             return RC.Get<ContactList>(Endpoint(false), parameters);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Returns user personal contacts.
         public Task<ContactList> List(ListParameters parameters)
         {
             return List(parameters as object);
@@ -30,51 +30,61 @@ namespace RingCentral
         {
             // If specified, only contacts whose First name or Last name start with the mentioned substring are returned. Case-insensitive
             public string @startsWith { get; set; }
-            // Sorts results by the specified property. The default is 'First Name'
+            // Sorts results by the specified property
             public string[] @sortBy { get; set; }
-            // Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'
+            // Indicates the page number to retrieve. Only positive number values are accepted
             public long? @page { get; set; }
-            // Indicates the page size (number of items). If not specified, the value is '100' by default
+            // Indicates the page size (number of items)
             public long? @perPage { get; set; }
             //
             public string[] @phoneNumber { get; set; }
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Creates personal user contact.
         public Task<PersonalContactResource> Post()
         {
             return RC.Post<PersonalContactResource>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Creates personal user contact.
         public Task<PersonalContactResource> Post(object parameters)
         {
             return RC.Post<PersonalContactResource>(Endpoint(true), parameters);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
-        public Task<PersonalContactResource> Post(PersonalContactResource parameters)
+        // Creates personal user contact.
+        public Task<PersonalContactResource> Post(PostParameters parameters)
         {
             return Post(parameters as object);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        public partial class PostParameters
+        {
+            // A country code value complying with the [ISO 3166-1 alpha-2](https://ru.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. The default value is home country of the current extension
+            public string @dialingPlan { get; set; }
+        }
+        // Returns contact(s) by ID(s). Batch request is supported.
         public Task<PersonalContactResource> Get()
         {
             return RC.Get<PersonalContactResource>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Updates personal contact information by contact ID(s). Batch request is supported
         public Task<PersonalContactResource> Put()
         {
             return RC.Put<PersonalContactResource>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        // Updates personal contact information by contact ID(s). Batch request is supported
         public Task<PersonalContactResource> Put(object parameters)
         {
             return RC.Put<PersonalContactResource>(Endpoint(true), parameters);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
-        public Task<PersonalContactResource> Put(PersonalContactResource parameters)
+        // Updates personal contact information by contact ID(s). Batch request is supported
+        public Task<PersonalContactResource> Put(PutParameters parameters)
         {
             return Put(parameters as object);
         }
-        // <p style='font-style:italic;'></p><p></p><h4>Required Permissions</h4><table class='fullwidth'><thead><tr><th>Permission</th><th>Description</th></tr></thead><tbody><tr><td class='code'>Contacts</td><td>Creating, viewing, editing and deleting user personal contacts</td></tr><tr><td class='code'>ReadContacts</td><td>Viewing user personal contacts</td></tr></tbody></table><h4>Usage Plan Group</h4><p>Heavy</p>
+        public partial class PutParameters
+        {
+            // A country code value complying with the [ISO 3166-1 alpha-2](https://ru.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. The default value is home country of the current extension
+            public string @dialingPlan { get; set; }
+        }
+        // Deletes contact(s) by ID(s). Batch request is supported.
         public async Task<bool> Delete()
         {
             await RC.Delete(Endpoint(true), null);

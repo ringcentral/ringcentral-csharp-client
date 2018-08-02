@@ -2,25 +2,15 @@ namespace RingCentral
 {
     public partial class DetailedExtensionPresenceWithSIPEvent
     {
-        // Internal identifier of an extension. Optional parameter
-        public string @extensionId { get; set; }
-        // Telephony presence status. Returned if telephony status is changed.
-        public string @telephonyStatus { get; set; }
-        // Collection of Active Call Info
-        public ActiveCallInfo[] @activeCalls { get; set; }
-        // Order number of a notification to state the chronology
-        public long? @sequence { get; set; }
-        // Aggregated presence status, calculated from a number of sources
-        public string @presenceStatus { get; set; }
-        // User-defined presence status (as previously published by the user)
-        public string @userStatus { get; set; }
-        // Extended DnD (Do not Disturb) status
-        public string @dndStatus { get; set; }
-        // If 'True' enables other extensions to see the extension presence status
-        public bool? @allowSeeMyPresence { get; set; }
-        // If 'True' enables to ring extension phone, if any user monitored by this extension is ringing
-        public bool? @ringOnMonitoredCall { get; set; }
-        // If 'True' enables the extension user to pick up a monitored line on hold
-        public bool? @pickUpCallsOnHold { get; set; }
+        // Universally unique identifier of a notification
+        public string @uuid { get; set; }
+        // Event filter URI
+        public string @event { get; set; }
+        // Datetime of sending a notification in [ISO 8601](shttps://en.wikipedia.org/wiki/ISO_8601) format including timezone, for example *2016-03-10T18:07:52.534Z*
+        public string @timestamp { get; set; }
+        // Internal identifier of a subscription
+        public string @subscriptionId { get; set; }
+        // Notification payload body
+        public DetailedExtensionPresenceWithSIPEventBody @body { get; set; }
     }
 }

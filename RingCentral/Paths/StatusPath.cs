@@ -11,7 +11,7 @@ namespace RingCentral
                 return "status";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.27 (Release 8.3)</p><p>Returns the API status; status '200' means the API is working fine, and '503' means it is temporary unavailable.</p><h4>API Group</h4><p>Light</p>
+        // Returns current PAS service status.
         public async Task<bool> Get()
         {
             await RC.Get(Endpoint(true), null);

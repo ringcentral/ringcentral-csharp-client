@@ -47,19 +47,10 @@ namespace RingCentral
         {
             return new NumberParserPath(this);
         }
-        public NumberPoolPath NumberPool()
+        // Returns current API version(s) and server info.
+        public Task<GetVersionsResponse> Get()
         {
-            return new NumberPoolPath(this);
-        }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns current API version(s) and server info.</p><h4>Usage Plan Group</h4><p>Light</p>
-        public Task<GetVersionsResponse> List()
-        {
-            return RC.Get<GetVersionsResponse>(Endpoint(false), null);
-        }
-        // <p style='font-style:italic;'>Since 1.0.0</p><p>Returns current API version info by apiVersion.</p><h4>Usage Plan Group</h4><p>Light</p>
-        public Task<GetVersionResponse> Get()
-        {
-            return RC.Get<GetVersionResponse>(Endpoint(true), null);
+            return RC.Get<GetVersionsResponse>(Endpoint(true), null);
         }
     }
 }

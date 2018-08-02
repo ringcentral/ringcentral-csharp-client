@@ -18,6 +18,8 @@ namespace RingCentral
         public string[] @addedPersonIds { get; set; }
         // For PersonsRemoved post type only. Identifiers of persons removed from a group
         public string[] @removedPersonIds { get; set; }
+        // List of at mentions in post text with names.
+        public GlipMentionsInfo[] @mentions { get; set; }
         // Post creation datetime in ISO 8601 format
         public string @creationTime { get; set; }
         // Post last change datetime in ISO 8601 format

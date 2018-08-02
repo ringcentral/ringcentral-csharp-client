@@ -11,7 +11,7 @@ namespace RingCentral
                 return "license-types";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.31 (Release 9.2)</p><p>Returns supported license types.</p><h4>API Group</h4><p>Light</p>
+        // Returns supported license types.
         public Task<LicenseTypes> List()
         {
             return RC.Get<LicenseTypes>(Endpoint(false), null);

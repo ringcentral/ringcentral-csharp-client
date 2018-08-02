@@ -20,15 +20,15 @@ namespace RingCentral
         public string @lastModifiedTime { get; set; }
         // List of posted attachments
         public GlipMessageAttachmentInfo[] @attachments { get; set; }
-        // List of posted attachments
+        //
         public GlipMentionsInfo[] @mentions { get; set; }
-        // activity type
+        // label of activity type
         public string @activity { get; set; }
-        // Title of the message. Can be set for bot messages only
+        // Title of the message. (Can be set for bot's messages only).
         public string @title { get; set; }
-        // URI to an image to use as the icon for this message.
+        // URI to an image to use as the icon for this message
         public string @iconUri { get; set; }
-        // Emoji to use as the icon for a message
+        // Emoji to use as the icon for a message.
         public string @iconEmoji { get; set; }
     }
 }

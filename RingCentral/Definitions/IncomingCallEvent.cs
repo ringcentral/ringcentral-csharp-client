@@ -20,7 +20,7 @@ namespace RingCentral
         public string @sessionId { get; set; }
         // Identifier of a server
         public string @serverId { get; set; }
-        // Phone number of a caller
+        // Phone number of a caller. For GCM transport type '_from' property should be used
         public string @from { get; set; }
         // Caller name
         public string @fromName { get; set; }
@@ -40,5 +40,7 @@ namespace RingCentral
         public string @recUrl { get; set; }
         // Notification lifetime value in seconds, the default value is 30 seconds
         public long? @pn_ttl { get; set; }
+        // Internal identifier of a subscription owner extension
+        public string @ownerId { get; set; }
     }
 }

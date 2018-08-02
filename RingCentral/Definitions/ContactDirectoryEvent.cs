@@ -28,5 +28,7 @@ namespace RingCentral
         public SiteInfo @site { get; set; }
         // Extension profile image information. Not returned if profile images are absent for an extension
         public CompanyDirectoryProfileImageInfo @profileImage { get; set; }
+        // Internal identifier of a subscription owner extension
+        public string @ownerId { get; set; }
     }
 }

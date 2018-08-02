@@ -11,17 +11,17 @@ namespace RingCentral
                 return "parse";
             }
         }
-        // <p style='font-style:italic;'>Since 1.0.13 (Release 6.5)</p><p>Returns one or more parsed and/or formatted phone numbers that are passed as a string.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns one or more parsed and/or formatted phone numbers that are passed as a string.
         public Task<ParsePhoneNumberResponse> Post()
         {
             return RC.Post<ParsePhoneNumberResponse>(Endpoint(true), null);
         }
-        // <p style='font-style:italic;'>Since 1.0.13 (Release 6.5)</p><p>Returns one or more parsed and/or formatted phone numbers that are passed as a string.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns one or more parsed and/or formatted phone numbers that are passed as a string.
         public Task<ParsePhoneNumberResponse> Post(object parameters)
         {
             return RC.Post<ParsePhoneNumberResponse>(Endpoint(true), parameters);
         }
-        // <p style='font-style:italic;'>Since 1.0.13 (Release 6.5)</p><p>Returns one or more parsed and/or formatted phone numbers that are passed as a string.</p><h4>Usage Plan Group</h4><p>Light</p>
+        // Returns one or more parsed and/or formatted phone numbers that are passed as a string.
         public Task<ParsePhoneNumberResponse> Post(PostParameters parameters)
         {
             return Post(parameters as object);
