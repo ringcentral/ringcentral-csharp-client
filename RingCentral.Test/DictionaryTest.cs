@@ -45,7 +45,7 @@ namespace RingCentral.Test
         {
             var methodInfo = rc.Restapi().GetType().GetMethod("Dictionary");
             var parameters = methodInfo.GetParameters();
-            Assert.Equal(0, parameters.Length);
+            Assert.Empty(parameters);
         }
 
         public void Dispose()

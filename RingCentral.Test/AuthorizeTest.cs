@@ -47,7 +47,7 @@ namespace RingCentral.Test
             }
             catch (FlurlHttpException fhe)
             {
-                Assert.Equal(fhe.Call.Response.StatusCode, HttpStatusCode.BadRequest);
+                Assert.Equal(HttpStatusCode.BadRequest, fhe.Call.Response.StatusCode);
             }
         }
 

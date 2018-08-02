@@ -13,9 +13,9 @@
     <copyright>Copyright 2016 - 2018</copyright>
     <tags>RingCentral Ring Central C# Client</tags>
     <dependencies>
-        <dependency id="Flurl" version="2.6.0" />
-        <dependency id="Flurl.Http" version="2.1.1" />
-        <dependency id="PubnubPCL" version="4.0.13" />
+        <dependency id="Flurl" version="2.8.0" />
+        <dependency id="Flurl.Http" version="2.3.2" />
+        <dependency id="PubnubPCL" version="4.0.19" />
     </dependencies>
   </metadata>
   <files>

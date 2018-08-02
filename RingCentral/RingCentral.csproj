@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Flurl" Version="2.6.0" />
-    <PackageReference Include="Flurl.Http" Version="2.1.1" />
-    <PackageReference Include="PubnubPCL" Version="4.0.13" />
+    <PackageReference Include="Flurl" Version="2.8.0" />
+    <PackageReference Include="Flurl.Http" Version="2.3.2" />
+    <PackageReference Include="PubnubPCL" Version="4.0.19" />
   </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ namespace RingCentral.Test
             rc.access_token_ttl = 1800;
             var token = await rc.Authorize(Config.Instance.username, "", Config.Instance.password);
             Assert.Equal(1800, rc.access_token_ttl);
-            Assert.Equal(true, token.expires_in > 1700 && token.expires_in < 1900);
+            Assert.True(token.expires_in > 1700 && token.expires_in < 1900);
         }
 
         public void Dispose()
