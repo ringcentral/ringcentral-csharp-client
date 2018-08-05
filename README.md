@@ -371,6 +371,12 @@ catch (FlurlHttpException fhe)
 ```
 
 
+## Events
+
+- `RestClient` class has EventHandler `TokenRefreshed`, so that every time token refreshed you can get a notification
+
+
+
 ## Sample code
 
 The [unit test project](https://github.com/ringcentral/ringcentral-csharp-client/tree/master/RingCentral.Test) contains lots of useful code snippets.
