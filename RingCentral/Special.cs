@@ -9,14 +9,6 @@ using System.Threading.Tasks;
 
 namespace RingCentral
 {
-    // Extension put requestBody is an enum
-    public interface ExtensionParameters { }
-    public partial class ExtensionInfo_Request_StatusInfo : ExtensionParameters { }
-    public partial class ExtensionInfo_Request_ContactInfo : ExtensionParameters { }
-    public partial class ExtensionInfo_Request_PasswordPIN : ExtensionParameters { }
-    public partial class ExtensionInfo_Request_PartnerId : ExtensionParameters { }
-    public partial class ExtensionInfo_Request_Provision : ExtensionParameters { }
-
     // MMS
     public partial class SmsPath
     {
