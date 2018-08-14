@@ -20,6 +20,11 @@ namespace RingCentral
     {
         public event EventHandler<TokenEventArgs> TokenRefreshed;
 
+        public static Action<HttpCall> AfterCall = null;
+        private static Action<HttpCall> afterCall = null;
+        public static Func<HttpCall, Task> AfterCallAsync = null;
+        private static Func<HttpCall, Task> afterCallAsync = null;
+
         public const string SandboxServer = "https://platform.devtest.ringcentral.com";
         public const string ProductionServer = "https://platform.ringcentral.com";
 
@@ -34,7 +39,27 @@ namespace RingCentral
         static RestClient()
         {
             var jsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings);
-            FlurlHttp.Configure(c => c.JsonSerializer = jsonSerializer);
+            afterCall = (httpCall) =>
+            {
+                if (AfterCall != null)
+                {
+                    AfterCall(httpCall);
+                }
+            };
+            afterCallAsync = (httpCall) =>
+            {
+                if (AfterCallAsync != null)
+                {
+                    return AfterCallAsync(httpCall);
+                }
+                return Task.FromResult(0);
+            };
+            FlurlHttp.Configure(c =>
+            {
+                c.JsonSerializer = jsonSerializer;
+                c.AfterCall = afterCall;
+                c.AfterCallAsync = afterCallAsync;
+            });
         }
 
         public RestClient(string clientId, string clientSecret, string server)
