@@ -386,3 +386,10 @@ Such as this [test class](https://github.com/ringcentral/ringcentral-csharp-clie
 ## License
 
 MIT
+
+
+## Common issues
+
+### You must add a reference to assembly netstandard
+
+Ref: https://github.com/dotnet/standard/issues/542
