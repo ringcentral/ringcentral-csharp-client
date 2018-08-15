@@ -16,14 +16,7 @@ namespace RingCentral
                             .WithHeader("User-Agent", userAgentHeader)
                             .WithHeader("RC-User-Agent", userAgentHeader)
                             .WithHeader("X-User-Agent", userAgentHeader);
-            if (token == null)
-            {
-                return url.WithBasicAuth(clientId, clientSecret);
-            }
-            else
-            {
-                return url.WithOAuthBearerToken(token.access_token);
-            }
+            return url.WithOAuthBearerToken(token.access_token);
         }
 
         public Task<HttpResponseMessage> Get(string endpoint, object queryParams = null)
