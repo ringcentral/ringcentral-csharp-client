@@ -62,11 +62,13 @@ namespace RingCentral
             });
         }
 
+        private FlurlClient flurlClient;
         public RestClient(string clientId, string clientSecret, string server)
         {
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.server = server;
+            flurlClient = new FlurlClient(server);
         }
         public RestClient(string clientId, string clientSecret, bool production = false)
             : this(clientId, clientSecret, production ? ProductionServer : SandboxServer)

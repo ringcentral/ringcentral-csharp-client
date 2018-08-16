@@ -12,11 +12,11 @@ namespace RingCentral
         private IFlurlRequest GetClient(string endpoint, object queryParams = null)
         {
             var userAgentHeader = string.Join(" ", "RC-CSHARP-CLIENT", userAgent);
-            var url = server.AppendPathSegment(endpoint).SetQueryParams(queryParams)
-                            .WithHeader("User-Agent", userAgentHeader)
-                            .WithHeader("RC-User-Agent", userAgentHeader)
-                            .WithHeader("X-User-Agent", userAgentHeader);
-            return url.WithOAuthBearerToken(token.access_token);
+            return flurlClient.Request(endpoint).SetQueryParams(queryParams)
+                       .WithHeader("User-Agent", userAgentHeader)
+                       .WithHeader("RC-User-Agent", userAgentHeader)
+                       .WithHeader("X-User-Agent", userAgentHeader)
+                       .WithOAuthBearerToken(token.access_token);
         }
 
         public Task<HttpResponseMessage> Get(string endpoint, object queryParams = null)
