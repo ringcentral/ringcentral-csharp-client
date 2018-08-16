@@ -17,16 +17,21 @@ namespace RingCentral.Test
         [Fact]
         public async void AfterCall()
         {
-            RestClient.AfterCall = (httpCall) =>
+            var count = 0;
+            EventHandler<HttpCallEventArgs> eventHandler = (object sender, HttpCallEventArgs args) =>
             {
-                var rateLimitRemaining = httpCall.Response.Headers.GetValues("X-Rate-Limit-Remaining").FirstOrDefault();
+                var rateLimitRemaining = args.HttpCall.Response.Headers.GetValues("X-Rate-Limit-Remaining").FirstOrDefault();
                 Console.WriteLine(rateLimitRemaining);
+                count += 1;
             };
+            rc.AfterHttpCall += eventHandler;
+
             const string phoneNumber = "+15889546648";
             var addressBook = rc.Restapi().Account().Extension().AddressBook();
-
             var listt = await addressBook.Contact().List(new { phoneNumber = phoneNumber });
-            RestClient.AfterCall = null;
+
+            rc.AfterHttpCall -= eventHandler;
+            Assert.Equal(1, count);
         }
 
         public void Dispose()

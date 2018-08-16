@@ -374,7 +374,9 @@ catch (FlurlHttpException fhe)
 ## Events
 
 - `RestClient` class has EventHandler `TokenRefreshed`, so that every time token refreshed you can get a notification
-
+    - [Sample code](https://github.com/ringcentral/ringcentral-csharp-client/blob/master/RingCentral.Test/EventsTest.cs)
+- `RestClient` class has EventHandler `AfterHttpCall`, so that after every HTTP call you can a notification
+    - [Sample code](https://github.com/ringcentral/ringcentral-csharp-client/blob/master/RingCentral.Test/AfterCallTest.cs)
 
 
 ## Sample code

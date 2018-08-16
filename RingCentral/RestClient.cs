@@ -16,14 +16,18 @@ namespace RingCentral
         }
     }
 
+    public class HttpCallEventArgs : EventArgs
+    {
+        public HttpCall HttpCall { get; private set; }
+        public HttpCallEventArgs(HttpCall httpCall) {
+            HttpCall = httpCall;
+        }
+    }
+
     public partial class RestClient
     {
         public event EventHandler<TokenEventArgs> TokenRefreshed;
-
-        public static Action<HttpCall> AfterCall = null;
-        private static Action<HttpCall> afterCall = null;
-        public static Func<HttpCall, Task> AfterCallAsync = null;
-        private static Func<HttpCall, Task> afterCallAsync = null;
+        public event EventHandler<HttpCallEventArgs> AfterHttpCall;
 
         public const string SandboxServer = "https://platform.devtest.ringcentral.com";
         public const string ProductionServer = "https://platform.ringcentral.com";
@@ -34,31 +38,18 @@ namespace RingCentral
         public int access_token_ttl = 3600;
         public int refresh_token_ttl = 604800;
 
+        private void AfterCall(HttpCall httpCall) {
+            AfterHttpCall?.Invoke(this, new HttpCallEventArgs(httpCall));
+        }
+
         public static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore };
 
         static RestClient()
         {
             var jsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings);
-            afterCall = (httpCall) =>
-            {
-                if (AfterCall != null)
-                {
-                    AfterCall(httpCall);
-                }
-            };
-            afterCallAsync = (httpCall) =>
-            {
-                if (AfterCallAsync != null)
-                {
-                    return AfterCallAsync(httpCall);
-                }
-                return Task.FromResult(0);
-            };
             FlurlHttp.Configure(c =>
             {
                 c.JsonSerializer = jsonSerializer;
-                c.AfterCall = afterCall;
-                c.AfterCallAsync = afterCallAsync;
             });
         }
 
@@ -69,6 +60,10 @@ namespace RingCentral
             this.clientSecret = clientSecret;
             this.server = server;
             flurlClient = new FlurlClient(server);
+            flurlClient.Configure(c =>
+            {
+                c.AfterCall = AfterCall;
+            });
         }
         public RestClient(string clientId, string clientSecret, bool production = false)
             : this(clientId, clientSecret, production ? ProductionServer : SandboxServer)
