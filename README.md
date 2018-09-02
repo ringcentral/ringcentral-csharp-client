@@ -270,15 +270,7 @@ await subscription.Renew();
 
 ## Send Fax
 
-```cs
-var attachment1 = new Attachment { fileName = "test.txt", contentType = "text/plain", bytes = Encoding.UTF8.GetBytes("hello world") };
-var attachment2 = new Attachment { fileName = "test.png", contentType = "image/png", bytes = File.ReadAllBytes("test.png") };
-var attachments = new Attachment[] { attachment1, attachment2 };
-var response = await extension.Fax().Post(new FaxPath.PostParameters
-{
-    to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } }
-}, attachments);
-```
+[Sample code](./RingCentral.Test/FaxTest.cs)
 
 
 ## Send MMS
