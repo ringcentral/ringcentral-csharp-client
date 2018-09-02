@@ -243,23 +243,7 @@ var str = await response.Content.ReadAsStringAsync(); // get response string
 
 ## Subscription
 
-```cs
-var subscription = rc.Restapi().Subscription().New();
-subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/message-store");
-subscription.EventFilters.Add("/restapi/v1.0/account/~/extension/~/presence?detailedTelephonyState=true");
-subscription.NotificationEvent += (sender, args) => {
-    var message = args.message;
-    dynamic jObject = JObject.Parse(message);
-    var eventString = (string)jObject.@event;
-    if(new Regex("/account/\\d+/extension/\\d+/message-store").Match(eventString).Success) {
-        var bodyString = JsonConvert.SerializeObject(jObject.body);
-        // If you want to play with raw json string, you can ignore the content below
-        var messageEvent = JsonConvert.DeserializeObject<MessageEvent>(bodyString); // deserialize body to MessageEvent object.
-        Console.WriteLine(messageEvent.changes[0].type);
-    }
-};
-await subscription.Register();
-```
+[Sample code](./RingCentral.Test/SubscripotionTest.cs)
 
 The subscription will renew itself automatically before it expires. In rare cases you might need to renew it manually:
 
@@ -277,71 +261,18 @@ await subscription.Renew();
 
 MMS and SMS share the same API endpoint. You can deem MMS as SMS with attachments
 
-```cs
-var attachment1 = new Attachment { fileName = "test.png", contentType = "image/png", bytes = File.ReadAllBytes("test.png") };
-var attachments = new Attachment[] { attachment1 };
-var response = await extension.Sms().Post(new
-{
-    to = new CallerInfo[] { new CallerInfo { phoneNumber = Config.Instance.receiver } },
-    from = new CallerInfo { phoneNumber = Config.Instance.username },
-    text = "Hello world again"
-}, attachments);
-```
+[Sample code](./RingCentral.Test/MMSTest.cs)
 
 
 ## Binary data
 
 #### Create/Update profile image
 
-```cs
-// create
-var bytes = File.ReadAllBytes("test.png");
-var response = await extension.ProfileImage().Post(bytes, "test.png");
-
-// update
-var bytes = File.ReadAllBytes("test.png");
-var response = await extension.ProfileImage().Put(bytes, "test.png");
-```
-
 #### Get message content
-
-```cs
-var response = await extension.MessageStore().List()
-var messages = response.records;
-
-// sms
-var message = messages.Where(m => m.type == "SMS" && m.attachments != null && m.attachments.Length > 0).First();
-var content = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
-var str = System.Text.Encoding.UTF8.GetString(content.data);
-
-// fax
-message = messages.Where(m => m.type == "Fax" && m.attachments != null && m.attachments.Length > 0).First();
-content = await extension.MessageStore(message.id).Content(message.attachments[0].id).Get();
-File.WriteAllBytes("test.pdf", content.data);
-```
-
 
 #### Download call recording
 
-```cs
-var account = rc.Restapi().Account();
-
-// List call Logs
-var queryParams = new CallLogPath.ListParameters
-{
-    type = "Voice",
-    view = "Detailed",
-    dateFrom = DateTime.UtcNow.AddDays(-100).ToString("o"),
-    withRecording = true,
-    perPage = 10,
-};
-var callLogs = await account.CallLog().List(queryParams);
-
-// download a call recording
-var callLog = callLogs.records[0];
-var content = await account.Recording(callLog.recording.id).Content().Get();
-File.WriteAllBytes("test.wav", content.data);
-```
+[Sample code](./RingCentral.Test/BinaryTest.cs)
 
 
 ## Exception handling
