@@ -10,10 +10,10 @@ namespace RingCentral
         public string @street2 { get; set; }
         // City name
         public string @city { get; set; }
-        // State/province name
-        public string @state { get; set; }
         // Zip code
         public string @zip { get; set; }
+        // State/province name
+        public string @state { get; set; }
         // Country name
         public string @country { get; set; }
     }

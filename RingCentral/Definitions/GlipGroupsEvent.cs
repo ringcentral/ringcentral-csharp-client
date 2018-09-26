@@ -14,9 +14,9 @@ namespace RingCentral
         public string @description { get; set; }
         // Identifier(s) of group members
         public string[] @members { get; set; }
-        // Group creation datetime in ISO 8601 format
+        // Group creation datetime in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @creationTime { get; set; }
-        // Group last change datetime in ISO 8601 format
+        // Group last change datetime in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @lastModifiedTime { get; set; }
         // Type of a group event. Only the person who joined/was added to a group will receive 'GroupJoined' notification. Only the person who left/was removed from a group will receive 'GroupLeft' notification
         public string @eventType { get; set; }

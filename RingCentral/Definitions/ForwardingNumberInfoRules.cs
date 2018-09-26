@@ -10,5 +10,7 @@ namespace RingCentral
         public string @phoneNumber { get; set; }
         // Title of a forwarding number
         public string @label { get; set; }
+        // Type of a forwarding number
+        public string @type { get; set; }
     }
 }

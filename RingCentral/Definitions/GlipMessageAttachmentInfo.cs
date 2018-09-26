@@ -8,8 +8,6 @@ namespace RingCentral
         public string @type { get; set; }
         // A string of default text that will be rendered in the case that the client does not support Interactive Messages
         public string @fallback { get; set; }
-        // A Hex color code that determines the color of the side border of the Interactive Message
-        public string @color { get; set; }
         // A pretext to the message
         public string @intro { get; set; }
         // Information about the author
@@ -26,5 +24,27 @@ namespace RingCentral
         public GlipMessageAttachmentFieldsInfo[] @fields { get; set; }
         // Message Footer
         public GlipMessageAttachmentFootnoteInfo @footnote { get; set; }
+        // Internal identifier of a person created an event
+        public string @creatorId { get; set; }
+        // Datetime of starting an event
+        public string @startTime { get; set; }
+        // Datetime of ending an event
+        public string @endTime { get; set; }
+        // Indicates whether an event has some specific time slot or lasts for the whole day(s)
+        public bool? @allDay { get; set; }
+        // Event recurrence settings.
+        public string @recurrence { get; set; }
+        // Condition of ending
+        public string @endingCondition { get; set; }
+        // Count of iterations. For periodic events only
+        public long? @endingAfter { get; set; }
+        // Iterations end datetime for periodic events
+        public string @endingOn { get; set; }
+        // Hex color code specifying font color of Event title, including its presentation in Calendar; or the color of the side border of an interactive message of a Card
+        public string @color { get; set; }
+        // Event location
+        public string @location { get; set; }
+        // Event details
+        public string @description { get; set; }
     }
 }

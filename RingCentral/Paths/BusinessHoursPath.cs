@@ -17,17 +17,17 @@ namespace RingCentral
             return RC.Get<GetUserBusinessHoursResponse>(Endpoint(true), null);
         }
         // Updates the extension user hours when answering rules are to be applied.
-        public Task<UserBusinessHoursUpdate> Put()
+        public Task<UserBusinessHoursUpdateResponse> Put()
         {
-            return RC.Put<UserBusinessHoursUpdate>(Endpoint(true), null);
+            return RC.Put<UserBusinessHoursUpdateResponse>(Endpoint(true), null);
         }
         // Updates the extension user hours when answering rules are to be applied.
-        public Task<UserBusinessHoursUpdate> Put(object parameters)
+        public Task<UserBusinessHoursUpdateResponse> Put(object parameters)
         {
-            return RC.Put<UserBusinessHoursUpdate>(Endpoint(true), parameters);
+            return RC.Put<UserBusinessHoursUpdateResponse>(Endpoint(true), parameters);
         }
         // Updates the extension user hours when answering rules are to be applied.
-        public Task<UserBusinessHoursUpdate> Put(UserBusinessHoursUpdateRequest parameters)
+        public Task<UserBusinessHoursUpdateResponse> Put(UserBusinessHoursUpdateRequest parameters)
         {
             return Put(parameters as object);
         }

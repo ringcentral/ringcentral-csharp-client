@@ -19,6 +19,22 @@ namespace RingCentral
         {
             return new PostsPath(this);
         }
+        public EventsPath Events(string _id)
+        {
+            return new EventsPath(this, _id);
+        }
+        public EventsPath Events()
+        {
+            return new EventsPath(this);
+        }
+        public NotesPath Notes(string _id)
+        {
+            return new NotesPath(this, _id);
+        }
+        public NotesPath Notes()
+        {
+            return new NotesPath(this);
+        }
         public WebhooksPath Webhooks(string _id)
         {
             return new WebhooksPath(this, _id);
@@ -46,7 +62,7 @@ namespace RingCentral
         {
             // Type of groups to be fetched (by default all type of groups will be fetched)
             public string @type { get; set; }
-            // Max number of groups to be fetched by one request (Not more than 250).
+            // Max number of groups to be fetched by one request.
             public double? @recordCount { get; set; }
             // Pagination token.
             public string @pageToken { get; set; }

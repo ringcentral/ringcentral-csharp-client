@@ -51,10 +51,6 @@ namespace RingCentral
         {
             return new MessageSyncPath(this);
         }
-        public VoicemailPath Voicemail()
-        {
-            return new VoicemailPath(this);
-        }
         public RingOutPath RingOut(string _id)
         {
             return new RingOutPath(this, _id);
@@ -210,6 +206,8 @@ namespace RingCentral
         }
         public partial class ListParameters
         {
+            // Extension number to retrieve
+            public string @extensionId { get; set; }
             // Indicates the page number to retrieve. Only positive number values are allowed
             public long? @page { get; set; }
             // Indicates the page size (number of items)

@@ -31,6 +31,22 @@ namespace RingCentral
         {
             return new CardsPath(this);
         }
+        public EventsPath Events(string _id)
+        {
+            return new EventsPath(this, _id);
+        }
+        public EventsPath Events()
+        {
+            return new EventsPath(this);
+        }
+        public NotesPath Notes(string _id)
+        {
+            return new NotesPath(this, _id);
+        }
+        public NotesPath Notes()
+        {
+            return new NotesPath(this);
+        }
         public PersonsPath Persons(string _id)
         {
             return new PersonsPath(this, _id);

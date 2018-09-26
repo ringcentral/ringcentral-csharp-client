@@ -2,11 +2,11 @@ namespace RingCentral
 {
     public partial class GlipMessageAttachmentAuthorInfo
     {
-        // The author name
+        // Name of a message author
         public string @name { get; set; }
-        // Used to link the authors name
+        // Link to an author's name
         public string @uri { get; set; }
-        // A url to an image up to 82x82px that will display to the left of the author’s name
+        // Link to an image displayed to the left of an author's name; sized 82x82px
         public string @iconUri { get; set; }
     }
 }

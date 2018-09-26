@@ -143,6 +143,10 @@ namespace RingCentral
         {
             return new DevicePath(this);
         }
+        public TelephonyPath Telephony()
+        {
+            return new TelephonyPath(this);
+        }
         // Returns basic information about a particular RingCentral customer account.
         public Task<GetAccountInfoResponse> Get()
         {

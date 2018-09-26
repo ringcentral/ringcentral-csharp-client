@@ -11,17 +11,17 @@ namespace RingCentral
                 return "cards";
             }
         }
-        // Creates a new card.
+        // Creates a new message.
         public Task<GlipMessageAttachmentInfo> Post()
         {
             return RC.Post<GlipMessageAttachmentInfo>(Endpoint(true), null);
         }
-        // Creates a new card.
+        // Creates a new message.
         public Task<GlipMessageAttachmentInfo> Post(object parameters)
         {
             return RC.Post<GlipMessageAttachmentInfo>(Endpoint(true), parameters);
         }
-        // Creates a new card.
+        // Creates a new message.
         public Task<GlipMessageAttachmentInfo> Post(PostParameters parameters)
         {
             return Post(parameters as object);

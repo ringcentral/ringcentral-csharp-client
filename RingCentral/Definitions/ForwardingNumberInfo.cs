@@ -14,5 +14,7 @@ namespace RingCentral
         public string[] @features { get; set; }
         // Number assigned to the call flip phone number, corresponds to the shortcut dial number
         public long? @flipNumber { get; set; }
+        // Forwarding phone number type
+        public string @type { get; set; }
     }
 }

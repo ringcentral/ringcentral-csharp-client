@@ -14,5 +14,7 @@ namespace RingCentral
         public string[] @features { get; set; }
         //
         public string @flipNumber { get; set; }
+        // Forwarding phone number type
+        public string @type { get; set; }
     }
 }

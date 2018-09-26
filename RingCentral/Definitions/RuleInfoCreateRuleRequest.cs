@@ -6,7 +6,7 @@ namespace RingCentral
         public long? @index { get; set; }
         // Number of rings for a forwarding number (or group). For inactive numbers the default value ('4') is returned
         public long? @ringCount { get; set; }
-        // Phone number status. Returned only if `showInactiveNumbers` is set to `true`
+        // Phone number status
         public bool? @enabled { get; set; }
         // Forwarding number (or group) data
         public ForwardingNumberInfoRulesCreateRuleRequest[] @forwardingNumbers { get; set; }

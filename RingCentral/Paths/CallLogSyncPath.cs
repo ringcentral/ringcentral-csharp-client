@@ -38,6 +38,8 @@ namespace RingCentral
             public long? @recordCount { get; set; }
             // Type of calls to be returned. The default value is 'All'
             public string[] @statusGroup { get; set; }
+            // View of call records. The same view parameter specified for FSync will be applied for ISync, the view cannot be changed for ISync
+            public string @view { get; set; }
         }
     }
 }

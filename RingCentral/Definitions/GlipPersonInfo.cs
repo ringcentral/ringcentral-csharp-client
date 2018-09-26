@@ -14,9 +14,9 @@ namespace RingCentral
         public string @avatar { get; set; }
         // Internal identifier of a company
         public string @companyId { get; set; }
-        // Time of creation in ISO 8601 format
+        // Time of creation in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @creationTime { get; set; }
-        // Time of last modification in ISO 8601 format
+        // Time of the last modification in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @lastModifiedTime { get; set; }
     }
 }

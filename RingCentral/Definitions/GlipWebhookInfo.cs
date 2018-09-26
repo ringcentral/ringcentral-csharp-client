@@ -2,19 +2,19 @@ namespace RingCentral
 {
     public partial class GlipWebhookInfo
     {
-        // ID of the webhook
+        // Internal identifier of a webhook
         public string @id { get; set; }
-        // ID of user whe created webhook
+        // Internal identifier of the user who created a webhook
         public string @creatorId { get; set; }
-        // IDs of groups where webhook has been created
+        // Internal identifiers of groups where a webhook has been created
         public string[] @groupsId { get; set; }
-        // Webhook creation time in ISO 8601 format
+        // Webhook creation time in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @creationTime { get; set; }
-        // Webhook last update time in ISO 8601 format
+        // Webhook last update time in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @lastModifiedTime { get; set; }
-        // Public url to send webhook's payload
+        // Public link to send a webhook payload
         public string @uri { get; set; }
-        // Current status of the webhook, one of 'Active', 'Suspended' or 'Deleted'
+        // Current status of a webhook
         public string @status { get; set; }
     }
 }

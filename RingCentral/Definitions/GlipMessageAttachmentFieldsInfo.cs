@@ -2,11 +2,11 @@ namespace RingCentral
 {
     public partial class GlipMessageAttachmentFieldsInfo
     {
-        // Title for an individual field
+        // Title of an individual field
         public string @title { get; set; }
-        // Field Value (Supports Markdown)
+        // Value of an individual field (supports Markdown)
         public string @value { get; set; }
-        // A style used to flag fields that should span the width of the message, Defaults to 'Short' (Not full width)
+        // Style of width span applied to a field
         public string @style { get; set; }
     }
 }

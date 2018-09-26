@@ -36,14 +36,14 @@ namespace RingCentral
             public string @phoneNumber { get; set; }
             // The direction for the resulting records. If not specified, both inbound and outbound records are returned. Multiple values are accepted
             public string[] @direction { get; set; }
-            //
+            // Internal identifier of a session
             public string @sessionId { get; set; }
             // Call type of a record. It is allowed to specify more than one type. If not specified, all call types are returned. Multiple values are accepted
             public string[] @type { get; set; }
             // Call transport type. 'PSTN' specifies that a call leg is initiated from the PSTN network provider; 'VoIP' - from an RC phone. By default this filter is disabled
             public string[] @transport { get; set; }
-            //
-            public string @view { get; set; }
+            // View of call records. The same view parameter specified for FSync will be applied for ISync, the view cannot be changed for ISync
+            public string[] @view { get; set; }
             // True should be specified to return recorded calls only
             public bool? @withRecording { get; set; }
             // The end datetime for resulting records in ISO 8601 format including timezone, for example 2016-03-10T18:07:52.534Z. The default value is current time
@@ -106,7 +106,7 @@ namespace RingCentral
         }
         public partial class GetParameters
         {
-            //
+            // View of call records. The same view parameter specified for FSync will be applied for ISync, the view cannot be changed for ISync
             public string @view { get; set; }
         }
     }

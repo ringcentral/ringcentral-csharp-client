@@ -11,7 +11,7 @@ namespace RingCentral
                 return "companies";
             }
         }
-        // Returns information about a company by ID.
+        // Returns information about a company or multiple companies by ID(s)
         public Task<GlipCompany> Get()
         {
             return RC.Get<GlipCompany>(Endpoint(true), null);

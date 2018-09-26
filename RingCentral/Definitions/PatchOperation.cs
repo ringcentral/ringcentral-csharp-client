@@ -7,6 +7,6 @@ namespace RingCentral
         //
         public string @path { get; set; }
         // corresponding 'value' of that field specified by 'path'
-        public object @value { get; set; }
+        public string @value { get; set; }
     }
 }

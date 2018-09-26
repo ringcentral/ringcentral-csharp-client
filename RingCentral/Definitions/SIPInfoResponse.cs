@@ -16,5 +16,7 @@ namespace RingCentral
         public string @transport { get; set; }
         // For TLS transport only Base64 encoded certificate
         public string @certificate { get; set; }
+        // The interval in seconds after which the app must try to switch back to primary proxy if it was previously switched to backup. If this parameter is not returned, the app must stay on backup proxy and try to switch to primary proxy after the next SIP-provision call.
+        public long? @switchBackInterval { get; set; }
     }
 }

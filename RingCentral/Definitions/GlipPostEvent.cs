@@ -20,9 +20,9 @@ namespace RingCentral
         public string[] @removedPersonIds { get; set; }
         // List of at mentions in post text with names.
         public GlipMentionsInfo[] @mentions { get; set; }
-        // Post creation datetime in ISO 8601 format
+        // Post creation datetime in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @creationTime { get; set; }
-        // Post last change datetime in ISO 8601 format
+        // Post last change datetime in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
         public string @lastModifiedTime { get; set; }
     }
 }

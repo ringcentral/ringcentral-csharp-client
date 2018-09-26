@@ -9,7 +9,7 @@ namespace RingCentral
         // Message sound
         public string @sound { get; set; }
         // Content availability
-        public string @contentAvailable { get; set; }
+        public string @content-available { get; set; }
         // Category of a message
         public string @category { get; set; }
     }

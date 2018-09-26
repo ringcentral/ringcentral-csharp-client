@@ -30,7 +30,7 @@ namespace RingCentral
         {
             // The direction for the result records. If not specified, both inbound and outbound records are returned. Multiple values are accepted
             public string[] @direction { get; set; }
-            //
+            // View of call records. The same view parameter specified for FSync will be applied for ISync, the view cannot be changed for ISync
             public string @view { get; set; }
             // Call type of a record. If not specified, all call types are returned. Multiple values are accepted
             public string[] @type { get; set; }
