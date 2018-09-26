@@ -21,7 +21,7 @@ namespace RingCentral
         //
         public string[] @schemas { get; set; }
         //
-        public EnterpriseUser @urn:ietf:params:scim:schemas:extension:enterprise:2.0:User { get; set; }
+        //public EnterpriseUser @urn:ietf:params:scim:schemas:extension:enterprise:2.0:User { get; set; }
         // MUST be same as work type email address
         public string @userName { get; set; }
     }
