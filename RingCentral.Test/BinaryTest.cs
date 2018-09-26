@@ -47,7 +47,7 @@ namespace RingCentral.Test
         {
             var extension = rc.Restapi().Account().Extension();
 
-            var response = await extension.MessageStore().List();
+            var response = await extension.MessageStore().List(new { dateFrom = DateTime.UtcNow.AddDays(-30).ToString("o") });
             var messages = response.records;
 
             // sms
