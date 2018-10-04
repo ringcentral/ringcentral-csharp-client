@@ -31,7 +31,7 @@ namespace RingCentral.Test
             } catch(FlurlHttpException fhe) {
                 string errorMessage = await fhe.GetResponseStringAsync();
                 Console.WriteLine(errorMessage);
-                Assert.Equal("{\"errorCode\":\"SUB-521\",\"message\":\"WebHook is not reachable\",\"errors\":[{\"errorCode\":\"SUB-521\",\"message\":\"WebHook is not reachable\"}]}", errorMessage);
+                Assert.StartsWith("{\"errorCode\":\"SUB-522\"", errorMessage);
             }
         }
 
