@@ -11,13 +11,37 @@ namespace RingCentral
                 return "glip";
             }
         }
+        public ChatsPath Chats(string _id)
+        {
+            return new ChatsPath(this, _id);
+        }
+        public ChatsPath Chats()
+        {
+            return new ChatsPath(this);
+        }
+        public ConversationsPath Conversations(string _id)
+        {
+            return new ConversationsPath(this, _id);
+        }
+        public ConversationsPath Conversations()
+        {
+            return new ConversationsPath(this);
+        }
+        public TeamsPath Teams(string _id)
+        {
+            return new TeamsPath(this, _id);
+        }
+        public TeamsPath Teams()
+        {
+            return new TeamsPath(this);
+        }
+        public EveryonePath Everyone()
+        {
+            return new EveryonePath(this);
+        }
         public GroupsPath Groups(string _id)
         {
             return new GroupsPath(this, _id);
-        }
-        public GroupsPath Groups()
-        {
-            return new GroupsPath(this);
         }
         public FilesPath Files()
         {

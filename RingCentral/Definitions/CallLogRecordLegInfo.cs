@@ -26,5 +26,7 @@ namespace RingCentral
         public string @transport { get; set; }
         // Call recording data. Returned if the call is recorded
         public RecordingInfo @recording { get; set; }
+        //
+        public bool? @master { get; set; }
     }
 }

@@ -12,17 +12,17 @@ namespace RingCentral
             }
         }
         // Returns call log records filtered by parameters specified.
-        public Task<ExtensionCallLogResponse> List()
+        public Task<UserCallLogResponse> List()
         {
-            return RC.Get<ExtensionCallLogResponse>(Endpoint(false), null);
+            return RC.Get<UserCallLogResponse>(Endpoint(false), null);
         }
         // Returns call log records filtered by parameters specified.
-        public Task<ExtensionCallLogResponse> List(object parameters)
+        public Task<UserCallLogResponse> List(object parameters)
         {
-            return RC.Get<ExtensionCallLogResponse>(Endpoint(false), parameters);
+            return RC.Get<UserCallLogResponse>(Endpoint(false), parameters);
         }
         // Returns call log records filtered by parameters specified.
-        public Task<ExtensionCallLogResponse> List(ListParameters parameters)
+        public Task<UserCallLogResponse> List(ListParameters parameters)
         {
             return List(parameters as object);
         }

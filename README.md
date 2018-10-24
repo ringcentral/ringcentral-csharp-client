@@ -19,6 +19,11 @@ RingCentral C# client.
 Feel free to :star: and :fork_and_knife: this repository.
 
 
+## Video tutorial
+
+[Setup project, authorization and sending fax](https://www.youtube.com/watch?v=lECKMrX_Dgw)
+
+
 ## Installation
 
 ```powershell

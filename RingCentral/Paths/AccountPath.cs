@@ -75,6 +75,10 @@ namespace RingCentral
         {
             return new IvrMenusPath(this, _id);
         }
+        public IvrMenusPath IvrMenus()
+        {
+            return new IvrMenusPath(this);
+        }
         public CallRecordingPath CallRecording()
         {
             return new CallRecordingPath(this);

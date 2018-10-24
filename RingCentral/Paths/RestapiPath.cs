@@ -47,10 +47,19 @@ namespace RingCentral
         {
             return new NumberParserPath(this);
         }
-        // Returns current API version(s) and server info.
-        public Task<GetVersionsResponse> Get()
+        public OauthPath Oauth()
         {
-            return RC.Get<GetVersionsResponse>(Endpoint(true), null);
+            return new OauthPath(this);
+        }
+        // Returns current API version(s) and server info.
+        public Task<GetVersionsResponse> List()
+        {
+            return RC.Get<GetVersionsResponse>(Endpoint(false), null);
+        }
+        // Returns current API version info by apiVersion.
+        public Task<GetVersionResponse> Get()
+        {
+            return RC.Get<GetVersionResponse>(Endpoint(true), null);
         }
     }
 }

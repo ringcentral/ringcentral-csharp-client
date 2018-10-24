@@ -11,18 +11,20 @@ namespace RingCentral
                 return "bulk-assign";
             }
         }
-        // Updates group members. Please note: Only groups of 'Team' type can be updated. Currently only one operation at a time (either adding or removal) is supported.
-        public Task<GlipGroupInfo> Post()
+        // Creates or updates the list of extensions to be recorded.
+        public async Task<bool> Post()
         {
-            return RC.Post<GlipGroupInfo>(Endpoint(true), null);
+            await RC.Post(Endpoint(true), null);
+            return true;
         }
-        // Updates group members. Please note: Only groups of 'Team' type can be updated. Currently only one operation at a time (either adding or removal) is supported.
-        public Task<GlipGroupInfo> Post(object parameters)
+        // Creates or updates the list of extensions to be recorded.
+        public async Task<bool> Post(object parameters)
         {
-            return RC.Post<GlipGroupInfo>(Endpoint(true), parameters);
+            await RC.Post(Endpoint(true), parameters);
+            return true;
         }
-        // Updates group members. Please note: Only groups of 'Team' type can be updated. Currently only one operation at a time (either adding or removal) is supported.
-        public Task<GlipGroupInfo> Post(EditGroupRequest parameters)
+        // Creates or updates the list of extensions to be recorded.
+        public Task<bool> Post(BulkAccountCallRecordingsResource parameters)
         {
             return Post(parameters as object);
         }

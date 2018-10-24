@@ -62,10 +62,19 @@ namespace RingCentral
             return true;
         }
         // Updates blocked or allowed phone number(s) by their ID(s). Batch request is supported.
-        public async Task<bool> Put()
+        public Task<BlockedAllowedPhoneNumberInfo> Put()
         {
-            await RC.Put(Endpoint(true), null);
-            return true;
+            return RC.Put<BlockedAllowedPhoneNumberInfo>(Endpoint(true), null);
+        }
+        // Updates blocked or allowed phone number(s) by their ID(s). Batch request is supported.
+        public Task<BlockedAllowedPhoneNumberInfo> Put(object parameters)
+        {
+            return RC.Put<BlockedAllowedPhoneNumberInfo>(Endpoint(true), parameters);
+        }
+        // Updates blocked or allowed phone number(s) by their ID(s). Batch request is supported.
+        public Task<BlockedAllowedPhoneNumberInfo> Put(AddBlockedAllowedPhoneNumber parameters)
+        {
+            return Put(parameters as object);
         }
     }
 }
