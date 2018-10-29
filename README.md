@@ -23,6 +23,8 @@ Feel free to :star: and :fork_and_knife: this repository.
 
 [Setup project, authorization and sending fax](https://www.youtube.com/watch?v=lECKMrX_Dgw)
 
+Deprecated: [Work with .NET 4.5 & WebForm](https://www.youtube.com/watch?v=0RjYTCDpn3A) You should not use legacy .NET versions. But if you have to, please watch the video.
+
 
 ## Installation
 
