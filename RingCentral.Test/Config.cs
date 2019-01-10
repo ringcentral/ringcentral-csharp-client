@@ -22,14 +22,14 @@ namespace RingCentral.Test
                     else
                     {
                         instance = new Config();
-                        instance.production = Environment.GetEnvironmentVariable("production") == "true";
-                        instance.server = Environment.GetEnvironmentVariable("server");
-                        instance.clientId = Environment.GetEnvironmentVariable("clientId");
-                        instance.clientSecret = Environment.GetEnvironmentVariable("clientSecret");
-                        instance.username = Environment.GetEnvironmentVariable("username");
-                        instance.extension = Environment.GetEnvironmentVariable("extension");
-                        instance.password = Environment.GetEnvironmentVariable("password");
-                        instance.receiver = Environment.GetEnvironmentVariable("receiver");
+                        instance.production = Environment.GetEnvironmentVariable("RINGCENTRAL_PRODUCTION") == "true";
+                        instance.server = Environment.GetEnvironmentVariable("RINGCENTRAL_SERVER_URL");
+                        instance.clientId = Environment.GetEnvironmentVariable("RINGCENTRAL_CLIENT_ID");
+                        instance.clientSecret = Environment.GetEnvironmentVariable("RINGCENTRAL_CLIENT_SECRET");
+                        instance.username = Environment.GetEnvironmentVariable("RINGCENTRAL_USERNAME");
+                        instance.extension = Environment.GetEnvironmentVariable("RINGCENTRAL_EXTENSION");
+                        instance.password = Environment.GetEnvironmentVariable("RINGCENTRAL_PASSWORD");
+                        instance.receiver = Environment.GetEnvironmentVariable("RINGCENTRAL_RECEIVER");
                     }
                 }
                 return instance;

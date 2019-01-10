@@ -67,7 +67,7 @@ namespace RingCentral.Test
 
             // search again
             list = await addressBook.Contact().List(new { phoneNumber = phoneNumber });
-            Assert.Null(list.paging.totalElements);
+            Assert.Equal(0, list.paging.totalElements);
         }
 
         public void Dispose()

@@ -84,10 +84,13 @@ namespace RingCentral.Test
             {
                 // download a call recording
                 var callLog = callLogs.records[0];
-                var content = await account.Recording(callLog.recording.id).Content().Get();
-                Assert.NotNull(content);
-                Assert.True(content.data.Length > 0);
-                System.IO.File.WriteAllBytes("test.wav", content.data);
+                if (callLog.recording != null)
+                {
+                    var content = await account.Recording(callLog.recording.id).Content().Get();
+                    Assert.NotNull(content);
+                    Assert.True(content.data.Length > 0);
+                    System.IO.File.WriteAllBytes("test.wav", content.data);
+                }
             }
         }
 
