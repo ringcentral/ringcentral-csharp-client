@@ -4,7 +4,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/ringcentral/ringcentral-csharp-client/badge.svg?branch=master&t=20160812)](https://coveralls.io/github/ringcentral/ringcentral-csharp-client?branch=master)
 [![NuGet Version](https://img.shields.io/nuget/v/RingCentral.Client.svg)](https://www.nuget.org/packages/RingCentral.Client/)
 [![Chat](https://img.shields.io/badge/chat-on%20glip-orange.svg)](https://glipped.herokuapp.com/)
-[![Community](https://img.shields.io/badge/dynamic/json.svg?label=community&colorB=&suffix=%20users&query=$.approximate_people_count&uri=http%3A%2F%2Fapi.getsatisfaction.com%2Fcompanies%2F102909.json)](https://devcommunity.ringcentral.com/ringcentraldev)
 [![Twitter](https://img.shields.io/twitter/follow/ringcentraldevs.svg?style=social&label=follow)](https://twitter.com/RingCentralDevs)
 
 
